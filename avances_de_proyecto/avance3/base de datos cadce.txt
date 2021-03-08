@@ -1,0 +1,102 @@
+BEGIN;
+CREATE TABLE Rol(
+	IdRol char(4) NOT NULL,
+	nombre varchar(30) Not NULL,
+	PRIMARY KEY (IdRol)
+);
+
+CREATE TABLE Dificultad(
+	IdDificultad char(4) NOT NULL,
+    dificultad int NOT NULL,
+    PRIMARY KEY(IdDificultad)
+    
+);
+
+CREATE TABLE Empleado(
+	IdEmpleado char(4) NOT NULL,
+	nombre varchar(30) NOT NULL,
+	apellidos varchar(30) NOT NULL,
+	correo varchar(30) NOT NULL,
+	contraseña varchar(20) NOT NULL,
+	IdRol char(4) NOT NULL,
+	PRIMARY KEY (IdEmpleado),
+	FOREIGN KEY (IdRol) REFERENCES Rol(IdRol)
+);
+
+
+
+CREATE TABLE Proyecto(
+	IdProyecto char(4) NOT NULL,
+	nombre varchar(20) NOT NULL,
+	descripcion varchar(200) NULL,
+	fechaPlaneada date NULL,
+	fechaLimite date NULL,
+	fechaInicial date NULL,
+	tiempoMax float NULL,
+	tiempoMin float NULL,
+	decripcion varchar(60) NULL,
+	PRIMARY KEY(IdProyecto)
+	
+);
+
+CREATE TABLE Empleado_Proyecto(
+	IdProyecto char(4) NOT NULL,
+	IdEmpleado char(4) NOT NULL,
+    PRIMARY KEY(IdProyecto, IdEmpleado),
+	FOREIGN KEY(IdProyecto) REFERENCES Proyecto(IdProyecto),
+	FOREIGN KEY(IdEmpleado) REFERENCES Empleado(IdEmpleado)
+);
+
+CREATE TABLE Funcion(
+	IdFuncion char(4) NOT NULL,
+    nombre varchar(20) NOT NULL,
+   	descripcion varchar(200) NULL,
+   	IdProyecto char(4) NOT NULL,
+    IdDificultad char(4) NOT NULL,
+	tiempoMax float NULL,
+	tiempoMin float NULL,
+    PRIMARY KEY(IdFuncion),
+    FOREIGN KEY(IdProyecto) REFERENCES Proyecto(IdProyecto),
+    FOREIGN KEY(IdDificultad) REFERENCES Dificultad(IdDificultad)
+);
+
+CREATE TABLE Fase(
+	IdFase char(4) NOT NULL,
+	nombre varchar(20),
+	PRIMARY KEY(IdFase)
+
+);
+
+CREATE TABLE Actividad(
+	IdActividad char(4) NOT NULL,
+	nombre varchar(20) NOT NULL,
+	IdFase char(4) NOT NULL,
+	PRIMARY KEY(IdActividad),
+	FOREIGN KEY(IdFase) REFERENCES Fase(IdFase)
+
+);
+
+CREATE TABLE Funcion_Actividad(
+	IdFuncion char(4) NOT NULL,
+	IdActividad char(4) NOT NULL,
+	PRIMARY KEY(IdFuncion, IdActividad),
+	FOREIGN KEY(IdFuncion) REFERENCES Funcion(IdFuncion),
+	FOREIGN KEY(IdActividad) REFERENCES Actividad(IdActividad)
+
+);
+
+
+
+
+CREATE TABLE Dificultad_Actividad(
+	IdActividad char(4) NOT NULL,
+	IdDificultad char(4) NOT NULL,
+	tiempoMin float NOT NULL,
+	tiempoMax float NOT NULL,
+    PRIMARY KEY(IdActividad, IdDificultad),
+	FOREIGN KEY(IdActividad) REFERENCES Actividad(IdActividad),
+    FOREIGN KEY(IdDificultad) REFERENCES Dificultad(IdDificultad)
+
+);
+
+COMMIT;
