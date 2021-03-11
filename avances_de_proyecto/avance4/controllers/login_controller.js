@@ -25,8 +25,8 @@ exports.post = (request, response, next) => {
                 console.log ("usuario y contra no coinciden");
                 response.redirect('/login/');
             } else {
-                console.log("pass en request: " + request.body.password);
-                console.log("pass en db: " + rows[0].password);
+                //console.log("pass en request: " + request.body.password);
+               //console.log("pass en db: " + rows[0].password);
                 bcrypt.compare(request.body.password, rows[0].password)
                     .then(doMatch => {
                         if (doMatch) {
@@ -34,7 +34,7 @@ exports.post = (request, response, next) => {
                             request.session.usuario = request.body.usuario;
                             return request.session.save(err => {
                                 response.redirect('/proyectos/inicio');
-                                console.log("exito");
+                                console.log("exito en login");
                             });
                         }
                         request.session.error = "El usuario y/o contraseña no coinciden";
