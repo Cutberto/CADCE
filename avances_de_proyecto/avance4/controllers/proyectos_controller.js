@@ -1,5 +1,8 @@
+const session = require('express-session');
+
 exports.inicio = (request, response, next) => {
-    if (request.session.rol == 0){
+    console.log(request.session.rol);
+    if (request.session.rol == '1'){
         response.render('index_admin');
     }
     else{

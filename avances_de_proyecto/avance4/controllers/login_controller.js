@@ -18,6 +18,7 @@ exports.post = (request, response, next) => {
     request.session.error = "";
     const username = request.body.IdEmpleado;
     console.log(username);
+    //IdRol = Usuario.getRole(username);
     Usuario.fetchOne(username)
         .then(([rows, fieldData]) => {
             if (rows.length < 1) {
@@ -30,8 +31,13 @@ exports.post = (request, response, next) => {
                 bcrypt.compare(request.body.contraseña, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
+                            console.log(request.body);
                             request.session.isLoggedIn = true;
-                            request.session.usuario = request.body.usuario;
+
+                            request.session.rol =rows[0].IdRol;
+                            //console.log(IdRol);
+
+                            request.session.usuario = request.body.IdEmpleado;
                             return request.session.save(err => {
                                 response.redirect('/proyectos/inicio');
                                 console.log("exito en login");
