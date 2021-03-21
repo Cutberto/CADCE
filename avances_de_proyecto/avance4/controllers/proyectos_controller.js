@@ -1,5 +1,11 @@
 exports.inicio = (request, response, next) => {
-    response.render('index');
+    if (request.session.rol == 0){
+        response.render('index_admin');
+    }
+    else{
+        response.render('index');
+    }
+
 
 };
 

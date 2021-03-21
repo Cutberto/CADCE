@@ -16,7 +16,7 @@ exports.get = (request, response, next) => {
 
 exports.post = (request, response, next) => {
     request.session.error = "";
-    const username = request.body.usuario;
+    const username = request.body.IdEmpleado;
     console.log(username);
     Usuario.fetchOne(username)
         .then(([rows, fieldData]) => {
@@ -27,7 +27,7 @@ exports.post = (request, response, next) => {
             } else {
                 //console.log("pass en request: " + request.body.password);
                //console.log("pass en db: " + rows[0].password);
-                bcrypt.compare(request.body.password, rows[0].password)
+                bcrypt.compare(request.body.contraseña, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
                             request.session.isLoggedIn = true;
@@ -71,12 +71,14 @@ exports.getRegister = (request, response, next) => {
 };
 
 exports.postRegister = (request, response, next) => {
-    const nuevo_usuario = new Usuario(request.body.nombre, request.body.usuario, request.body.password);
+    console.log("recibi un post de register");
+    const nuevo_usuario = new Usuario(request.body.IdEmpleado, request.body.nombre, request.body.apellidos, request.body.correo, request.body.contraseña, request.body.IdRol);
     nuevo_usuario.save()
         .then(() => {
             request.session.isLoggedIn = true;
-            request.session.usuario = request.body.usuario;
-            response.redirect('/productos');
+            request.session.usuario = request.body.IdEmpleado;
+            request.session.rol = request.body.IdRol;
+            response.redirect('/proyectos/inicio');
         }).catch(err => console.log(err));
 
 }
