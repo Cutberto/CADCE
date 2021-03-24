@@ -19,6 +19,28 @@
        
    
 <body>  
+<!----    constructor(IdProyecto, nombre, descripcion, fechaPlaenada, fechaLimite, fechaInicial, tiempoMax, tiempoMin) -->
+
+    <form action="/proyectos/crear_proyecto" method="POST">
+        <label for="IdProyecto"> IdProyecto </label> <input type="text" name="IdProyecto">
+        <label for="nombre"> Nombre del Proyecto  </label> <input type="text" name="nombre">
+        <label for="descripcion"> Descripción del Proyecto  </label> <input type="text" name="descripcion">
+        <label for="fechaPlaenada"> Fecha de entrega planeada  </label> <input type="date" name="fechaPlaenada">
+        <label for="fechaLimite"> Fecha limite  </label> <input type="date" name="fechaLimite<">
+        <label for="fechaInicial"> Fecha de inicio de proyecto  </label> <input type="date" name="fechaInicial">
+        <label for="tiempoMax"> TiempoMax  </label> <input type="text" name="tiempoMax">
+        <label for="tiempoMin"> TiempoMin  </label> <input type="text" name="tiempoMin">
+        
+        <br><br>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Ingresar
+            <i class="material-icons right">send</i>
+        </button>
+        <br><br><br>
+                
+    </form>
+
+
+
     <div class="container">
         <div class="row">
             <div class="col md-12 sm-12 lg-3">
