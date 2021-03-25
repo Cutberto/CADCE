@@ -18,10 +18,12 @@ module.exports = class Proyecto {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
+        console.log('ejecutando save proyecto con parametros: ' );
+        console.log( this.IdProyecto +this.nombre+this.descripcion +this.fechaPlaenada+ this.fechaLimite +this.fechaInicial + this.tiempoMax + this.tiempoMin);
        // return bcrypt.hash(this.contraseña, 12)
          //   .then((password_encriptado) => {
                 return db.execute(
-                    'INSERT INTO empleado (IdProyecto, nombre, descripcion, fechaPlaenada, fechaLimite, fechaInicial, tiempoMax, tiempoMin)) VALUES (?, ?, ?, ?, ?, ?,?,?)',
+                    ' INSERT INTO proyecto (IdProyecto, nombre, descripcion, fechaPlaneada, fechaLimite, fechaInicial, tiempoMax, tiempoMin) VALUES (?,?,?,?,?,?,?,?)',
                     [ this.IdProyecto ,this.nombre,this.descripcion ,this.fechaPlaenada, this.fechaLimite,this.fechaInicial , this.tiempoMax , this.tiempoMin    ]
                 );
           //  }).catch(err => console.log(err));  
