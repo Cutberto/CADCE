@@ -14,13 +14,19 @@ router.get('/crear_proyecto', isAuth, proyectosController.crear_proyecto);
 
 router.post('/crear_proyecto' , isAuth, proyectosController.postProyecto);               
 
-router.get('/todos', isAuth, proyectosController.todos);
+router.get('/todos', isAuth, proyectosController.get)
 
 router.get('/modif_proyecto', isAuth, proyectosController.modif_proyecto);
 
 router.get('/detalleset', isAuth, proyectosController.detalleset);
 
 router.get('/actividades', isAuth, proyectosController.actividades);
+
+
+
+/*Obtener la lista de proyectos*/
+
+
 
 
 /*
