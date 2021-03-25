@@ -18,4 +18,6 @@ router.get('/register',isAuth, isAdmin, loginController.getRegister);
 
 router.post('/register', isAuth, isAdmin, loginController.postRegister);
 
+router.get('/logout',  loginController.getLogout);
+
 module.exports = router;

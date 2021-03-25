@@ -8,7 +8,7 @@ exports.getNuevoCasoDeUso = (request, response, next) => {
 };
 
 exports.postNuevoCasoDeUso = (request, response, next) => {
-    const nuevo_casodeuso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.IdDificultad_cu);
+    const nuevo_casodeuso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu);
     nuevo_casodeuso.save()
         .then(() => {
             response.setHeader('Set-Cookie', ['ultimo_casodeuso='+nuevo_casodeuso.nombre+'; HttpOnly']);
