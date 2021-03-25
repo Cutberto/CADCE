@@ -9,14 +9,9 @@ const isAuth = require('../utils/is-auth.js');
 const casosdeusoController = require('../controllers/casosdeuso_controller');
 
 
+router.get('/NuevoCasoDeUso', isAuth, casosdeusoController.getNuevoCasoDeUso);
 
-router.get('/NuevoCasoDeUso',  casosdeusoController.getNuevoCasoDeUso);
-
-router.post('/NuevoCasoDeUso',  casosdeusoController.postNuevoCasoDeUso);
-
-
-
-
+router.post('/NuevoCasoDeUso', isAuth, casosdeusoController.postNuevoCasoDeUso);
 
 
 module.exports = router;
