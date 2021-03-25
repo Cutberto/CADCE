@@ -6,10 +6,10 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 
-const csrf = require('csurf');
-const csrfProtection = csrf();
+
 app.use(bodyParser.urlencoded({extended: false}));
 const proyectos = require('./routes/proyectos');
+const casosdeuso = require('./routes/casosdeuso');
 const login = require('./routes/login');
 
 //const mensaje = require ('./routes/mensaje');
@@ -24,6 +24,7 @@ app.use(session({
 }));
 
 app.use('/proyectos', proyectos);
+app.use('/casosdeuso', casosdeuso);
 
 app.use('/login',login);
 
@@ -31,7 +32,10 @@ app.use('/login',login);
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(csrfProtection); 
 
-
+app.get('/', (request, response, next) => {
+    console.log(request.session);
+    response.redirect('/proyectos');
+});
 
 
                    
