@@ -36,7 +36,7 @@ exports.postActualizarProyecto = (request, response, next) => {
     actualizar_proyecto.actualizar()
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
-            response.redirect('/proyectos/inicio');
+            response.redirect('/proyectos/todos');
         }).catch(err => console.log(err));
 
 }

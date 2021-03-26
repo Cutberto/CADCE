@@ -13,5 +13,7 @@ router.get('/NuevoCasoDeUso', isAuth, casosdeusoController.getNuevoCasoDeUso);
 
 router.post('/NuevoCasoDeUso', isAuth, casosdeusoController.postNuevoCasoDeUso);
 
+router.get('/todos', isAuth, casosdeusoController.get);
+
 
 module.exports = router;

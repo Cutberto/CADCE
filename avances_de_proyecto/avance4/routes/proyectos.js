@@ -16,9 +16,9 @@ router.post('/crear_proyecto' , isAuth, proyectosController.postProyecto);
 
 router.get('/todos', isAuth, proyectosController.get)
 
-router.get('/:proyecto_id',  proyectosController.getProyecto); //colocar isauth
+router.get('/:proyecto_id',  isAuth, proyectosController.getProyecto); //colocar isauth
 
-router.post('/:proyecto_id',  proyectosController.postActualizarProyecto);
+router.post('/:proyecto_id', isAuth, proyectosController.postActualizarProyecto);
 
 router.get('/detalleset', isAuth, proyectosController.detalleset);
 

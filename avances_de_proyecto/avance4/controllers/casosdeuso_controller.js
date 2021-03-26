@@ -1,3 +1,4 @@
+const session = require('express-session');
 const CasoDeUso = require('../models/casodeuso');
 
 exports.getNuevoCasoDeUso = (request, response, next) => {
@@ -11,8 +12,8 @@ exports.postNuevoCasoDeUso = (request, response, next) => {
     const nuevo_casodeuso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu);
     nuevo_casodeuso.save()
         .then(() => {
-            response.setHeader('Set-Cookie', ['ultimo_casodeuso='+nuevo_casodeuso.nombre+'; HttpOnly']);
-            response.redirect('/casosdeuso');
+
+            response.redirect('/casosdeuso/todos');
         }).catch(err => console.log(err));
 
 }
@@ -37,15 +38,12 @@ exports.getCasoDeUso = (request, response, next) => {
 
 
 exports.get = (request, response, next) => {
-    
-
-    console.log(request.ultimoCasoDeUsoAgregado);
 
     CasoDeUso.fetchAll()
         .then(([rows, fieldData]) => {
-            response.render('casosdeuso', { 
+            response.render('todos_casosdeuso', { 
                 lista_casosdeuso: rows, 
-                titulo: 'CasosDeUso',
+                titulo: 'Casos de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
@@ -53,4 +51,3 @@ exports.get = (request, response, next) => {
             console.log(err);
         });
 };
-
