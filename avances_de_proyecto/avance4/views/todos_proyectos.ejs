@@ -31,14 +31,29 @@
             </div>
             <div class="col md-12 sm-12 lg-9">
                 <h1>Todos los Proyectos</h1> <br>
-                <ul> 
-                    <li> Nombre de proyecto    | Fecha inicial  | Fecha de entrega | <a href="/proyectos/modif_proyecto" class="waves-effect waves-light btn"> Editar </a> <br> 
- 
-                    <li> Nombre de proyecto    | Fecha inicial  | Fecha de entrega |  <a href="/proyectos/modif_proyecto" class="waves-effect waves-light btn"> Editar </a> <br>
-                    <li> Nombre de proyecto    | Fecha inicial  | Fecha de entrega |  <a href="/proyectos/modif_proyecto" class="waves-effect waves-light btn"> Editar </a> <br>
-                    
-                </ul>
-
+                <table class="responsive-table">
+                <tr>
+                <td>IdProyecto</td>
+                <td>Nombre</td>
+                <td>Descripcion</td>
+                <td>Fecha inicial</td>
+                <td>Fecha Planeada</td>
+                </tr>
+            
+                <% for (let Proyecto of lista_proyectos) { %>
+                       <tr>
+                           <td><%= Proyecto.IdProyecto %></td>
+                           <td><%= Proyecto.nombre %></td>
+                           <td><%= Proyecto.descripcion %></td>
+                           <td><%= Proyecto.fechaInicial %></td>
+                           <td><%= Proyecto.fechaPlaneada %></td>
+                           <td> <a href="/proyectos/<%= Proyecto.IdProyecto %>">Editar</a></td>
+                          
+                       </tr>
+                        
+                          
+                <% } %>
+                </table>
             </div>
         </div>
     </div>    

@@ -20,7 +20,7 @@ exports.crear_proyecto = (request, response, next) => {
 
 exports.postProyecto = (request, response, next) => {
     console.log("recibi un post de proyecto");
-    const nuevo_proyecto = new Proyecto(request.body.IdProyecto, request.body.nombre, request.body.descripcion, request.body.fechaPlaenada, request.body.fechaLimite, request.body.fechaInicial, request.body.tiempoMax, request.body.tiempoMin);
+    const nuevo_proyecto = new Proyecto(request.body.IdProyecto, request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite, request.body.fechaInicial);
     nuevo_proyecto.save()
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido creado!"; //para mostrar un aviso en la siguiente vista renderizada
@@ -29,10 +29,54 @@ exports.postProyecto = (request, response, next) => {
 
 }
 
-exports.todos = (request, response, next) => {
-    response.render('todos_proyectos');
 
+exports.postActualizarProyecto = (request, response, next) => {
+    console.log("recibi un actualizar de proyecto");
+    const actualizar_proyecto = new Proyecto(request.body.IdProyecto, request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite);
+    actualizar_proyecto.actualizar()
+        .then(() => {
+            request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
+            response.redirect('/proyectos/todos');
+        }).catch(err => console.log(err));
+
+}
+
+
+exports.getProyecto = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    Proyecto.fetchOne(idProyecto)
+        .then(([rows, fieldData]) => {
+            response.render('modif_proyecto', { 
+                lista_proyectos: rows, 
+                titulo: 'Editor de proyectos',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
+
+
+
+exports.get = (request, response, next) => {
+
+    Proyecto.fetchAll()
+        .then(([rows, fieldData]) => {
+            response.render('todos_proyectos', { 
+                lista_proyectos: rows, 
+                titulo: 'Proyectos',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+
+
+
 
 exports.modif_proyecto = (request, response, next) => {
     response.render('modif_proyecto');
