@@ -30,6 +30,35 @@ exports.postProyecto = (request, response, next) => {
 }
 
 
+exports.postActualizarProyecto = (request, response, next) => {
+    console.log("recibi un actualizar de proyecto");
+    const actualizar_proyecto = new Proyecto(request.body.IdProyecto, request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite);
+    actualizar_proyecto.actualizar()
+        .then(() => {
+            request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
+            response.redirect('/proyectos/inicio');
+        }).catch(err => console.log(err));
+
+}
+
+
+exports.getProyecto = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    Proyecto.fetchOne(idProyecto)
+        .then(([rows, fieldData]) => {
+            response.render('modif_proyecto', { 
+                lista_proyectos: rows, 
+                titulo: 'Editor de proyectos',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+
+
 exports.get = (request, response, next) => {
 
     Proyecto.fetchAll()

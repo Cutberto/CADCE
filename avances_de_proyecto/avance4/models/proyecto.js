@@ -17,8 +17,8 @@ module.exports = class Proyecto {
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        console.log('ejecutando save proyecto con parametros: ' );
-        console.log( 'id'+this.IdProyecto +'nombre' + this.nombre+ 'descripcion'+this.descripcion +'inicial'+this.fechaplaneada+'limite'+ this.fechaLimite +'planeada'+this.fechaInicial +'0'+'0');
+        /*console.log('ejecutando save proyecto con parametros: ' );
+        console.log( 'id'+this.IdProyecto +'nombre' + this.nombre+ 'descripcion'+this.descripcion +'inicial'+this.fechaplaneada+'limite'+ this.fechaLimite +'planeada'+this.fechaInicial +'0'+'0');*/
        // return bcrypt.hash(this.contraseña, 12)
          //   .then((password_encriptado) => {
                 return db.execute(
@@ -28,13 +28,20 @@ module.exports = class Proyecto {
           //  }).catch(err => console.log(err));  
     }
     
+    actualizar() {
+        return db.execute(
+            'UPDATE proyecto SET nombre=?, descripcion=?, fechaplaneada=?, fechaLimite=? WHERE IdProyecto=?',[this.nombre, this.descripcion, this.fechaplaneada, this.fechaLimite, this.IdProyecto]
+
+            );
+    }
+    
     static fetchAll() {
         return db.execute('SELECT * FROM proyecto');
     }
     
 
-    static fetchOne(IdProyecto) {
-        return db.execute('SELECT * FROM proyecto WHERE IdProyecto=?', [IdProyecto]);
+    static fetchOne(idProyecto) {
+        return db.execute('SELECT * FROM proyecto WHERE IdProyecto=?', [idProyecto]);
     }
 
 
