@@ -1,0 +1,30 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+        .row {
+            background-color: beige;
+            
+        }
+
+        .mycol{
+            background-color: bisque;
+
+
+        }
+
+        
+        .body-text {
+            background-color: #bbf1fa;
+        }
+h2 {
+    color:#663f3f;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+h1{
+    color : black   ;
+    
+}
+
+
+
+
