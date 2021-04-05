@@ -20,6 +20,16 @@ module.exports = class CasoDeUso {
         );
     }
 
+    //cu 10
+    actualizar() {
+        return db.execute(
+            "UPDATE casodeuso SET nombre=?, descripcion=?, IdProyecto =?, dificultad=? WHERE IdCasoDeUso =? ",
+            [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, this.IdCasoDeUso]
+            );
+    }
+ 
+    
+
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
         return db.execute('SELECT * FROM casodeuso');

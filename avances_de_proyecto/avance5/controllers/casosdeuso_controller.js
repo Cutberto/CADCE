@@ -34,8 +34,23 @@ exports.getCasoDeUso = (request, response, next) => {
         });
 };
 
+//    constructor(IdCasoDeUso, nombre, descripcion, IdProyecto, dificultad) {
 
+exports.postActualizarCasoDeUso = (request, response, next) => {
+    console.log("recibi un actualizar de caso de uso");
+    console.log(request.body);
+    const actualizar_caso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu);
+    actualizar_caso.actualizar()
+        .then(() => {
+            request.session.aviso = "Caso de uso " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
+            response.redirect('/casosdeuso/todos');
+        }).catch(err => console.log(err));
 
+}
+exports.getActualizarCasoDeUso = (request, response, next) => {
+     response.render('modif_casodeuso');
+
+}
 
 exports.get = (request, response, next) => {
 
