@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 const proyectos = require('./routes/proyectos');
 const casosdeuso = require('./routes/casosdeuso');
 const login = require('./routes/login');
+const tareas = require('./routes/tareas');
+
 
 //const mensaje = require ('./routes/mensaje');
 
@@ -25,7 +27,7 @@ app.use(session({
 
 app.use('/proyectos', proyectos);
 app.use('/casosdeuso', casosdeuso);
-
+app.use('/tareas', tareas);
 app.use('/login',login);
 
 //Para acceder a los recursos de la carpeta public
