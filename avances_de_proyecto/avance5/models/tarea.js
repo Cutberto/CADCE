@@ -20,17 +20,17 @@ module.exports = class Tarea {
                           [this.IdTarea, this.nombre, this.IdFase, this.dificultad]
         );
     }
-// hasta aqui llevo 
 
-    //cu 10
+    //cu 18
     actualizar() {
         return db.execute(
-            "UPDATE casodeuso SET nombre=?, descripcion=?, IdProyecto =?, dificultad=? WHERE IdCasoDeUso =? ",
-            [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, this.IdCasoDeUso]
+            "UPDATE tarea SET  nombre=?, IdFase =?, dificultad=? WHERE IdTarea =? ",
+            [ this.nombre, this.IdFase, this.dificultad, this.IdTarea]
             );
     }
  
     
+// hasta aqui llevo 
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {

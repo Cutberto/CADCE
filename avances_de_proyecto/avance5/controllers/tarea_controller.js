@@ -35,25 +35,29 @@ exports.getTarea = (request, response, next) => {
             console.log(err);
         });
 };
-  //hasta aqui llevo   
 
-//    constructor(IdCasoDeUso, nombre, descripcion, IdProyecto, dificultad) {
 
-exports.postActualizarCasoDeUso = (request, response, next) => {
-    console.log("recibi un actualizar de caso de uso");
+exports.postActualizarTarea = (request, response, next) => {
+    console.log("recibi un actualizar de tarea");
     console.log(request.body);
-    const actualizar_caso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu);
-    actualizar_caso.actualizar()
+    const actualizar_tarea = new Tarea(request.body.IdTarea, request.body.nombre, request.body.IdFase, request.body.dificultad);
+    actualizar_tarea.actualizar()
         .then(() => {
-            request.session.aviso = "Caso de uso " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
+            request.session.aviso = "Tarea " + request.body.nombre + " ha sido actualizada"; //para mostrar un aviso en la siguiente vista renderizada
             response.redirect('/casosdeuso/todos');
         }).catch(err => console.log(err));
 
 }
-exports.getActualizarCasoDeUso = (request, response, next) => {
-     response.render('modif_casodeuso');
+exports.getActualizarTarea = (request, response, next) => {
+     response.render('modif_tarea');
 
 }
+
+  //hasta aqui llevo   
+
+//    constructor(IdCasoDeUso, nombre, descripcion, IdProyecto, dificultad) {
+
+
 
 exports.get = (request, response, next) => {
 

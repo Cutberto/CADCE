@@ -15,8 +15,8 @@ router.post('/nueva', isAuth, tareaController.postNuevaTarea);
 
 //router.get('/todos', isAuth, casosdeusoController.get);
 
-//router.post('/actualizarCaso', isAuth, casosdeusoController.postActualizarCasoDeUso);
+router.post('/actualizarTarea', isAuth, tareaController.postActualizarTarea);
 
-//router.get('/actualizarCaso', isAuth, casosdeusoController.getActualizarCasoDeUso);
+router.get('/actualizarTarea', isAuth, tareaController.getActualizarTarea);
 
 module.exports = router;
