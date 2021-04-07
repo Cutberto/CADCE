@@ -21,6 +21,8 @@ exports.postNuevoCasoDeUso = (request, response, next) => {
 
 exports.getCasoDeUso = (request, response, next) => {
     const idCasoDeUso = request.params.casodeuso_id;
+    console.log(idCasoDeUso);
+    console.log(request.params);
     CasoDeUso.fetchOne(idCasoDeUso)
         .then(([rows, fieldData]) => {
             response.render('casosdeuso', { 
@@ -48,7 +50,22 @@ exports.postActualizarCasoDeUso = (request, response, next) => {
 
 }
 exports.getActualizarCasoDeUso = (request, response, next) => {
-     response.render('modif_casodeuso');
+    // response.render('modif_casodeuso');
+    const idCasoDeUso = request.params.casodeuso_id;
+    console.log("getActualizarcasodeuso");
+    console.log(idCasoDeUso);
+    console.log(request.params);
+    CasoDeUso.fetchOne(idCasoDeUso)
+        .then(([rows, fieldData]) => {
+            response.render('modif_casodeuso', { 
+                lista_casosdeuso: rows, 
+                titulo: 'CasosDeUso',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 
 }
 

@@ -44,6 +44,7 @@ exports.postActualizarProyecto = (request, response, next) => {
 
 exports.getProyecto = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
+    console.log("getProyecto",idProyecto);
     Proyecto.fetchOne(idProyecto)
         .then(([rows, fieldData]) => {
             response.render('modif_proyecto', { 
@@ -81,7 +82,36 @@ exports.get = (request, response, next) => {
 exports.modif_proyecto = (request, response, next) => {
     response.render('modif_proyecto');
 
+};  
+
+//nuevo cu4
+/*
+exports.modif_proyecto = (request, response, next) => {
+    const get_proyectos = new Proyecto('NULL','NULL','NULL','NULL','NULL','NULL');
+    console.log( get_proyectos.fetchAll() );
+    response.render('modif_proyecto');
+
 };
+*/
+
+/*
+router.get('/', function(req, res, next) {
+
+    sql.connect(config).then(() => {
+        return sql.query`select Project_Type_Desc from Project_Type`
+    }).then(result => {
+        console.log(result)
+        // Pass the DB result to the template
+        res.render('newProject', {dropdownVals: result})
+    }).catch(err => {
+        console.log(err)
+    })
+    
+
+});
+
+*/
+
 
 exports.detalleset = (request, response, next) => {
     response.render('detalleset');
