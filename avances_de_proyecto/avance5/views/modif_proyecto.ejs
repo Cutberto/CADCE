@@ -19,18 +19,15 @@
        
    
 <body>  
+    <div class="row">
+        <%- include('includes/navbar.ejs'); %>
+
+    </div>
+
     <div class="container">
         <div class="row">
-            <div class="">
-                <div class="mycol">
-                    <h1>Natgas</h1> <br> 
-                    <a href="/proyectos/inicio" class="waves-effect waves-light btn" > Volver </a> <br> 
-
-                </div>
-                 
-            </div>
-            <div class="col md-12 sm-12 lg-9">
-                <h1><%= titulo %></h1> <br>
+             
+            <div class="mycol md-12 sm-12 lg-9">
                 <form action="/proyectos/:proyecto_id" method="POST">
                 <% for (let Proyecto of lista_proyectos) { %>
 
@@ -44,9 +41,12 @@
                             <br><br>                 
                           
                 <% } %>
-                <button class="btn waves-effect waves-light" type="submit" name="action">Crear
+                <button class="btn waves-effect waves-light" type="submit" name="action"> Guardar
                     <i class="material-icons right">send</i>
                 </button>                
+                <a href="/proyectos/inicio" class="waves-effect waves-light btn" > Cancelar </a> <br> 
+
+
                 </form>
 
                 <br><br><br>                    
