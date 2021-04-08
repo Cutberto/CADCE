@@ -39,4 +39,9 @@ module.exports = class CasoDeUso {
         return db.execute('SELECT * FROM casodeuso WHERE IdCasoDeUso=?', [IdCasoDeUso]);
     }
 
+    static fetchByProject(IdProyecto) {
+        return db.execute('SELECT * FROM casodeuso WHERE IdProyecto=?', [IdProyecto]);
+    }
+
+
 }

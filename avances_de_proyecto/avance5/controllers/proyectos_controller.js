@@ -1,5 +1,6 @@
 const session = require('express-session');
 const Proyecto = require('../models/proyecto');
+const CasoDeUso = require('../models/casodeuso');
 /*
 exports.inicio = (request, response, next) => {
     console.log(request.session.rol);
@@ -27,7 +28,6 @@ exports.inicio = (request, response, next) => {
             console.log(err);
         });
 };
-
 
 
 exports.crear_proyecto = (request, response, next) => {
@@ -77,6 +77,23 @@ exports.getProyecto = (request, response, next) => {
         });
 };
 
+
+exports.getCaso = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    
+    console.log(request.params);
+    CasoDeUso.fetchByProject(idProyecto)
+        .then(([rows, fieldData]) => {
+            response.render('todos_casosdeuso', { 
+                lista_casosdeuso: rows, 
+                titulo: 'Casos de uso'  ,
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 
 
 exports.get = (request, response, next) => {

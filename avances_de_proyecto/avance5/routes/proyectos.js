@@ -14,16 +14,17 @@ router.get('/crear_proyecto', isAuth, proyectosController.crear_proyecto);
 
 router.post('/crear_proyecto' , isAuth, proyectosController.postProyecto);               
 
-router.get('/todos', isAuth, proyectosController.get)
+router.get('/todos', isAuth, proyectosController.get);  
 
-router.get('/:proyecto_id',  isAuth, proyectosController.getProyecto); //colocar isauth
-
-router.post('/:proyecto_id', isAuth, proyectosController.postActualizarProyecto);
+router.get('/casosdeuso/:proyecto_id' , isAuth,  proyectosController.getCaso  );
 
 router.get('/detalleset', isAuth, proyectosController.detalleset);
 
 router.get('/actividades', isAuth, proyectosController.actividades);
 
+router.get('/:proyecto_id',  isAuth, proyectosController.getProyecto); //colocar isauth
+
+router.post('/:proyecto_id', isAuth, proyectosController.postActualizarProyecto);
 
 
 /*Obtener la lista de proyectos*/
