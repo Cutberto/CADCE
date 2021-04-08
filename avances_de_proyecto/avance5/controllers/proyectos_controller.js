@@ -55,7 +55,7 @@ exports.postActualizarProyecto = (request, response, next) => {
     actualizar_proyecto.actualizar()
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
-            response.redirect('/proyectos/todos');
+            response.redirect('/proyectos/inicio');
         }).catch(err => console.log(err));
 
 }
@@ -78,6 +78,23 @@ exports.getProyecto = (request, response, next) => {
 };
 
 
+exports.getDetalles = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    console.log("getDetalles",idProyecto);
+    Proyecto.fetchOne(idProyecto)
+        .then(([rows, fieldData]) => {
+            response.render('detalles_proyecto', { 
+                Proyecto: rows,  
+                titulo: 'Detalles del proyecto',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+
 exports.getCaso = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
     
@@ -87,6 +104,7 @@ exports.getCaso = (request, response, next) => {
             response.render('todos_casosdeuso', { 
                 lista_casosdeuso: rows, 
                 titulo: 'Casos de uso'  ,
+                idProyecto: idProyecto,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })

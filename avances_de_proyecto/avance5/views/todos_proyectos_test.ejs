@@ -29,7 +29,7 @@
        
          <% for (let proyecto of proyectos) { %>
         <div class="col s12 m4"> <!-- Tamaño de cada tarjeta -->
-            <div class="card ">
+            <div class="card small ">
                 <div class="card-image">
                     <!--img src="../img/square_logo2.jpg" alt="Project Logo" width="320" height="300" -->
 
@@ -39,15 +39,13 @@
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item"> <b>Descripción: </b> <%= proyecto.descripcion %></li>
-                    <li class="list-group-item"> <b>Fecha de Inicio:</b> <%= proyecto.fechaInicial %></li>
-                    <li class="list-group-item"> <b>Fecha planeada de entrega:</b> <%= proyecto.fechaPlaneada %></li>
-                    <li class="list-group-item"> <b> Fecha Límite:</b> <%= proyecto.fechaLimite %></li>
+                   
                   </ul>
 
                 <div class="card-content">
                     
-                    <a href="/proyectos/<%= proyecto.IdProyecto %>" class="btn btn-primary">Editar</a>
-                    <a href="/proyectos/casosdeuso/<%= proyecto.IdProyecto %>" class="btn btn-primary">Casos de Uso</a>
+                    <a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="btn btn-primary">Detalles</a>
+
                     
                 </div>
                 
