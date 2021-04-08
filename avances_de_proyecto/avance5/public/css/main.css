@@ -1,11 +1,11 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
         .row {
-            background-color: beige;
+            background-color: rgb(182, 216, 248);
             
         }
 
         .mycol{
-            background-color: bisque;
+            background-color: rgb(192, 255, 180);
 
 
         }

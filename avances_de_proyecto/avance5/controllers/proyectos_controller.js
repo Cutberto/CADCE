@@ -1,6 +1,6 @@
 const session = require('express-session');
 const Proyecto = require('../models/proyecto');
-
+/*
 exports.inicio = (request, response, next) => {
     console.log(request.session.rol);
     if (request.session.rol == '1'){
@@ -11,10 +11,29 @@ exports.inicio = (request, response, next) => {
     }
 
 
+}; */
+
+exports.inicio = (request, response, next) => {
+
+    Proyecto.fetchAll()
+        .then(([rows, fieldData]) => {
+            response.render('todos_proyectos_test', { 
+                proyectos: rows, 
+                titulo: 'Todos los proyectos',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 };
 
+
+
 exports.crear_proyecto = (request, response, next) => {
-    response.render('crear_proyecto');
+    response.render('crear_proyecto',
+        {titulo: 'Crear Proyecto'}
+    );
 
 };
 
