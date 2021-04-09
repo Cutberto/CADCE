@@ -78,7 +78,7 @@ exports.getRegister = (request, response, next) => {
 
 exports.postRegister = (request, response, next) => {
     console.log("recibi un post de register");
-    const nuevo_usuario = new Usuario(request.body.IdEmpleado, request.body.nombre, request.body.apellidos, request.body.correo, request.body.contraseña, request.body.IdRol);
+    const nuevo_usuario = new Usuario(request.body.nombre, request.body.apellidos, request.body.correo, request.body.contraseña, request.body.IdRol);
     nuevo_usuario.save()
         .then(() => {
             request.session.isLoggedIn = true;

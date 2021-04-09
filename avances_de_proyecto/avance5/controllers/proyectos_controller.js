@@ -41,7 +41,7 @@ exports.crear_proyecto = (request, response, next) => {
 
 exports.postProyecto = (request, response, next) => {
     console.log("recibi un post de proyecto");
-    const nuevo_proyecto = new Proyecto(request.body.IdProyecto, request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite, request.body.fechaInicial);
+    const nuevo_proyecto = new Proyecto(request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite, request.body.fechaInicial);
     nuevo_proyecto.save()
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido creado!"; //para mostrar un aviso en la siguiente vista renderizada
@@ -53,7 +53,7 @@ exports.postProyecto = (request, response, next) => {
 
 exports.postActualizarProyecto = (request, response, next) => {
     console.log("recibi un actualizar de proyecto");
-    const actualizar_proyecto = new Proyecto(request.body.IdProyecto, request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite);
+    const actualizar_proyecto = new Proyecto(request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite);
     actualizar_proyecto.actualizar()
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada

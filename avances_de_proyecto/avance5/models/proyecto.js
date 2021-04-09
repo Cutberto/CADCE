@@ -4,8 +4,7 @@ const bcrypt = require('bcryptjs');
 module.exports = class Proyecto {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(IdProyecto, nombre, descripcion, fechaplaneada, fechaLimite, fechaInicial) {
-       this.IdProyecto = IdProyecto;
+    constructor(nombre, descripcion, fechaplaneada, fechaLimite, fechaInicial) {
        this.nombre = nombre;
        this.descripcion = descripcion;
        this.fechaplaneada = fechaplaneada;
@@ -22,8 +21,8 @@ module.exports = class Proyecto {
        // return bcrypt.hash(this.contraseña, 12)
          //   .then((password_encriptado) => {
                 return db.execute(
-                    ' INSERT INTO proyecto (IdProyecto, nombre, descripcion, fechaPlaneada, fechaLimite, fechaInicial, tiempoMax, tiempoMin) VALUES (?,?,?,?,?,?,?,?)',
-                    [ this.IdProyecto ,this.nombre,this.descripcion ,this.fechaplaneada, this.fechaLimite,this.fechaInicial , '0', '0'    ]
+                    ' INSERT INTO proyecto (nombre, descripcion, fechaPlaneada, fechaLimite, fechaInicial, tiempoMax, tiempoMin, estado) VALUES (?,?,?,?,?,?,?,?)',
+                    [this.nombre,this.descripcion ,this.fechaplaneada, this.fechaLimite,this.fechaInicial , '0', '0', 'Activo'    ]
                 );
           //  }).catch(err => console.log(err));  
     }
