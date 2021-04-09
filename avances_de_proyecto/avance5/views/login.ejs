@@ -19,12 +19,12 @@
 <main class="container">
     <h2>  Iniciar sesión  </h2>
     <form action="/login" method="POST">
-        <input type="text" name="IdEmpleado">
-        <input type="password" name="contraseña">
+        <label for="IdEmpleado"> Nombre de Usuario </label>   <input type="text" name="IdEmpleado">
+        <label for="nombre"> Contraseña </label>   <input type="password" name="contraseña">
         <%= error  %>
         
         <br><br>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Ingresar
+        <button class="btn waves-effect waves-light" type="submit" name="action"> Iniciar sesión
             <i class="material-icons right">send</i>
         </button>
 
