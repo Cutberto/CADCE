@@ -18,6 +18,8 @@ router.get('/todos', isAuth, proyectosController.get);
 
 router.get('/casosdeuso/:proyecto_id' , isAuth,  proyectosController.getCaso  );
 
+router.get('/nuevocaso/:proyecto_id' , isAuth,  proyectosController.getNuevoCaso  );
+
 router.get('/detalles/:proyecto_id' , isAuth,  proyectosController.getDetalles  );
 
 router.get('/detalleset', isAuth, proyectosController.detalleset);

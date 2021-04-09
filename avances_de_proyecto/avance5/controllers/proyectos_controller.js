@@ -19,6 +19,7 @@ exports.inicio = (request, response, next) => {
     Proyecto.fetchAll()
         .then(([rows, fieldData]) => {
             response.render('todos_proyectos_test', { 
+                rol: request.session.rol,
                 proyectos: rows, 
                 titulo: 'Todos los proyectos',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -32,7 +33,8 @@ exports.inicio = (request, response, next) => {
 
 exports.crear_proyecto = (request, response, next) => {
     response.render('crear_proyecto',
-        {titulo: 'Crear Proyecto'}
+        {rol: request.session.rol,
+            titulo: 'Crear Proyecto'}
     );
 
 };
@@ -67,6 +69,7 @@ exports.getProyecto = (request, response, next) => {
     Proyecto.fetchOne(idProyecto)
         .then(([rows, fieldData]) => {
             response.render('modif_proyecto', { 
+                rol: request.session.rol,
                 lista_proyectos: rows, 
                 titulo: 'Editor de proyectos',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -77,6 +80,18 @@ exports.getProyecto = (request, response, next) => {
         });
 };
 
+exports.getNuevoCaso = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    console.log("getnuevoCaso",idProyecto);
+    
+    response.render('crear_casodeuso', { 
+            rol: request.session.rol,
+            idProyecto: idProyecto, 
+            titulo: 'Nuevo caso de uso ',
+            isLoggedIn: request.session.isLoggedIn === true ? true : false 
+       });
+    }
+        
 
 exports.getDetalles = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
@@ -84,6 +99,7 @@ exports.getDetalles = (request, response, next) => {
     Proyecto.fetchOne(idProyecto)
         .then(([rows, fieldData]) => {
             response.render('detalles_proyecto', { 
+                rol: request.session.rol,
                 Proyecto: rows,  
                 titulo: 'Detalles del proyecto',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -102,6 +118,7 @@ exports.getCaso = (request, response, next) => {
     CasoDeUso.fetchByProject(idProyecto)
         .then(([rows, fieldData]) => {
             response.render('todos_casosdeuso', { 
+                rol: request.session.rol,
                 lista_casosdeuso: rows, 
                 titulo: 'Casos de uso'  ,
                 idProyecto: idProyecto,
@@ -119,6 +136,7 @@ exports.get = (request, response, next) => {
     Proyecto.fetchAll()
         .then(([rows, fieldData]) => {
             response.render('todos_proyectos', { 
+                rol: request.session.rol,
                 lista_proyectos: rows, 
                 titulo: 'Proyectos',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false

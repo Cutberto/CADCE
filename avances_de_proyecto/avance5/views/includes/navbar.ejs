@@ -32,8 +32,10 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="/login/logout">Cerrar sesión</a></li>
                     <li><hr class="dropdown-divider"></li>
+                    <!--  Poner aqui un if session.rol == 1   -->
+                    <% if (rol == 1) {%>
                     <li><a class="dropdown-item" href="/login/register">Registrar nuevo usuario  </a></li>
-                    
+                    <% } %>
                     </ul>
                 </li>
             

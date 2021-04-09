@@ -3,7 +3,8 @@ const CasoDeUso = require('../models/casodeuso');
 
 exports.getNuevoCasoDeUso = (request, response, next) => {
     response.render('crear_casodeuso', {
-        titulo: 'Nuevo CasoDeUso',
+        rol: request.session.rol,
+        titulo: 'Nuevo Caso de uso',
         isLoggedIn: request.session.isLoggedIn === true ? true : false
     });
 };
@@ -13,7 +14,7 @@ exports.postNuevoCasoDeUso = (request, response, next) => {
     nuevo_casodeuso.save()
         .then(() => {
 
-            response.redirect('/casosdeuso/todos');
+            response.redirect('/proyectos/casosdeuso/'+request.body.IdProyecto_cu);
         }).catch(err => console.log(err));
 
 }
@@ -25,7 +26,8 @@ exports.getCasoDeUso = (request, response, next) => {
     console.log(request.params);
     CasoDeUso.fetchOne(idCasoDeUso)
         .then(([rows, fieldData]) => {
-            response.render('casosdeuso', { 
+            response.render('casosdeuso', {
+                rol: request.session.rol, 
                 lista_casosdeuso: rows, 
                 titulo: 'CasosDeUso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -58,6 +60,7 @@ exports.getActualizarCasoDeUso = (request, response, next) => {
     CasoDeUso.fetchOne(idCasoDeUso)
         .then(([rows, fieldData]) => {
             response.render('modif_casodeuso', { 
+                rol: request.session.rol,
                 lista_casosdeuso: rows, 
                 titulo: 'CasosDeUso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -74,6 +77,7 @@ exports.get = (request, response, next) => {
     CasoDeUso.fetchAll()
         .then(([rows, fieldData]) => {
             response.render('todos_casosdeuso', { 
+                rol: request.session.rol,
                 lista_casosdeuso: rows, 
                 titulo: 'Casos de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false

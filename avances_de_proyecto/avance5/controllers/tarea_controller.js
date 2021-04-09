@@ -26,6 +26,7 @@ exports.getTarea = (request, response, next) => {
     CasoDeUso.fetchOne(idTarea)
         .then(([rows, fieldData]) => {
             response.render('tarea', { 
+                rol: request.session.rol,
                 lista_tarea: rows, 
                 titulo: 'Tarea',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
@@ -64,6 +65,7 @@ exports.get = (request, response, next) => {
     CasoDeUso.fetchAll()
         .then(([rows, fieldData]) => {
             response.render('todos_casosdeuso', { 
+                rol: request.session.rol,
                 lista_casosdeuso: rows, 
                 titulo: 'Casos de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
