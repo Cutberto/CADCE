@@ -30,7 +30,7 @@
                 <form action="/casosdeuso/actualizarCaso" method="POST">
                     <% for (let casodeuso of lista_casosdeuso) { %>
 
-                    <label for="IdCasoDeUso"> Id Caso de Uso  </label><input type="text" name="IdCasoDeUso_cu"  value="<%= casodeuso.IdCasodeUso %>" required>
+                    <label for="IdCasoDeUso"> Id Caso de Uso  </label><input type="text" name="IdCasoDeUso_cu"  value="<%= casodeuso.IdCasoDeUso %>" required>
                         <label for="nombre">Nombre </label><input type="text" name="nombre_cu" value="<%= casodeuso.nombre %>" required>
                         <label for="descripcion">Descripción </label><input type="text" name="descripcion_cu" value="<%= casodeuso.descripcion %>" required>
                         <label for="IdProyecto"> IdProyecto </label><input type="text" name="IdProyecto_cu" value="<%= casodeuso.IdProyecto %>" required>
@@ -42,7 +42,7 @@
                             <i class="material-icons right">send</i>
                         </button>
                         <% for (let casodeuso of lista_casosdeuso) { %>
-                        <a href="/proyectos/casosdeuso/<%= casodeuso.IdCasodeUso %>" class="waves-effect waves-light btn" > Cancelar </a> <br> 
+                        <a href="/proyectos/casosdeuso/<%= casodeuso.IdCasoDeUso %>" class="waves-effect waves-light btn" > Cancelar </a> <br> 
                         <% } %>
                         <br><br><br>
 
