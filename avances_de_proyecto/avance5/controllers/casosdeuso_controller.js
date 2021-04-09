@@ -62,7 +62,7 @@ exports.getActualizarCasoDeUso = (request, response, next) => {
             response.render('modif_casodeuso', { 
                 rol: request.session.rol,
                 lista_casosdeuso: rows, 
-                titulo: 'CasosDeUso',
+                titulo: 'Modificar caso de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
