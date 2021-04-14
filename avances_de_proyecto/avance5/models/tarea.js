@@ -16,7 +16,7 @@ module.exports = class Tarea {
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
         console.log(this.IdTarea, this.nombre, this.IdFase, this.dificultad);
-        return db.execute('INSERT INTO tarea (IdTarea, nombre, IdFase, dificultad) VALUES (?, ?, ?, ?)',
+        return db.execute('INSERT INTO tarea (IdTarea, nombre, fase, dificultad) VALUES (?, ?, ?, ?)',
                           [this.IdTarea, this.nombre, this.IdFase, this.dificultad]
         );
     }
@@ -24,17 +24,28 @@ module.exports = class Tarea {
     //cu 18
     actualizar() {
         return db.execute(
-            "UPDATE tarea SET  nombre=?, IdFase =?, dificultad=? WHERE IdTarea =? ",
+            "UPDATE tarea SET  nombre=?, fase =?, dificultad=? WHERE IdTarea =? ",
             [ this.nombre, this.IdFase, this.dificultad, this.IdTarea]
             );
     }
- 
+    // IdCasoDeUso lo recibe como parametro del request (se maneja en tarea_controller/postNuevaTarea)
+    asignarConCasoDeUso(IdCasoDeUso) {
+        return db.execute(
+            "INSERT INTO casodeuso_tarea (IdTarea, IdCasoDeUso) VALUES (?,?) ",
+            [ this.IdTarea, IdCasoDeUso]
+            );
+    }
     
 // hasta aqui llevo 
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
-        return db.execute('SELECT * FROM casodeuso');
+        return db.execute('SELECT * FROM tarea');
+    }
+
+    static fetchTareasOfCaso(IdCasoDeUso) {
+                            //consulta verificada, brinda las tareas correspondientes a cada caso de uso
+        return db.execute('SELECT * FROM tarea WHERE IdTarea IN (SELECT IdTarea FROM casodeuso_tarea where IdCasoDeUso =?)', [IdCasoDeUso] );
     }
     
     static fetchOne(IdCasoDeUso) {

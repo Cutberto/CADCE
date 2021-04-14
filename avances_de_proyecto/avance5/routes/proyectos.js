@@ -30,6 +30,14 @@ router.get('/:proyecto_id',  isAuth, proyectosController.getProyecto); //colocar
 
 router.post('/:proyecto_id', isAuth, proyectosController.postActualizarProyecto);
 
+router.get('/wbs/:proyecto_id' , isAuth,  proyectosController.getWbs );
+
+//router.get('/nuevatarea/:proyecto_id' , isAuth,  proyectosController.getNuevaTarea  );
+
+//router.post('/nuevatarea/:proyecto_id' , isAuth,  proyectosController.postNuevaTarea  );
+
+
+
 
 /*Obtener la lista de proyectos*/
 

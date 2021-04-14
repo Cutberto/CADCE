@@ -1,5 +1,27 @@
 const session = require('express-session');
 const CasoDeUso = require('../models/casodeuso');
+const Tarea = require('../models/tarea');
+
+
+exports.getTareas = (request, response, next) => {
+    const idCasoDeUso = request.params.casodeuso_id;
+    const idProyecto = request.params.proyecto_id;
+    console.log(request.params);
+    Tarea.fetchTareasOfCaso(idCasoDeUso)
+        .then(([rows, fieldData]) => {
+            response.render('todas_tareas', { 
+                rol: request.session.rol,
+                lista_tareas: rows, 
+                titulo: 'Tareas del caso de uso'  ,
+                IdCasoDeUso: idCasoDeUso,
+                idProyecto: idProyecto,
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 
 exports.getNuevoCasoDeUso = (request, response, next) => {
     response.render('crear_casodeuso', {
@@ -87,3 +109,4 @@ exports.get = (request, response, next) => {
             console.log(err);
         });
 };
+
