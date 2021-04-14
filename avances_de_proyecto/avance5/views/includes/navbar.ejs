@@ -1,40 +1,38 @@
 <div class="row">    
-    <div class="col s12 m4 ">
+    <div class="col s6 m12">
       <div class="row center"> <!-- Esta es la barra blanca que se ve al fondo  -->
     
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-white bg-dark">
             <div class="container-fluid">
             <a class="navbar-brand" href="/proyectos/inicio"> <img src="/img/natdev_logo.png" alt="NatDev Logo" width="120" height="20">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#16B8D9">
                         Proyectos
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/proyectos/inicio">Todos los proyectos</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="/proyectos/crear_proyecto">Nuevo Proyecto  </a></li>
+                        <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/proyectos/inicio" style="color:#16B8D9">Todos los proyectos</a></li>
+                        <li><hr class="dropdown-divider "></li>
+                        <li><a class="dropdown-item" href="/proyectos/crear_proyecto" style="color:#16B8D9">Nuevo Proyecto  </a></li>
                         
                         </ul>
                     </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">placeHolder</a>
+                    <a class="nav-link" href="#" style="color:#16B8D9">placeHolder</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color:#16B8D9">
                     Usuario
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="/login/logout">Cerrar sesión</a></li>
+                    <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/login/logout" style="color:#16B8D9">Cerrar sesión</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <!--  Poner aqui un if session.rol == 1   -->
                     <% if (rol == 1) {%>
-                    <li><a class="dropdown-item" href="/login/register">Registrar nuevo usuario  </a></li>
+                    <li><a class="dropdown-item" href="/login/register" style="color:#16B8D9">Registrar nuevo usuario  </a></li>
                     <% } %>
                     </ul>
                 </li>
@@ -46,12 +44,12 @@
         </nav>
 
     </div>
-    <div class = "col s12 m12 center"  > 
+    <div class = "col s12 m12"  > 
          <div class="d-none d-md-block"> 
-             <h1>  <%= titulo %>  </h1>   
+             <h1 >  <%= titulo %>  </h1>   
         </div>
         <div class="d-none d-sm-xs-block d-md-none"> 
-            hola</br> </br>
+            hola<br> <br>
         </div> 
     </div>
 </div>

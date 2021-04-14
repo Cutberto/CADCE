@@ -18,40 +18,34 @@
     
        
    
-<body> 
+<body class="row"> 
         
 
     <%- include('includes/navbar.ejs'); %>
 
- <div class="row center">
+ <div class="center">
      
     <div class="col s12 m12 ">
        
          <% for (let proyecto of proyectos) { %>
-        <div class="col s12 m4"> <!-- Tamaño de cada tarjeta -->
-            <div class="card small ">
-                <div class="card-image">
-                    <!--img src="../img/square_logo2.jpg" alt="Project Logo" width="320" height="300" -->
-
-                </div>
-                <div class="card-header">
-                    <h5>  <%= proyecto.nombre %> </h5>  <br>  
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item"> <b>Descripción: </b> <%= proyecto.descripcion %></li>
-                    <li class="list-group-item"> <b>Estado: </b> <%= proyecto.estado %></li>
-                   
-                  </ul>
-
-                <div class="card-content">
-                    
-                    <a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="btn btn-primary">Detalles</a>
-
-                    
-                </div>
-                
+           
+            <div class="col s12 m4"> <!-- Tamaño de cada tarjeta -->
+                    <div class="card" style="width: 100%; hight: 100%;">
+                      <div class="card-body">
+                              <div class="card-header">
+                                <b><%= proyecto.nombre %></b>
+                              </div>                      
+                       <ul class="list-group list-group-flush">
+                           <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Estado:</b> <%= proyecto.estado %></h6></li>
+                           <li class="list-group-item"><p class="card-text"><b>Descripción: </b> <%= proyecto.descripcion %></p></li>
+                           <li class="list-group-item"> <a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="card-link">Detalles</a></li>
+                       </ul>   
+                        
+                      </div>
+                      
+                    </div>
             </div>
-        </div>
+                     
         <% } %>
     </div>    
 </div>

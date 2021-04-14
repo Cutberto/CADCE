@@ -3,33 +3,35 @@
 <html lang = "es">
 
 <head>
-    
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>Utilizando bootstrap</title>
       <meta name="description" content="Prototipo ">
-      <link href = "../css/main.css" rel = "stylesheet">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
-
+      <link href = "../css/login.css" rel = "stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">    
 </head>
 
-<main class="container">
-    <h2>  Iniciar sesión  </h2>
-    <form action="/login" method="POST">
-        <label for="IdEmpleado"> Nombre de Usuario </label>   <input type="text" name="IdEmpleado">
-        <label for="nombre"> Contraseña </label>   <input type="password" name="contraseña">
-        <%= error  %>
-        
-        <br><br>
-        <button class="btn waves-effect waves-light" type="submit" name="action"> Iniciar sesión
-            <i class="material-icons right">send</i>
-        </button>
-
-        <br><br><br>
-                
-    </form>
+<main>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card">
+                        <form action="/login" method="POST" class="box" >
+                            <h1>Login</h1>
+                            <p class="text-muted"> Por favor ingresa tu usuario y contraseña</p> <input type="text" name="IdEmpleado" placeholder="Usuario"> 
+                            <input type="password" name="contraseña" placeholder="Contraseña">
+                            <p><%= error  %></p>  
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
+                            
+                        </form>
+                    
+                    </div>
+                </div>
+           </div>
+        </div>
+    </body>
 </main>
+
+
 
