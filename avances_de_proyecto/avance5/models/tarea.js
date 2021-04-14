@@ -16,8 +16,8 @@ module.exports = class Tarea {
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
         console.log(this.IdTarea, this.nombre, this.IdFase, this.dificultad);
-        return db.execute('INSERT INTO tarea (IdTarea, nombre, fase, dificultad) VALUES (?, ?, ?, ?)',
-                          [this.IdTarea, this.nombre, this.IdFase, this.dificultad]
+        return db.execute('INSERT INTO tarea (nombre, fase, dificultad) VALUES ( ?, ?, ?)',
+                          [ this.nombre, this.IdFase, this.dificultad]
         );
     }
 
@@ -31,8 +31,8 @@ module.exports = class Tarea {
     // IdCasoDeUso lo recibe como parametro del request (se maneja en tarea_controller/postNuevaTarea)
     asignarConCasoDeUso(IdCasoDeUso) {
         return db.execute(
-            "INSERT INTO casodeuso_tarea (IdTarea, IdCasoDeUso) VALUES (?,?) ",
-            [ this.IdTarea, IdCasoDeUso]
+            "INSERT INTO casodeuso_tarea (IdTarea, IdCasoDeUso) VALUES ((SELECT IdTarea FROM tarea WHERE nombre = ?),?) ",
+            [ this.nombre, IdCasoDeUso]
             );
     }
     

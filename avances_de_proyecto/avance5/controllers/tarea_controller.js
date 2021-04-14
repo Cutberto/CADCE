@@ -17,6 +17,7 @@ exports.postNuevaTarea = (request, response, next) => {
     const nueva_tarea = new Tarea(request.body.IdTarea, request.body.nombre, request.body.IdFase, request.body.dificultad);
     nueva_tarea.save()   
         .then(() => {
+            
             nueva_tarea.asignarConCasoDeUso(request.body.IdCasoDeUso)
             .then(() =>{
                 response.redirect('/proyectos/todos'); //Poner aqui una ruta hacia proyectos/casosdeuso/ProyectoID

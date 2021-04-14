@@ -29,10 +29,9 @@
             
             <div class="mycol md-12 sm-12 lg-9">
                     <form action="/tareas/nueva" method="POST">
-                        <label for="IdTarea">Tarea </label><input type="text" name="IdTarea" required>
-                        <label for="nombre">Nombre </label><input type="text" name="nombre" required>
+                        <label for="nombre">Nombre de la tarea </label><input type="text" name="nombre" required>
 
-                        <label for="IdFase">Fase </label><input type="text" name="IdFase" required>
+                        <label for="IdFase">Fase de desarrollo </label><input type="text" name="IdFase" required>
                         <label for="dificultad"> Dificultad </label><input type="text" name="dificultad" required>
                         <input type="hidden" name ="IdCasoDeUso" value = "<%= IdCasoDeUso %>">
                         <br><br>
