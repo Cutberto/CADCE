@@ -28,9 +28,12 @@ module.exports = class Proyecto {
           //  }).catch(err => console.log(err));  
     }
     
-    actualizar() {
+    actualizar(IdProyecto) {
+        console.log('los parametros del update son: '+this.nombre, this.descripcion, this.fechaplaneada, this.fechaLimite, this.IdProyecto)
         return db.execute(
-            'UPDATE proyecto SET nombre=?, descripcion=?, fechaplaneada=?, fechaLimite=? WHERE IdProyecto=?',[this.nombre, this.descripcion, this.fechaplaneada, this.fechaLimite, this.IdProyecto]
+            
+            'UPDATE proyecto SET nombre=?, descripcion=?, fechaplaneada=?, fechaLimite=? WHERE IdProyecto=?',
+            [this.nombre, this.descripcion, this.fechaplaneada, this.fechaLimite, IdProyecto]
 
             );
     }
