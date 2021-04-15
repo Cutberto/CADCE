@@ -36,7 +36,6 @@ module.exports = class Tarea {
             );
     }
     
-// hasta aqui llevo 
 
     //Este método servirá para devolver los objetos del almacenamiento persistente.
     static fetchAll() {
@@ -48,8 +47,8 @@ module.exports = class Tarea {
         return db.execute('SELECT * FROM tarea WHERE IdTarea IN (SELECT IdTarea FROM casodeuso_tarea where IdCasoDeUso =?)', [IdCasoDeUso] );
     }
     
-    static fetchOne(IdCasoDeUso) {
-        return db.execute('SELECT * FROM casodeuso WHERE IdCasoDeUso=?', [IdCasoDeUso]);
+    static fetchOne(IdTarea) {
+        return db.execute('SELECT * FROM tarea WHERE IdTarea=?', [IdTarea]);
     }
 
 }
