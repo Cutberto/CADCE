@@ -46,6 +46,10 @@ module.exports = class Proyecto {
     static fetchOne(idProyecto) {
         return db.execute('SELECT * FROM proyecto WHERE IdProyecto=?', [idProyecto]);
     }
+    
+    static eliminarProyecto(idProyecto){
+        return db.execute('UPDATE proyecto SET estado = ? WHERE IdProyecto = ?', ['Finalizado', idProyecto]);
+    }    
 
 
 }

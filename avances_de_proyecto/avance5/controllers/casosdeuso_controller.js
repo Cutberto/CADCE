@@ -94,6 +94,21 @@ exports.getActualizarCasoDeUso = (request, response, next) => {
 
 }
 
+
+
+exports.postEliminarCasoDeUso = (request, response) => {
+    const idCasoDeUso = request.body.IdCasoDeUso;
+    console.log("Id",request.body.IdCasoDeUso)
+    CasoDeUso.EliminarCasoDeUso(idCasoDeUso)
+    .then(() => {
+        request.session.alerta = "Caso de uso eliminado exitosamente";
+        response.redirect('/proyectos/inicio');
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 exports.get = (request, response, next) => {
 
     CasoDeUso.fetchAll()

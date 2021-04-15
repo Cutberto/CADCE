@@ -9,6 +9,37 @@
 
 }
 
+button[name="add"] {
+
+    background: none;
+    border: 2px solid #F85151;
+    color: #FFDADA;
+    border-radius: 24px;
+    
+
+
+}
+
+button[name="opt"] {
+
+    background: none;
+    border: 2px solid #3498db;
+    color: #C5E8FF;
+    border-radius: 24px;
+    
+}
+
+a{
+    text-decoration:none;
+}
+
+a:link, a:visited, a:active, a:hover, a:focus{
+   color: #C5E8FF;
+    text-decoration:none;
+}
+
+
+
 .box input[type="text"],
 .box input[type="password"],
 .box input[type="numeric"]

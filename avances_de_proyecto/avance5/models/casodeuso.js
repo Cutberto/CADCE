@@ -43,6 +43,10 @@ module.exports = class CasoDeUso {
     static fetchByProject(IdProyecto) {
         return db.execute('SELECT * FROM casodeuso WHERE IdProyecto=? ORDER BY iteracion ASC', [IdProyecto]);
     }
+    
+    static EliminarCasoDeUso(idCasoDeUso){
+        return db.execute('DELETE FROM casodeuso WHERE IdCasoDeUso=?', [idCasoDeUso]);
+    }        
 
 
 }
