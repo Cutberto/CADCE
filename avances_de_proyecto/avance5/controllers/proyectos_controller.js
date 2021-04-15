@@ -105,6 +105,7 @@ exports.getDetalles = (request, response, next) => {
                 rol: request.session.rol,
                 Proyecto: rows,  
                 titulo: 'Detalles del proyecto',
+                idProyecto: idProyecto,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
@@ -153,13 +154,13 @@ exports.get = (request, response, next) => {
 
 exports.getWbs = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
-    
+    console.log("GET wbs_tareas con proyecto_id: ")
     console.log(request.params);
-    CasoDeUso.fetchByProject(idProyecto)
+    Tarea.fetchTareasOfProyecto(idProyecto) //busca las tareas del proyecto dado
         .then(([rows, fieldData]) => {
-            response.render('todos_casosdeuso', { 
+            response.render('wbs_tareas', { 
                 rol: request.session.rol,
-                lista_casosdeuso: rows, 
+                lista_tareas: rows, 
                 titulo: 'WBS Para el proyecto'  ,
                 idProyecto: idProyecto,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
