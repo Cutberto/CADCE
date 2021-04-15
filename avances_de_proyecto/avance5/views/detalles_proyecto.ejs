@@ -31,9 +31,10 @@
                       <th scope="col">Id del Proyecto</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Descripcion</th>
-                      <th scope="col">Fecha Inicial</th>
+                      <th scope="col">Fecha de inicio de desarrollo</th>
                       <th scope="col">Fecha Planeada de entrega</th>
                       <th scope="col">Fecha Limite de entrega</th>
+                      <th scope="col"></th>
                       <th scope="col"></th>
                       
                     </tr>
@@ -46,12 +47,13 @@
                       <th scope="row" ><%= elemento.IdProyecto %></th>
                       <td><%= elemento.nombre %> </td>
                       <td><%= elemento.descripcion %></td>
-                      <td><%= elemento.fechaInicial %> </td>
-                      <td><%= elemento.fechaPlaneada %></td>
-                      <td><%= elemento.fechaLimite %></td>
+                      <td><%= elemento.fecha_inicial %> </td>
+                      <td><%= elemento.fecha_planeada %></td>
+                      <td><%= elemento.fecha_limite %></td>
+                      <td><button name="opt"><a href="/proyectos/<%= elemento.IdProyecto %>" >Editar</a> </button><br><br></td>
                       
                       <td>
-                            <button name="opt"><a href="/proyectos/<%= elemento.IdProyecto %>" >Editar</a> </button><br><br>
+                            
                            
                            
                             <form action="/proyectos/eliminar-proyecto" method="POST" id="eliminar_<%= elemento.IdProyecto %>">
