@@ -1,6 +1,8 @@
 const session = require('express-session');
 const Proyecto = require('../models/proyecto');
 const CasoDeUso = require('../models/casodeuso');
+const Tarea = require('../models/tarea');
+
 /*
 exports.inicio = (request, response, next) => {
     console.log(request.session.rol);
@@ -149,7 +151,24 @@ exports.get = (request, response, next) => {
 };
 
 
-
+exports.getWbs = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    
+    console.log(request.params);
+    CasoDeUso.fetchByProject(idProyecto)
+        .then(([rows, fieldData]) => {
+            response.render('todos_casosdeuso', { 
+                rol: request.session.rol,
+                lista_casosdeuso: rows, 
+                titulo: 'WBS Para el proyecto'  ,
+                idProyecto: idProyecto,
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 
 
 exports.modif_proyecto = (request, response, next) => {

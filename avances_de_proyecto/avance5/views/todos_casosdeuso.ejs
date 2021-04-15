@@ -51,6 +51,7 @@
                       <td><%= CasoDeUso.iteracion %></td>
                       
                       <td> <a href="/casosdeuso/<%= CasoDeUso.IdCasoDeUso %>">Editar</a></td> 
+                      <td> <a href="/casosdeuso/<%= CasoDeUso.IdCasoDeUso %>/<%= CasoDeUso.IdProyecto %>">Ver tareas asociadas</a></td>
 
                     </tr>
                     
@@ -59,9 +60,15 @@
                 </table>               
             
             
-            
-            <a href="/proyectos/detalles/<%=idProyecto %>" class="btn btn-primary" > Volver al proyecto </a> 
-            <a href="/proyectos/nuevocaso/<%=idProyecto %>" class="btn btn-primary"> Crear nuevo</a>
+           
+                        
+                     
+                
+                
+           
+            </table>
+            <a href="/proyectos/detalles/<%=idProyecto %>" class="waves-effect waves-light btn" > Volver al proyecto </a> 
+            <a href="/proyectos/nuevocaso/<%=idProyecto %>" class="waves-effect waves-light btn"> Crear nuevo</a>
                 
 
         </div>
