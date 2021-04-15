@@ -9,48 +9,42 @@
       <title> <%= titulo %> </title>
       <meta name="description" content="Prototipo ">
       <link href = "../css/main.css" rel = "stylesheet">
+      <link href = "../css/inputs.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
+
 
 </head>
     
        
    
-<body>  
+<body class="row">  
     <div class="row">
         <%- include('includes/navbar.ejs'); %>
 
     </div>
 
     <div class="container">
-        <div class="row">
+        
              
             <div class="mycol md-12 sm-12 lg-9">
-                <form action="/proyectos/:proyecto_id" method="POST">
+                <form action="/proyectos/:proyecto_id" method="POST" class="box">
                 <% for (let Proyecto of lista_proyectos) { %>
-
-                            <label for="IdProyecto" > IdProyecto (En formato P000) </label> <input type="text" name="IdProyecto" value="<%= Proyecto.IdProyecto %>" required>
-                            <label for="nombre" > Nombre del Proyecto  </label> <input type="text" name="nombre" value="<%= Proyecto.nombre %>" required>
-                            <label for="descripcion"> Descripción del Proyecto  </label> <input type="text" name="descripcion" value="<%= Proyecto.descripcion %>" required>
-                            <label for="fechaplaneada" > Fecha de entrega planeada  </label> <input type="date" name="fechaplaneada" value="<%= Proyecto.fechaplaneada %>" required>
-                            <label for="fechaLimite" value="<%= Proyecto.fechaLimite %>"> Fecha limite de entrega  </label> <input type="date" name="fechaLimite" required>
-                            <label for="fechaInicial" > Fecha de inicio de proyecto  </label> <input type="date" name="fechaInicial" value="<%= Proyecto.fechaInicial %>" required>
-
-                            <br><br>                 
-                          
-                
-                <button class="btn waves-effect waves-light" type="submit" name="action"> Guardar
-                    <i class="material-icons right">send</i>
-                </button>                
-                <a href="/proyectos/detalles/<%=Proyecto.IdProyecto %>" class="waves-effect waves-light btn" > Cancelar </a> <br> 
+                    <div class="row">
+                            
+                            <label for="nombre" >Nombre del Proyecto  </label>  <br> <br><input type="text" name="nombre" value="<%= Proyecto.nombre %>" required>
+                            <label for="descripcion"><br> Descripción del Proyecto  </label><br> <br> <input type="text" name="descripcion" value="<%= Proyecto.descripcion %>" required>
+                            
+                            <label for="fechaPlaneada" ><br> Fecha de entrega planeada  </label><br> <br> <input type="date" name="fechaPlaneada" value="<%= Proyecto.fechaPlaneada %>" required>
+                            
+                            <label for="fechaLimite" ><br> Fecha limite de entrega  </label> <br> <br><input type="date" name="fechaLimite" value="<%= Proyecto.fechaLimite %>" required>
+           
+                            <label for="IdProyecto" class="oculto"> IdProyecto (En formato P000) </label> <input type="text" name="IdProyecto" value="<%= Proyecto.IdProyecto %>" class="oculto" required>                                                               
                 <% } %>
-
+                            <label></label>                
+                            <button type="submit" name="action"> Guardar</button>
+                    </div>
                 </form>
-
-                <br><br><br>                    
-            </div>
+                   
         </div>
     </div>    
 

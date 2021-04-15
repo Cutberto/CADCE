@@ -4,12 +4,13 @@ const bcrypt = require('bcryptjs');
 module.exports = class Proyecto {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(nombre, descripcion, fechaplaneada, fechaLimite, fechaInicial) {
+    constructor(nombre, descripcion, fechaplaneada, fechaLimite, fechaInicial, IdProyecto) {
        this.nombre = nombre;
        this.descripcion = descripcion;
        this.fechaplaneada = fechaplaneada;
        this.fechaLimite = fechaLimite;
        this.fechaInicial = fechaInicial;
+       this.IdProyecto = IdProyecto;
 
 
     }
@@ -35,7 +36,7 @@ module.exports = class Proyecto {
     }
     
     static fetchAll() {
-        return db.execute('SELECT * FROM proyecto');
+        return db.execute('SELECT * FROM proyecto ORDER BY estado, fechaInicial');
     }
     
 

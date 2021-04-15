@@ -9,8 +9,8 @@
       <title> <%= titulo %>  </title>
       <meta name="description" content="Prototipo ">
       <link href = "../css/main.css" rel = "stylesheet">
+      <link href = "../css/login.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 
@@ -30,20 +30,29 @@
          <% for (let proyecto of proyectos) { %>
            
             <div class="col s12 m4"> <!-- Tamaño de cada tarjeta -->
-                    <div class="card" style="width: 100%; hight: 100%;">
-                      <div class="card-body">
-                              <div class="card-header">
-                                <b><%= proyecto.nombre %></b>
-                              </div>                      
-                       <ul class="list-group list-group-flush">
-                           <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Estado:</b> <%= proyecto.estado %></h6></li>
-                           <li class="list-group-item"><p class="card-text"><b>Descripción: </b> <%= proyecto.descripcion %></p></li>
-                           <li class="list-group-item"> <a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="card-link">Detalles</a></li>
-                       </ul>   
-                        
-                      </div>
-                      
-                    </div>
+                    
+                <div class="card border-info text-white bg-dark mb-3" style="width: 100%; hight: 100%;">
+
+                  <div class="card-header card-title bg-transparent border-info"><%= proyecto.nombre %></div>
+
+                  <div class="card-footer bg-transparent border-info"><br><h6><b>Descripción: </b><%= proyecto.descripcion %></h6> <br></div>
+
+                  <div class="card-footer bg-transparent border-info">
+                  <% if (proyecto.estado == 'Activo') {%>
+                  
+                      <h6 style="color:#2ecc71"><b>Estado: </b><%= proyecto.estado %></h6>
+                  
+                  <% } else { %>
+                  
+                      <h6 style="color:#E1574A"><b>Estado: </b><%= proyecto.estado %></h6>
+                  
+                  <% } %>
+                  </div>
+
+                  <div class="card-footer bg-transparent border-info"><a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="card-link waves-effect waves-light btn  light-blue accent-4" style="color:#b3e5fc ">Detalles</a></div>
+
+                </div>
+                                                      
             </div>
                      
         <% } %>

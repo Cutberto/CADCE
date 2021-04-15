@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response, next) => {
     console.log(request.session);
-    response.redirect('/proyectos');
+    response.redirect('/login');
 });
 
 

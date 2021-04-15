@@ -53,7 +53,7 @@ exports.postProyecto = (request, response, next) => {
 
 exports.postActualizarProyecto = (request, response, next) => {
     console.log("recibi un actualizar de proyecto");
-    const actualizar_proyecto = new Proyecto(request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite);
+    const actualizar_proyecto = new Proyecto(request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite, request.body.IdProyecto);
     actualizar_proyecto.actualizar()
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada

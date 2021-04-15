@@ -9,16 +9,14 @@
       <title> <%= titulo %> </title>
       <meta name="description" content="Prototipo ">
       <link href = "../css/main.css" rel = "stylesheet">
+      <link href = "../css/inputs.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 
 </head>
     
        
    
-<body>  
+<body class="row">  
 <!----    constructor(IdProyecto, nombre, descripcion, fechaplaneada, fechaLimite, fechaInicial, tiempoMax, tiempoMin) -->
 
     <div class="row">
@@ -26,34 +24,25 @@
 
     </div>
 
-
-
-    <div class="container">
-        <div class="row">
-            
-            
-            <div class="mycol s12 m12">
-                <form action="/proyectos/crear_proyecto" method="POST">
-                    <label for="nombre"> Nombre del Proyecto  </label> <input type="text" name="nombre" required>
-                    <label for="descripcion"> Descripción del Proyecto  </label> <input type="text" name="descripcion" required>
-                    <label for="fechaplaneada"> Fecha de entrega planeada  </label> <input type="date" name="fechaplaneada" required>
-                    <label for="fechaLimite"> Fecha limite de entrega  </label> <input type="date" name="fechaLimite" required>
-                    <label for="fechaInicial"> Fecha de inicio de proyecto  </label> <input type="date" name="fechaInicial" required>
+    <div class="container ">
                     
-                    <br><br>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Ingresar
-                        <i class="material-icons right">send</i>
+                <form action="/proyectos/crear_proyecto" method="POST" class="box">
+                   <div class="row">
+                    <label for="nombre" > Nombre del Proyecto  </label> <br><br> <input type="text" name="nombre" required><br>
+                    <label for="descripcion" > <br>Descripción del Proyecto  </label> <br><br><br> <input type="text" name="descripcion" required><br>
+                    <label for="fechaplaneada" > <br>Fecha de entrega planeada <br> </label> <br><br><br><input type="date" name="fechaplaneada" required><br>
+                    <label for="fechaLimite" > <br>Fecha limite de entrega <br> </label> <br><br><br><input type="date" name="fechaLimite" required><br>
+                    <label for="fechaInicial" > <br>Fecha de inicio de proyecto  <br></label><br><br><br> <input type="date" name="fechaInicial" required><br>
+                    <label><br></label>                   
+                    <button type="submit" name="action">Crear
                     </button>
-                    <a href="/proyectos/inicio" class="waves-effect waves-light btn" > Cancelar </a> 
-
-                    <br><br><br>
-                            
+                    
+                   </div>         
                 </form>
                 
             
-            </div>
+            
         </div>
-    </div>    
 
 
 
