@@ -10,7 +10,8 @@
 }
 
 .box input[type="text"],
-.box input[type="password"]
+.box input[type="password"],
+.box input[type="numeric"]
 
 {
     border: 0;
@@ -25,7 +26,8 @@
     transition: 0.4s
 }
 
-.box input[type="date"]{
+.box input[type="date"]
+{
     border: 0;
     background: none;   
     text-align: left;
@@ -34,6 +36,20 @@
     width: auto;
     outline: none;
     color: white;
+    border-radius: 24px;
+    transition: 0.25s    
+}
+
+.box select
+{
+    border: 0;
+    background: none;   
+    text-align: center;
+    border: 2px solid #8981F3;
+    padding: 10px 10px;
+    width: auto;
+    outline: none;
+    color: #7FC5F3;
     border-radius: 24px;
     transition: 0.25s    
 }
@@ -156,3 +172,5 @@ a.socialIcon:hover,
     transition: all 0.8s;
     transition: all 0.8s
 }
+
+   

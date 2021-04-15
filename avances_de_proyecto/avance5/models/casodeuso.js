@@ -4,27 +4,28 @@ const db = require('../utils/database');
 module.exports = class CasoDeUso {
 
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
-    constructor(IdCasoDeUso, nombre, descripcion, IdProyecto, dificultad) {
+    constructor(IdCasoDeUso, nombre, descripcion, IdProyecto, dificultad, iteracion) {
         this.IdCasoDeUso = IdCasoDeUso;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.IdProyecto = IdProyecto;
         this.dificultad = dificultad;
+        this.iteracion = iteracion;
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        console.log( this.nombre, this.descripcion, this.IdProyecto, this.dificultad, 'NULL', 'NULL', '1');
-        return db.execute('INSERT INTO casodeuso ( nombre, descripcion, IdProyecto, dificultad, tiempoMax, tiempoMin, iteracion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                          [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, 'NULL', 'NULL', '1']
+        console.log( this.nombre, this.descripcion, this.IdProyecto, this.dificultad, 'NULL', 'NULL', this.iteracion);
+        return db.execute('INSERT INTO casodeuso ( nombre, descripcion, IdProyecto, dificultad, tiempoMax, tiempoMin, iteracion) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                          [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, 'NULL', 'NULL', this.iteracion]
         );
     }
 
     //cu 10
     actualizar() {
         return db.execute(
-            "UPDATE casodeuso SET nombre=?, descripcion=?, IdProyecto =?, dificultad=? WHERE IdCasoDeUso =? ",
-            [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, this.IdCasoDeUso]
+            "UPDATE casodeuso SET nombre=?, descripcion=?, IdProyecto =?, dificultad=?, iteracion=? WHERE IdCasoDeUso =? ",
+            [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, this.iteracion, this.IdCasoDeUso ]
             );
     }
  
@@ -40,7 +41,7 @@ module.exports = class CasoDeUso {
     }
 
     static fetchByProject(IdProyecto) {
-        return db.execute('SELECT * FROM casodeuso WHERE IdProyecto=?', [IdProyecto]);
+        return db.execute('SELECT * FROM casodeuso WHERE IdProyecto=? ORDER BY iteracion ASC', [IdProyecto]);
     }
 
 

@@ -10,7 +10,7 @@ exports.getNuevoCasoDeUso = (request, response, next) => {
 };
 
 exports.postNuevoCasoDeUso = (request, response, next) => {
-    const nuevo_casodeuso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu);
+    const nuevo_casodeuso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu, request.body.iteracion_cu);
     nuevo_casodeuso.save()
         .then(() => {
 
@@ -43,7 +43,7 @@ exports.getCasoDeUso = (request, response, next) => {
 exports.postActualizarCasoDeUso = (request, response, next) => {
     console.log("recibi un actualizar de caso de uso");
     console.log(request.body);
-    const actualizar_caso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu);
+    const actualizar_caso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu, request.body.iteracion_cu);
     actualizar_caso.actualizar()
         .then(() => {
             request.session.aviso = "Caso de uso " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
