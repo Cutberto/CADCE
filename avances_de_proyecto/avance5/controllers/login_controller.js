@@ -22,7 +22,7 @@ exports.post = (request, response, next) => {
     Usuario.getCorreo(username)
         .then(([rows, fieldData]) => {
             if (rows.length < 1) {
-                request.session.error = "El usuario y/o contraseña no coinciden";
+                request.session.error = "El correo y/o contraseña no coinciden";
                 console.log ("usuario y contra no coinciden");
                 response.redirect('/login/');
             } else {
