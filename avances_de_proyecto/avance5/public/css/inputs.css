@@ -102,7 +102,8 @@ a:link, a:visited, a:active, a:hover, a:focus{
 }
 
 .box input[type="text"]:focus,
-.box input[type="password"]:focus {
+.box input[type="password"]:focus,
+.box input[type="numeric"]:focus {
     width: 75%;
     border-color: #2ecc71
 }
