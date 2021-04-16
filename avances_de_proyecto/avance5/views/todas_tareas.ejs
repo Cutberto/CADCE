@@ -34,6 +34,7 @@
                 <td>Nombre</td>
                 <td>Fase</td>
                 <td>Dificultad</td>
+                <td>Tiempo Estimado (en horas)</td>
                 </tr>
             
                 <% for (let tarea of lista_tareas) { %>
@@ -42,6 +43,7 @@
                            <td><%= tarea.nombre %></td>
                            <td><%= tarea.fase %></td>
                            <td><%= tarea.dificultad %></td>
+                           <td><%= tarea.TiempoEstimado %></td>
                            <td> <a href="/tareas/actualizarTarea/<%= tarea.IdTarea %>">Editar tarea </a></td> 
  
                            
@@ -54,7 +56,7 @@
                 <% } %>
             </table>
             <a href="/proyectos/casosdeuso/<%= idProyecto %>" class="waves-effect waves-light btn" > Volver al caso de uso </a> 
-            <a href="/tareas/nueva/<%= IdCasoDeUso %>" class="waves-effect waves-light btn"> Crear nueva tarea</a>
+            <a href="/tareas/nueva/<%= IdCasoDeUso %>/<%= idProyecto %>" class="waves-effect waves-light btn"> Crear nueva tarea</a>
                 
 
             </div>

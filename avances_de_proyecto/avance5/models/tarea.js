@@ -6,26 +6,28 @@ module.exports = class Tarea {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
     // Tarea(request.body.IdTarea, request.body.Nombre, request.body.Fase, request.body.IdDificultad, request.body.TiempoMax, request.body.TiempoMin);
 
-    constructor(IdTarea, nombre, IdFase, dificultad) {
+    constructor( IdTarea, nombre, IdFase, dificultad, IdProyecto, TiempoEstimado) {
         this.IdTarea = IdTarea;
         this.nombre = nombre;
         this.IdFase = IdFase;
         this.dificultad = dificultad;
+        this.IdProyecto = IdProyecto;
+        this.TiempoEstimado = TiempoEstimado;
     }
 
-    //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
-        console.log(this.IdTarea, this.nombre, this.IdFase, this.dificultad);
-        return db.execute('INSERT INTO tarea (nombre, fase, dificultad) VALUES ( ?, ?, ?)',
-                          [ this.nombre, this.IdFase, this.dificultad]
+        console.log("guardando tarea en db con parametros: ")
+        console.log(this.nombre, this.IdFase, this.dificultad, this.IdProyecto, this.TiempoEstimado);
+        return db.execute('INSERT INTO tarea (nombre, fase, dificultad, IdProyecto, TiempoEstimado) VALUES ( ?, ?, ?, ?, ?)',
+                          [ this.nombre, this.IdFase, this.dificultad, this.IdProyecto, this.TiempoEstimado]
         );
     }
 
     //cu 18
     actualizar() {
         return db.execute(
-            "UPDATE tarea SET  nombre=?, fase =?, dificultad=? WHERE IdTarea =? ",
-            [ this.nombre, this.IdFase, this.dificultad, this.IdTarea]
+            "UPDATE tarea SET  nombre=?, fase =?, dificultad=?, TiempoEstimado=? WHERE IdTarea =? ",
+            [ this.nombre, this.IdFase, this.dificultad, this.TiempoEstimado, this.IdTarea]
             );
     }
     // IdCasoDeUso lo recibe como parametro del request (se maneja en tarea_controller/postNuevaTarea)
@@ -46,9 +48,20 @@ module.exports = class Tarea {
                             //consulta verificada, brinda las tareas correspondientes a cada caso de uso
         return db.execute('SELECT * FROM tarea WHERE IdTarea IN (SELECT IdTarea FROM casodeuso_tarea where IdCasoDeUso =?)', [IdCasoDeUso] );
     }
+
+    static fetchTareasOfProyecto(IdProyecto) {
+        return db.execute('SELECT * FROM tarea WHERE IdProyecto =?', [IdProyecto] );
+}
     
     static fetchOne(IdTarea) {
         return db.execute('SELECT * FROM tarea WHERE IdTarea=?', [IdTarea]);
+    }
+//devuelve el total de tareas que hay en un proyecto
+    static fetchTotalPorProyecto(IdProyecto) {
+        return db.execute('SELECT COUNT(IdTarea) AS conteo FROM tarea WHERE IdProyecto = ? ', [IdProyecto] );
+    }
+    static fetchDonePorProyecto(IdProyecto) {
+        return db.execute('SELECT COUNT(IdTarea) AS conteo FROM tarea WHERE IdProyecto = 1 AND Status = "Done"', [IdProyecto] );
     }
 
 }

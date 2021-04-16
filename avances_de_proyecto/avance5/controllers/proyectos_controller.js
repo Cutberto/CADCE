@@ -3,18 +3,10 @@ const Proyecto = require('../models/proyecto');
 const CasoDeUso = require('../models/casodeuso');
 const Tarea = require('../models/tarea');
 
-/*
-exports.inicio = (request, response, next) => {
-    console.log(request.session.rol);
-    if (request.session.rol == '1'){
-        response.render('index_admin');
-    }
-    else{
-        response.render('index');
-    }
 
 
-}; */
+
+//idea para count count = rows[0].count;
 
 exports.inicio = (request, response, next) => {
 
@@ -153,13 +145,13 @@ exports.get = (request, response, next) => {
 
 exports.getWbs = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
-    
+    console.log("GET wbs_tareas con proyecto_id: ")
     console.log(request.params);
-    CasoDeUso.fetchByProject(idProyecto)
+    Tarea.fetchTareasOfProyecto(idProyecto) //busca las tareas del proyecto dado
         .then(([rows, fieldData]) => {
-            response.render('todos_casosdeuso', { 
+            response.render('wbs_tareas', { 
                 rol: request.session.rol,
-                lista_casosdeuso: rows, 
+                lista_tareas: rows, 
                 titulo: 'WBS Para el proyecto'  ,
                 idProyecto: idProyecto,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
