@@ -47,5 +47,9 @@ module.exports = class Proyecto {
         return db.execute('SELECT * FROM proyecto WHERE IdProyecto=?', [idProyecto]);
     }
 
+    static fetchProyectosConHoras(){
+        return db.execute('SELECT * FROM vista_proyecto_tareas ORDER BY estado, fechaInicial');
+    }
+
 
 }

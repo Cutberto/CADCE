@@ -10,8 +10,9 @@ const Tarea = require('../models/tarea');
 
 exports.inicio = (request, response, next) => {
 
-    Proyecto.fetchAll()
+    Proyecto.fetchProyectosConHoras()
         .then(([rows, fieldData]) => {
+      
             response.render('todos_proyectos_test', { 
                 rol: request.session.rol,
                 proyectos: rows, 
