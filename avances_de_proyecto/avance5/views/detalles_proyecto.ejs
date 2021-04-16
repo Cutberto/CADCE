@@ -9,6 +9,7 @@
       <title> <%= titulo %> </title>
       <meta name="description" content="Prototipo ">
       <link href = "/css/main.css" rel = "stylesheet">
+      <link href = "/css/inputs.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
 </head>
@@ -30,9 +31,12 @@
                       <th scope="col">Id del Proyecto</th>
                       <th scope="col">Nombre</th>
                       <th scope="col">Descripcion</th>
-                      <th scope="col">Fecha Inicial</th>
+                      <th scope="col">Fecha de inicio de desarrollo</th>
                       <th scope="col">Fecha Planeada de entrega</th>
                       <th scope="col">Fecha Limite de entrega</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      
                     </tr>
                   </thead>
                   
@@ -43,9 +47,32 @@
                       <th scope="row" ><%= elemento.IdProyecto %></th>
                       <td><%= elemento.nombre %> </td>
                       <td><%= elemento.descripcion %></td>
-                      <td><%= elemento.fechaInicial %> </td>
-                      <td><%= elemento.fechaPlaneada %></td>
-                      <td><%= elemento.fechaLimite %></td>
+                      <td><%= elemento.fecha_inicial %> </td>
+                      <td><%= elemento.fecha_planeada %></td>
+                      <td><%= elemento.fecha_limite %></td>
+                      <td><button name="opt"><a href="/proyectos/<%= elemento.IdProyecto %>" >Editar</a> </button><br><br></td>
+                      
+                      <td>
+                            
+                           
+                           
+                            <form action="/proyectos/eliminar-proyecto" method="POST" id="eliminar_<%= elemento.IdProyecto %>">
+                                <input type="hidden" name="IdProyecto" value="<%= elemento.IdProyecto %>">
+                                <button type="submit" name="add">Finalizar</button>
+                                
+                                <script> 
+                                    document.getElementById("eliminar_<%= elemento.IdProyecto %>").addEventListener('submit', (e) => {
+                                      let confirmacion = confirm('¿Estás seguro de eliminar el proyecto?');
+                                      if(!confirmacion){
+                                        e.preventDefault();
+                                      }  
+                                    });
+                                </script>
+                                
+                            </form>
+                                                      
+                                                    
+                      </td>
                     </tr>
                     
                     <% } %> 
@@ -53,13 +80,19 @@
                 </table>                    
             <br>
                     <% for (let elemento of Proyecto){ %>
-                    <a href="/proyectos/<%= elemento.IdProyecto %>" class="btn btn-primary">Editar</a>
-                    <a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn btn-primary">Casos de Uso</a>
+
+                    
+                   
+                    <button name="opt"><a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn">Casos de Uso</a></button>
+                    
+                    
 
 
                    <% } %>
-                    <a href="#" class="btn btn-primary">WBS</a>
-                    <a href="/proyectos/inicio" class="btn btn-primary">Volver al inicio</a>                    
+                   <button name="opt"><a href="#" class="btn">WBS</a></button>
+                   <button name="opt"><a href="/proyectos/inicio" class="btn">Volver al inicio</a> </button>
+                    
+                                       
 
 
            

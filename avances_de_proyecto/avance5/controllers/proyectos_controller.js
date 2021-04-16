@@ -144,6 +144,19 @@ exports.get = (request, response, next) => {
 };
 
 
+exports.postEliminarProyecto = (request, response) => {
+    const idProyecto = request.body.IdProyecto;
+    console.log("Id",request.body.IdProyecto)
+    Proyecto.eliminarProyecto(idProyecto)
+    .then(() => {
+        request.session.alerta = "Proyecto eliminado exitosamente";
+        response.redirect('/proyectos/inicio');
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
 exports.getWbs = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
     console.log("GET wbs_tareas con proyecto_id: ")
