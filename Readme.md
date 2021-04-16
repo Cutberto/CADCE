@@ -23,6 +23,8 @@ En la ruta correspondiente, ejecutar el comando siguiente
 
 npm start
 
+paara acceder a la app: localhost:3000/login
+
 ## Credenciales de login
 
 ### Cuenta administradora
