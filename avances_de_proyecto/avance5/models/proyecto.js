@@ -44,8 +44,12 @@ module.exports = class Proyecto {
     
 
     static fetchOne(idProyecto) {
-        return db.execute('SELECT * FROM proyecto WHERE IdProyecto=?', [idProyecto]);
+        return db.execute('SELECT *, DATE_FORMAT(fechaInicial, "%d-%m-%Y")AS fecha_inicial, DATE_FORMAT(fechaPlaneada, "%d-%m-%Y")AS fecha_planeada, DATE_FORMAT(fechaLimite, "%d-%m-%Y")AS fecha_limite FROM proyecto WHERE IdProyecto=?', [idProyecto]);
     }
+    
+    static eliminarProyecto(idProyecto){
+        return db.execute('UPDATE proyecto SET estado = ? WHERE IdProyecto = ?', ['Finalizado', idProyecto]);
+    }    
 
 
 }

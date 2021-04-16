@@ -15,6 +15,8 @@ router.post('/NuevoCasoDeUso', isAuth, casosdeusoController.postNuevoCasoDeUso);
 
 router.get('/todos', isAuth, casosdeusoController.get);
 
+router.post('/eliminar-casoDeUso', isAuth, casosdeusoController.postEliminarCasoDeUso);
+
 router.post('/actualizarCaso', isAuth, casosdeusoController.postActualizarCasoDeUso);
 
 router.get('/actualizarCaso', isAuth, casosdeusoController.getActualizarCasoDeUso);
