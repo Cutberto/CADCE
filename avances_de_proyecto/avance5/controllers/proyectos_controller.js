@@ -39,6 +39,11 @@ exports.postProyecto = (request, response, next) => {
     const nuevo_proyecto = new Proyecto(request.body.nombre, request.body.descripcion, request.body.fechaplaneada, request.body.fechaLimite, request.body.fechaInicial);
     nuevo_proyecto.save()
         .then(() => {
+            //esto crea el registro por default del wbs del proyecto en cero
+        // console.log("Dando de alta tiempos en  tabla con parametros "+ request.body.nombre, request.body.descripcion);
+        //    nuevo_proyecto.darDeAltaTiempos(request.body.nombre, request.body.descripcion)
+        //    .then(()=>{            }        )
+            
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido creado!"; //para mostrar un aviso en la siguiente vista renderizada
             response.redirect('/proyectos/inicio');
         }).catch(err => console.log(err));
@@ -158,16 +163,12 @@ exports.postEliminarProyecto = (request, response) => {
 }
 
 exports.getWbs = (request, response, next) => {
-    const idProyecto = request.params.proyecto_id;
-    console.log("GET wbs_tareas con proyecto_id: ")
-    console.log(request.params);
-    Tarea.fetchTareasOfProyecto(idProyecto) //busca las tareas del proyecto dado
+    Proyecto.fetchWBS()  
         .then(([rows, fieldData]) => {
-            response.render('wbs_tareas', { 
+            response.render('wbs', { 
                 rol: request.session.rol,
-                lista_tareas: rows, 
-                titulo: 'WBS Para el proyecto'  ,
-                idProyecto: idProyecto,
+                lstwbs: rows, 
+                titulo: 'WBS'  ,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
@@ -176,6 +177,31 @@ exports.getWbs = (request, response, next) => {
         });
 };
 
+//dummy
+exports.postWbs = (request, response, next) => {
+
+    console.log("POST wbs_tareas ")
+    console.log(request.body);
+    const dificultades = [1,2,3,5,8,13];
+    /*for (i in request.body.Dificultad){
+        console.log(request.body.Dificultad[i], request.body.TiempoEstimado[i]); //busca las tareas del proyecto dado
+       
+
+    }*/
+    for (i in request.body.Dificultad){
+        Proyecto.actualizarWbsGlobal(request.body.Dificultad[i], request.body.TiempoEstimado[i]) //busca las tareas del proyecto dado
+        .then(([rows, fieldData]) => {
+            console.log("update realizado en wbs con valores (dificultad, tiempo)=",request.body.Dificultad[i], request.body.TiempoEstimado[i] );
+        })
+        .catch(err => {
+            console.log(err);
+            //response.redirect("proyectos/inicio");
+        });
+
+    }
+    response.redirect("/proyectos/inicio");
+   
+};
 
 exports.modif_proyecto = (request, response, next) => {
     response.render('modif_proyecto');
