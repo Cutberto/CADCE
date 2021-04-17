@@ -18,7 +18,7 @@
     
        
    
-<body class="row"> 
+<body class="row s12 m12"> 
         
 
     <%- include('includes/navbar.ejs'); %>
@@ -29,13 +29,13 @@
        
          <% for (let proyecto of proyectos) { %>
            
-            <div class="col s12 m4"> <!-- Tamaño de cada tarjeta -->
+            <div class="col s12 m4" style="width: 33%, height: 10%"> <!-- Tamaño de cada tarjeta -->
                     
-                <div class="card border-info text-white bg-dark mb-3" style="width: 100%; height: 100%;">
+                <div class="card border-info text-white bg-dark mb-2" style="width: 100%, height: 100%">
 
                   <div class="card-header card-title bg-transparent border-info"><%= proyecto.nombre %></div>
 
-                  <div class="card-footer bg-transparent border-info"><br><h6><b>Descripción: </b><%= proyecto.descripcion %></h6> <br></div>
+                  <div class="card-footer bg-transparent border-info" style="height:150px"><br><h6><b>Descripción: </b><%= proyecto.descripcion %></h6> <br></div>
 
                   <div class="card-footer bg-transparent border-info">
                   <% if (proyecto.estado == 'Activo') {%>
@@ -47,18 +47,36 @@
                       <h6 style="color:#E1574A"><b>Estado: </b><%= proyecto.estado %></h6>
                   
                   <% } %>
-                  </div>
-                  <% if (proyecto.terminadas != null && proyecto.totales != null)  { %>
-                  <div class="card-header card-title bg-transparent border-info">Porcentaje terminado: <%= (proyecto.terminadas/proyecto.totales)*100 %>   </div>
-                  <% } else if (proyecto.totales == null) { %>
-                    <div class="card-header card-title bg-transparent border-info">Aún no hay tareas para este proyecto   </div>
-                    <% } else if (proyecto.terminadas == null) { %>
-                        <div class="card-header card-title bg-transparent border-info">Porcentaje terminado: 0   </div>
-                  <% } else { %>
-                    <div class="card-header card-title bg-transparent border-info">Porcentaje terminado: 0  </div>
-                    <% } %>
+                  </div >
+                  <div class="card-footer bg-transparent border-info" style="height:100px">
+                      <% if (proyecto.terminadas != null && proyecto.totales != null)  { %>
+                        <h5>Progreso:</h5>
+                        <div class="container">
+                            <div class="progress blue-grey darken-4" style="height: 30px">
+                            <div class="determinate green accent-3" style="width: <%= (proyecto.terminadas/proyecto.totales)*100 %>%" ><lettercolor><%= (proyecto.terminadas/proyecto.totales)*100 %>%</lettercolor></div>
+                        </div>
+                        </div>
+                      <% } else if (proyecto.totales == null) { %>
+                        <div><br><h6>Aún no hay tareas para este proyecto</h6> <br>  </div>
+                        <% } else if (proyecto.terminadas == null) { %>
+                           <h5>Progreso:</h5>
+                            <div class="container">
+                                <div class="progress blue-grey darken-4" style="height: 30px">
+                                <div class="determinate green accent-3" style="width:0%" ></div><lettercolor0>0%</lettercolor0>
+                            </div>
+                            </div>
+                      <% } else { %>
+                           <h5>Progreso:</h5>
+                            <div class="container">
+                                <div class="progress blue-grey darken-4" style="height: 30px">
+                                <div class="determinate green accent-3" style="width:0%" ></div><lettercolor0>0%</lettercolor0>
+                            </div>
+                            </div>
+                        <% } %>
+                  </div>  
 
-
+                    
+                      
                   <div class="card-footer bg-transparent border-info"><a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="card-link waves-effect waves-light btn  light-blue accent-4" style="color:#b3e5fc ">Detalles</a></div>
 
                 </div>
