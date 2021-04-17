@@ -64,4 +64,9 @@ module.exports = class Tarea {
         return db.execute('SELECT COUNT(IdTarea) AS conteo FROM tarea WHERE IdProyecto = 1 AND Status = "Done"', [IdProyecto] );
     }
 
+    static fetchWbs() {
+        return db.execute('SELECT * FROM wbs' );
+    }
+
+
 }

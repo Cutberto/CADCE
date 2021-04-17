@@ -37,7 +37,7 @@
                             <label for="nombre">Nombre </label><input type="text" name="nombre" value = "<%= tarea.nombre %>" required>
                             <label for="IdFase">Fase </label><input type="text" name="IdFase" value = "<%= tarea.fase %>" required>
                             <label for="dificultad"> Dificultad </label><input type="text" name="dificultad" value ="<%= tarea.dificultad %>" required>           
-                            <label for="TiempoEstimado"> TiempoEstimado </label><input type="text" name="TiempoEstimado" value ="<%= tarea.TiempoEstimado %>" required>           
+                            <input type="hidden" name="TiempoEstimado" value ="<%= tarea.TiempoEstimado %>" required>           
 
                                 <br><br>
                                 <button class="btn waves-effect waves-light" type="submit" name="action"> Actualizar

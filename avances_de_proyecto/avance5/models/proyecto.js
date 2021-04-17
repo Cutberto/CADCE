@@ -37,6 +37,31 @@ module.exports = class Proyecto {
 
             );
     }
+
+    static actualizarWbsGlobal(Dificultad, horas) {
+     
+        return db.execute(
+            //UPDATE `wbs` SET `TiempoEstimado` = '1' WHERE `wbs`.`Dificultad` = 1
+            'UPDATE wbs SET TiempoEstimado = ? WHERE Dificultad = ?', [ horas, Dificultad   ]
+
+            );
+    }
+
+
+    darDeAltaTiempos(nombre, descripcion){
+        return db.execute(
+            'INSERT INTO proyecto_wbs (IdProyecto, "1", "2", "3", "5", "8", "13") VALUES ( (SELECT IdProyecto FROM proyecto WHERE nombre = ? AND descripcion =? ) ,0,0,0,0,0,0) ', 
+            [nombre, descripcion]
+
+        );
+
+        
+
+    }
+
+    static fectchDificultad(dificultad, IdProyecto){
+        return db.execute('SELECT "?" FROM proyecto_wbs WHERE IdProyecto = ?', [dificultad, IdProyecto]   );
+    }
     
     static fetchAll() {
         return db.execute('SELECT * FROM proyecto ORDER BY estado, fechaInicial');
@@ -46,6 +71,8 @@ module.exports = class Proyecto {
     static fetchOne(idProyecto) {
         return db.execute('SELECT *, DATE_FORMAT(fechaInicial, "%d-%m-%Y")AS fecha_inicial, DATE_FORMAT(fechaPlaneada, "%d-%m-%Y")AS fecha_planeada, DATE_FORMAT(fechaLimite, "%d-%m-%Y")AS fecha_limite FROM proyecto WHERE IdProyecto=?', [idProyecto]);
     }
+
+    
     
     static eliminarProyecto(idProyecto){
         return db.execute('UPDATE proyecto SET estado = ? WHERE IdProyecto = ?', ['Finalizado', idProyecto]);
@@ -54,6 +81,8 @@ module.exports = class Proyecto {
     static fetchProyectosConHoras(){
         return db.execute('SELECT * FROM vista_proyecto_tareas ORDER BY estado, fechaInicial');
     }
-
+    static fetchWBS() {
+        return db.execute('SELECT * FROM wbs' );
+    }
 
 }

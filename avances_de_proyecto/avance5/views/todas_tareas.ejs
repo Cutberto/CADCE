@@ -34,8 +34,7 @@
                 <td>Id de la tarea</td>
                 <td>Nombre</td>
                 <td>Fase</td>
-                <td>Dificultad</td>
-                <td>Tiempo Estimado (en horas)</td>
+                <td>Dificultad (Puntos ágiles)</td>
                 </tr>
             
                 <% for (let tarea of lista_tareas) { %>
@@ -44,7 +43,6 @@
                            <td><%= tarea.nombre %></td>
                            <td><%= tarea.fase %></td>
                            <td><%= tarea.dificultad %></td>
-                           <td><%= tarea.TiempoEstimado %></td>
                            <td> <a href="/tareas/actualizarTarea/<%= tarea.IdTarea %>">Editar tarea </a></td> 
  
                            

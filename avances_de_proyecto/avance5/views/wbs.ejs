@@ -28,34 +28,26 @@
         <div class="row">
             
             <div class="mycol md-12 sm-12 lg-9">
-                <table class="responsive-table">
-                <tr>
-                <td>Id de la tarea</td>
-                <td>Nombre</td>
-                <td>Fase</td>
-                <td>Dificultad</td>
-                </tr>
-            
-                <% for (let tarea of lista_tareas) { %>
-                       <tr>
-                           <td><%= tarea.IdTarea %></td>
-                           <td><%= tarea.nombre %></td>
-                           <td><%= tarea.fase %></td>
-                           <td><%= tarea.dificultad %></td>
-                           <td> <a href="/tareas/actualizarTarea/<%= tarea.IdTarea %>">Editar tarea </a></td> 
- 
-                           
-                          
-                       </tr>
+           
+                <form action="/proyectos/Wbs" method="POST" class="box">
+
+                <% for (let dificultad of lstwbs) { %>
+
+                    <input type="hidden" name="Dificultad" value="<%= dificultad.Dificultad %>" required>
+
+                    <label for="TiempoEstimado">Tiempo estimado en horas para la dificultad <%= dificultad.Dificultad%> </label><br><br>
+                    <input type="text" name="TiempoEstimado" value="<%= dificultad.TiempoEstimado %>" required>
+                         
                         
-                          
-                
+                    
                 
                 <% } %>
-            </table>
-            <a href="/proyectos/detalles/<%= idProyecto %>" class="waves-effect waves-light btn" > Volver al proyecto </a> 
-            <a href="/tareas/nueva/<%= idProyecto %>" class="waves-effect waves-light btn"> Crear nueva tarea</a>
-                
+                <button class="btn waves-effect waves-light" type="submit" name="action"> Actualizar WBS
+                    <i class="material-icons right">send</i>
+                </button>
+           
+            <a href="/proyectos/inicio" class="waves-effect waves-light btn" > Volver al inicio </a> 
+                 
 
             </div>
         </div>
