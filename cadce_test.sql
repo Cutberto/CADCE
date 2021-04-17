@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-04-2021 a las 16:12:21
+-- Tiempo de generación: 17-04-2021 a las 23:44:54
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -75,6 +75,7 @@ INSERT INTO `casodeuso_tarea` (`IdCasoDeUso`, `IdTarea`) VALUES
 (3, 1),
 (6, 19),
 (6, 20),
+(6, 23),
 (7, 21);
 
 -- --------------------------------------------------------
@@ -146,7 +147,8 @@ INSERT INTO `proyecto` (`IdProyecto`, `nombre`, `descripcion`, `fechaPlaneada`, 
 (2, 'Aplicación para aprender ingles', 'Desarrollo de aplicación de ingles para openenglish ', '2021-03-02', '2021-03-09', '2021-03-25', 0, 0, 'Finalizado'),
 (3, 'Pagina web, tienda de mascotas', 'Creación de una pagina web para presentar los productos que ofrece la tienda de mascotas milmaskotas', '2021-04-07', '2021-04-29', '2021-03-03', 0, 0, 'Activo'),
 (5, 'Proyecto con nuevo id', 'Este es un nuevo proyecto pero ahora la id se actualiza sola', '2021-04-10', '2021-04-12', '2021-04-09', 0, 0, 'Activo'),
-(6, 'Videojuego de Unity', 'Este vieojuego debe ser compilado para ejecutarse en html5 para ser insertado en la sección recreativa de la pagina web', '2021-04-23', '2021-04-07', '2021-03-28', 0, 0, 'Activo');
+(6, 'Videojuego de Unity', 'Este vieojuego debe ser compilado para ejecutarse en html5 para ser insertado en la sección recreativa de la pagina web', '2021-04-23', '2021-04-07', '2021-03-28', 0, 0, 'Activo'),
+(8, 'temp', 'temp', '2021-02-17', '2021-04-14', '2021-04-13', 0, 0, 'Activo');
 
 -- --------------------------------------------------------
 
@@ -185,6 +187,22 @@ CREATE TABLE `proyecto_tareastotales` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `proyecto_wbs`
+--
+
+CREATE TABLE `proyecto_wbs` (
+  `IdProyecto` int(11) NOT NULL,
+  `1` int(11) NOT NULL,
+  `2` int(11) NOT NULL,
+  `3` int(11) NOT NULL,
+  `5` int(11) NOT NULL,
+  `8` int(11) NOT NULL,
+  `13` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `rol`
 --
 
@@ -214,26 +232,41 @@ CREATE TABLE `tarea` (
   `dificultad` float NOT NULL,
   `IdProyecto` int(11) NOT NULL,
   `Status` varchar(500) DEFAULT NULL,
-  `TiempoEstimado` float NOT NULL DEFAULT 0
+  `TiempoEstimado` float NOT NULL DEFAULT 0,
+  `TiempoReal` float NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tarea`
 --
 
-INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `Status`, `TiempoEstimado`) VALUES
-(1, 'tarea para caso 13', '1', 13, 1, 'Done', 0),
-(2, 'Segunda tarea (editada otra vez)', '1', 1, 1, NULL, 0),
-(5, 'Crear diseño de boto', '1', 5, 1, NULL, 0),
-(9, 'otra tarea (editada)', '1', 5, 1, NULL, 0),
-(10, 'dibujar iconos de la', '1', 13, 1, NULL, 0),
-(11, 'tarea de proyecto 1', '1', 13, 1, NULL, 0),
-(12, 'testing task', '1', 3, 1, NULL, 0),
-(13, 'Tarea para caso 5', '1', 13, 1, NULL, 0),
-(19, 'tarea nueva caso 3 editada otra vez 2', '1', 5, 3, NULL, 0.5),
-(20, 'otra tarea caso de uso caro', '1', 1, 3, NULL, 1),
-(21, 'crear icono de registro', '1', 1, 5, NULL, 0.5),
-(22, 'programar openenglish', '1', 13, 2, 'Done', 50);
+INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `Status`, `TiempoEstimado`, `TiempoReal`) VALUES
+(1, 'tarea para caso 13', '1', 13, 1, 'Done', 0, 0),
+(2, 'Segunda tarea (editada otra vez)', '1', 1, 1, NULL, 0, 0),
+(5, 'Crear diseño de boto', '1', 5, 1, NULL, 0, 0),
+(9, 'otra tarea (editada)', '1', 5, 1, NULL, 0, 0),
+(10, 'dibujar iconos de la', '1', 13, 1, NULL, 0, 0),
+(11, 'tarea de proyecto 1', '1', 13, 1, NULL, 0, 0),
+(12, 'testing task', '1', 3, 1, NULL, 0, 0),
+(13, 'Tarea para caso 5', '1', 13, 1, NULL, 0, 0),
+(19, 'tarea nueva caso 3 editada otra vez 2', '1', 5, 3, NULL, 0.5, 0),
+(20, 'otra tarea caso de uso caro', '1', 1, 3, NULL, 1, 0),
+(21, 'crear icono de registro', '1', 1, 5, NULL, 0.5, 0),
+(22, 'programar openenglish', '1', 13, 2, 'Done', 50, 0),
+(23, 'tarea con wbs 2', '2', 2, 3, NULL, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `vista_estimacion_tiempo_proyecto`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `vista_estimacion_tiempo_proyecto` (
+`IdProyecto` int(11)
+,`IdCasoDeUso` int(11)
+,`dificultad` float
+,`TiempoTotal` double
+);
 
 -- --------------------------------------------------------
 
@@ -254,6 +287,29 @@ CREATE TABLE `vista_proyecto_tareas` (
 ,`totales` bigint(21)
 ,`terminadas` bigint(21)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `wbs`
+--
+
+CREATE TABLE `wbs` (
+  `Dificultad` int(11) NOT NULL,
+  `TiempoEstimado` float NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `wbs`
+--
+
+INSERT INTO `wbs` (`Dificultad`, `TiempoEstimado`) VALUES
+(1, 0.5),
+(2, 2),
+(3, 3),
+(5, 4),
+(8, 5),
+(13, 10);
 
 -- --------------------------------------------------------
 
@@ -281,6 +337,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `proyecto_tareastotales`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `proyecto_tareastotales`  AS  select `tarea`.`IdProyecto` AS `IdProyecto`,count(`tarea`.`IdTarea`) AS `totales` from `tarea` group by `tarea`.`IdProyecto` ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `vista_estimacion_tiempo_proyecto`
+--
+DROP TABLE IF EXISTS `vista_estimacion_tiempo_proyecto`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_estimacion_tiempo_proyecto`  AS  select `casodeuso`.`IdProyecto` AS `IdProyecto`,`casodeuso_tarea`.`IdCasoDeUso` AS `IdCasoDeUso`,`tarea`.`dificultad` AS `dificultad`,sum(`wbs`.`TiempoEstimado`) AS `TiempoTotal` from (((`casodeuso_tarea` join `tarea`) join `wbs`) join `casodeuso`) where `casodeuso_tarea`.`IdTarea` = `tarea`.`IdTarea` and `tarea`.`dificultad` = `wbs`.`Dificultad` and `casodeuso`.`IdCasoDeUso` = `casodeuso_tarea`.`IdCasoDeUso` group by `casodeuso`.`IdProyecto` ;
 
 -- --------------------------------------------------------
 
@@ -343,6 +408,12 @@ ALTER TABLE `tarea`
   ADD KEY `dificultad` (`dificultad`);
 
 --
+-- Indices de la tabla `wbs`
+--
+ALTER TABLE `wbs`
+  ADD PRIMARY KEY (`Dificultad`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -362,13 +433,13 @@ ALTER TABLE `empleado`
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
-  MODIFY `IdProyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `IdProyecto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
