@@ -35,8 +35,29 @@
                                  <input type="hidden" name="IdProyecto" value = "<%= idProyecto %>" required>
 
                             <label for="nombre">Nombre </label><input type="text" name="nombre" value = "<%= tarea.nombre %>" required>
-                            <label for="IdFase">Fase </label><input type="text" name="IdFase" value = "<%= tarea.fase %>" required>
-                            <label for="dificultad"> Dificultad </label><input type="text" name="dificultad" value ="<%= tarea.dificultad %>" required>           
+                            
+                            
+                            <label for="IdFase">Fase de desarrollo </label> 
+                                <select class="form-select" aria-label="IdFase" name="IdFase" value = "<%= tarea.fase %>">
+                                    <option value="Análisis">1.Análisis </option>
+                                    <option value="Diseño">2.Diseño</option>
+                                    <option value="Implementación">3.Implementación</option>
+                                    <option value="Pruebas">4.Pruebas</option>
+                                    <option value="Despliegue">5.Despliegue</option>
+                                </select>
+
+
+                                <label for="dificultad"> Dificultad </label> 
+                                <select class="form-select" aria-label="dificultad" name="dificultad"   value ="<%= tarea.dificultad %>">
+                                    <option value="1">1 </option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                    <option value="8">8</option>
+                                    <option value="13">13</option>
+
+                                </select>
+                           
                             <input type="hidden" name="TiempoEstimado" value ="<%= tarea.TiempoEstimado %>" required>           
 
                                 <br><br>

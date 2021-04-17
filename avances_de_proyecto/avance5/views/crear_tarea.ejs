@@ -32,8 +32,28 @@
                     <form action="/tareas/nueva" method="POST">
                         <label for="nombre">Nombre de la tarea </label><input type="text" name="nombre" required>
 
-                        <label for="IdFase">Fase de desarrollo </label><input type="text" name="IdFase" required>
-                        <label for="dificultad"> Dificultad </label><input type="text" name="dificultad" required>
+                        <label for="IdFase">Fase de desarrollo </label> 
+                        <select class="form-select" aria-label="IdFase" name="IdFase">
+                            <option value="Análisis">1.Análisis </option>
+                            <option value="Diseño">2.Diseño</option>
+                            <option value="Implementación">3.Implementación</option>
+                            <option value="Pruebas">4.Pruebas</option>
+                            <option value="Despliegue">5.Despliegue</option>
+                           </select>
+
+
+                        <label for="dificultad"> Dificultad </label> 
+                        <select class="form-select" aria-label="dificultad" name="dificultad">
+                            <option value="1">1 </option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="5">5</option>
+                            <option value="8">8</option>
+                            <option value="13">13</option>
+
+                           </select>
+
+
                         <input type="hidden" name="TiempoEstimado" value = "0" >
 
                         <input type="hidden" name ="IdCasoDeUso" value = "<%= IdCasoDeUso %>">
