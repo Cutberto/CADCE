@@ -9,46 +9,46 @@
       <title><%= titulo %></title>
       <meta name="description" content="Prototipo ">
       <link href = "/css/main.css" rel = "stylesheet">
+      <link href = "/css/inputs.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
 
 </head>
     
        
    
-<body>  
-    <div class="row">
+<body class="row">  
+    <div>
         <%- include('includes/navbar.ejs'); %>
 
     </div>
 
-    <div class="container">
+    <div >
         <div class="row">
             
             <div class="mycol md-12 sm-12 lg-9">
            
                 <form action="/proyectos/Wbs" method="POST" class="box">
-
+                
+                
+                <label>Escribe el tiempo estimado para cada dificultad</label><br>
                 <% for (let dificultad of lstwbs) { %>
 
                     <input type="hidden" name="Dificultad" value="<%= dificultad.Dificultad %>" required>
 
-                    <label for="TiempoEstimado">Tiempo estimado en horas para la dificultad <%= dificultad.Dificultad%> </label><br><br>
-                    <input type="text" name="TiempoEstimado" value="<%= dificultad.TiempoEstimado %>" required>
+                    <label for="TiempoEstimado"><br>Dificultad <%= dificultad.Dificultad%> </label><br><br>
+                    <input type="text" name="TiempoEstimado" value="<%= dificultad.TiempoEstimado %>" required><br>
                          
                         
                     
                 
                 <% } %>
-                <button class="btn waves-effect waves-light" type="submit" name="action"> Actualizar WBS
-                    <i class="material-icons right">send</i>
+                <br>
+                <button class="btn waves-effect waves-light" type="submit" name="action"> Actualizar
                 </button>
            
-            <a href="/proyectos/inicio" class="waves-effect waves-light btn" > Volver al inicio </a> 
                  
-
+                </form>
             </div>
         </div>
     </div>    

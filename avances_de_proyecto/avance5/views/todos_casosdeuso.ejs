@@ -29,17 +29,15 @@
                  
                   <thead>
                     <tr>
-                      <th scope="col">Id del Caso de uso</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Descripcion</th>
-                      <th scope="col">Id del Proyecto</th>
-                      <th scope="col">Dificultad</th>
-                      <th scope="col">Iteracion</th>
-                      <th></th>
-                      <th></th>
-                  
-                      
-                      <th scope="col"></th>
+                      <th scope="col" style="width:7%">Id del Caso de uso</th>
+                      <th scope="col" style="width:12%">Nombre</th>
+                      <th scope="col" style="width:32%">Descripcion</th>
+                      <th scope="col" style="width:7%">Id del Proyecto</th>
+                      <th scope="col" style="width:7%">Dificultad</th>
+                      <th scope="col" style="width:7%">Iteracion</th>
+                      <th scope="col" style="width:6%"></th>
+                      <th scope="col" style="width:14%"></th>
+                      <th scope="col" style="width:8%"></th>
                     </tr>
                   </thead>
                   
@@ -48,11 +46,11 @@
                     
                     <tr>
                       <th scope="row" ><%= CasoDeUso.IdCasoDeUso %></th>
-                      <td><%= CasoDeUso.nombre %> </td>
-                      <td><%= CasoDeUso.descripcion %></td>
-                      <td><%= CasoDeUso.IdProyecto %> </td>
-                      <td><%= CasoDeUso.dificultad %></td>
-                      <td><%= CasoDeUso.iteracion %></td>
+                      <td scope="row" ><%= CasoDeUso.nombre %> </td>
+                      <td scope="row" ><%= CasoDeUso.descripcion %></td>
+                      <td scope="row" ><%= CasoDeUso.IdProyecto %> </td>
+                      <td scope="row" ><%= CasoDeUso.dificultad %></td>
+                      <td scope="row" ><%= CasoDeUso.iteracion %></td>
                       
                       <td> <button name="opt"><a href="/casosdeuso/<%= CasoDeUso.IdCasoDeUso %>">Editar</a></button></td>
                       
@@ -88,8 +86,8 @@
                      
                 
                 
-            <button name="opt"><a href="/proyectos/detalles/<%=idProyecto %>" class="btn " > Volver al proyecto </a></button>
-            <button name="opt"><a href="/proyectos/nuevocaso/<%=idProyecto %>" class="btn"> Crear nuevo</a></button>
+            <button name="opt"><a href="/proyectos/detalles/<%=idProyecto %>"> Volver al proyecto </a></button>
+            <button name="opt"><a href="/proyectos/nuevocaso/<%=idProyecto %>"> Crear nuevo</a></button>
              
             
                 
