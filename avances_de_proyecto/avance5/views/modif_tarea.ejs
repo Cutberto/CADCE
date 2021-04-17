@@ -9,39 +9,38 @@
       <title>Utilizando bootstrap</title>
       <meta name="description" content="Prototipo ">
       <link href = "/css/main.css" rel = "stylesheet">
+      <link href = "/css/inputs.css" rel = "stylesheet">
+      
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
 
 </head>
     
        
    
-<body>  
-    <div class="row">
+<body class="row">  
+    <div>
         <%- include('includes/navbar.ejs'); %>
 
     </div>
 
-    <div class="container">
+    <div>
         <div class="row">
             
             <div class="mycol md-12 sm-12 lg-9">
-                <form action="/tareas/actualizarTarea" method="POST"> <!-- ACTUALIZAR ESTE LINK DE REGREO A LA TAREA-->
+                <form action="/tareas/actualizarTarea" method="POST" class="box"> <!-- ACTUALIZAR ESTE LINK DE REGREO A LA TAREA-->
                     <% for (let tarea of lista_tarea) { %>
                         
-                                 <input type="hidden" name="IdTarea" value = "<%= tarea.IdTarea %>" required>
-                                 <input type="hidden" name="IdProyecto" value = "<%= idProyecto %>" required>
+                            <input type="hidden" name="IdTarea" value = "<%= tarea.IdTarea %>" required>
+                            <input type="hidden" name="IdProyecto" value = "<%= idProyecto %>" required>
 
-                            <label for="nombre">Nombre </label><input type="text" name="nombre" value = "<%= tarea.nombre %>" required>
-                            <label for="IdFase">Fase </label><input type="text" name="IdFase" value = "<%= tarea.fase %>" required>
-                            <label for="dificultad"> Dificultad </label><input type="text" name="dificultad" value ="<%= tarea.dificultad %>" required>           
+                            <label for="nombre">Nombre <br></label><br><br><input type="text" name="nombre" value = "<%= tarea.nombre %>" required><br>
+                            <label for="IdFase"><br>Fase </label><br><input type="text" name="IdFase" value = "<%= tarea.fase %>" required><br>
+                            <label for="dificultad"><br> Dificultad </label><br><br><input type="text" name="dificultad" value ="<%= tarea.dificultad %>" required>           
                             <input type="hidden" name="TiempoEstimado" value ="<%= tarea.TiempoEstimado %>" required>           
 
                                 <br><br>
                                 <button class="btn waves-effect waves-light" type="submit" name="action"> Actualizar
-                                    <i class="material-icons right">send</i>
                                 </button>
                                 <br><br><br>        
                            

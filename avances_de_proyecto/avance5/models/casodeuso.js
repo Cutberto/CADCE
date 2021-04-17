@@ -46,7 +46,13 @@ module.exports = class CasoDeUso {
     
     static EliminarCasoDeUso(idCasoDeUso){
         return db.execute('DELETE FROM casodeuso WHERE IdCasoDeUso=?', [idCasoDeUso]);
-    }        
+    }
+    
+
+    
+    static EliminarConexionTareasCasoDeUso(idCasoDeUso){
+        return db.execute('DELETE FROM casodeuso_tarea WHERE IdCasoDeUso=?', [idCasoDeUso]);
+    }    
 
 
 }

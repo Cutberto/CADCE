@@ -34,6 +34,7 @@
                       <th scope="col">Fecha de inicio de desarrollo</th>
                       <th scope="col">Fecha Planeada de entrega</th>
                       <th scope="col">Fecha Limite de entrega</th>
+                      <th scope="col">Horas estimadas</th>
                       <th scope="col"></th>
                       <th scope="col"></th>
                       
@@ -50,6 +51,7 @@
                       <td><%= elemento.fecha_inicial %> </td>
                       <td><%= elemento.fecha_planeada %></td>
                       <td><%= elemento.fecha_limite %></td>
+                      <td><%= Proyecto[0].TiempoTotal %></td>
                       <td><button name="opt"><a href="/proyectos/<%= elemento.IdProyecto %>" >Editar</a> </button><br><br></td>
                       
                       <td>
@@ -79,12 +81,9 @@
                   </tbody>
                 </table>                    
             <br>
-            <h1> Horas estimadas para terminar el proyecto: <%= Proyecto[0].TiempoTotal %> </h1>  
 
                     <% for (let elemento of Proyecto){ %>
-
                     
-                   
                     <button name="opt"><a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn">Casos de Uso</a></button>
                     
                     
