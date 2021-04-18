@@ -24,13 +24,12 @@
     </div>
 
     <div class="container">
-        <div class="row">
             
             <div class="mycol md-12 sm-12 lg-9">
                     <form action="/tareas/nueva" method="POST" class="box">
                         <label for="nombre">Nombre de la tarea </label><br><br><input type="text" name="nombre" required><br>
-
-                        <label for="IdFase">Fase de desarrollo </label> 
+                        <br>
+                        <label for="IdFase">Fase de desarrollo </label> <br><br>
                         <select class="form-select" aria-label="IdFase" name="IdFase">
                             <option value="Análisis">1.Análisis </option>
                             <option value="Diseño">2.Diseño</option>
@@ -39,8 +38,8 @@
                             <option value="Despliegue">5.Despliegue</option>
                            </select>
 
-
-                        <label for="dificultad"> Dificultad </label> 
+                           <br>
+                        <label for="dificultad"> Dificultad </label> <br><br>
                         <select class="form-select" aria-label="dificultad" name="dificultad">
                             <option value="1">1 </option>
                             <option value="2">2</option>
@@ -57,18 +56,17 @@
                         <input type="hidden" name ="IdCasoDeUso" value = "<%= IdCasoDeUso %>">
                         <input type="hidden" name ="IdProyecto" value = "<%= IdProyecto %>">
 
-                        <br><br>
+                        <br>
                         <button class="btn waves-effect waves-light" type="submit" name="action">Crear
                         </button>
-                        <br><br><br>
+                        
 
                     </form>
 
             </div>
 
-        </div>
-    </div>    
-
+ 
+    </div>
 
 
     <script src="/js/crear_bnts.js"></script>

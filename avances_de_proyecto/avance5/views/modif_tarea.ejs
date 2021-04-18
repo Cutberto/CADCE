@@ -19,13 +19,13 @@
        
    
 <body class="row">  
-    <div>
+    <div class = "row">
         <%- include('includes/navbar.ejs'); %>
 
     </div>
 
-    <div>
-        <div class="row">
+  
+        <div class="container">
             
             <div class="mycol md-12 sm-12 lg-9">
                 <form action="/tareas/actualizarTarea" method="POST" class="box"> <!-- ACTUALIZAR ESTE LINK DE REGREO A LA TAREA-->
@@ -34,10 +34,10 @@
                             <input type="hidden" name="IdTarea" value = "<%= tarea.IdTarea %>" required>
                             <input type="hidden" name="IdProyecto" value = "<%= idProyecto %>" required>
 
-                            <label for="nombre">Nombre </label><input type="text" name="nombre" value = "<%= tarea.nombre %>" required>
+                            <label for="nombre">Nombre </label> <br><br>  <input type="text" name="nombre" value = "<%= tarea.nombre %>" required> <br>
                             
-                            
-                            <label for="IdFase">Fase de desarrollo </label> 
+                            <br><br>
+                            <label for="IdFase">Fase de desarrollo </label> <br><br>
                                 <select class="form-select" aria-label="IdFase" name="IdFase" value = "<%= tarea.fase %>">
                                     <option value="Análisis">1.Análisis </option>
                                     <option value="Diseño">2.Diseño</option>
@@ -45,9 +45,9 @@
                                     <option value="Pruebas">4.Pruebas</option>
                                     <option value="Despliegue">5.Despliegue</option>
                                 </select>
+                                <br>
 
-
-                                <label for="dificultad"> Dificultad </label> 
+                                <label for="dificultad"> Dificultad </label> <br><br>
                                 <select class="form-select" aria-label="dificultad" name="dificultad"   value ="<%= tarea.dificultad %>">
                                     <option value="1">1 </option>
                                     <option value="2">2</option>
@@ -60,7 +60,7 @@
                            
                             <input type="hidden" name="TiempoEstimado" value ="<%= tarea.TiempoEstimado %>" required>           
 
-                                <br><br>
+                                <br>
                                 <button class="btn waves-effect waves-light" type="submit" name="action"> Actualizar
                                 </button>
                                 <br><br><br>        
