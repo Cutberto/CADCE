@@ -4,6 +4,7 @@ const Tarea = require('../models/tarea');
 
 
 exports.getTareas = (request, response, next) => {
+
     const idCasoDeUso = request.params.casodeuso_id;
     const idProyecto = request.params.proyecto_id;
     console.log(request.params);

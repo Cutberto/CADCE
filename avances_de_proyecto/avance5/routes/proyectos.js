@@ -8,6 +8,8 @@ const isAuth = require('../utils/is-auth.js');
 
 const proyectosController = require('../controllers/proyectos_controller');
 
+const airtable_controller = require('../controllers/airtable_controller');
+
 router.get('/inicio', isAuth, proyectosController.inicio);
 
 router.get('/crear_proyecto', isAuth, proyectosController.crear_proyecto);
@@ -19,6 +21,8 @@ router.get('/todos', isAuth, proyectosController.get);
 router.get('/casosdeuso/:proyecto_id' , isAuth,  proyectosController.getCaso  );
 
 router.get('/nuevocaso/:proyecto_id' , isAuth,  proyectosController.getNuevoCaso  );
+//<button name="opt"><a href="/proyectos/airtable/<%=Proyecto.IdProyecto%>" class="btn">Enviar a Airtable</a> </button>
+
 
 router.get('/detalles/:proyecto_id' , isAuth,  proyectosController.getDetalles  );
 
