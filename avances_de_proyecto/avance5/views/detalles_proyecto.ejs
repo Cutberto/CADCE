@@ -85,13 +85,14 @@
                     <% for (let elemento of Proyecto){ %>
                     
                     <button name="opt"><a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn">Casos de Uso</a></button>
-                    
+                    <button name="opt"><a href="/airtable/<%=elemento.IdProyecto%>" class="btn">Enviar a Airtable</a> </button>
                     
 
 
                    <% } %>
 
                     <button name="opt"><a href="/proyectos/inicio" class="btn">Volver al inicio</a> </button>
+                    
                     
                                        
 

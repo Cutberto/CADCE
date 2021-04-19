@@ -88,4 +88,11 @@ module.exports = class Proyecto {
         return db.execute('SELECT * FROM wbs' );
     }
 
+    //Regresa todas las columnas de la tabla de airtable en su estado actual de la db
+    static fetchVistaAirtable(IdProyecto) {
+         return db.execute('SELECT * FROM airtable_view WHERE IdProyecto = ?' ,[IdProyecto]   );
+        //return db.execute("SELECT tarea.nombre AS 'Tarea', casodeuso.nombre AS 'Caso de uso', casodeuso.iteracion AS 'Iteración', tarea.fase AS 'Fase de desarrollo', tarea.Status, tarea.TiempoReal AS 'Tiempo de completado' FROM tarea, casodeuso, casodeuso_tarea WHERE tarea.IdTarea = casodeuso_tarea.IdTarea AND  casodeuso.IdCasoDeUso = casodeuso_tarea.IdCasoDeUso AND tarea.IdProyecto = ?        ", [IdProyecto]    );
+}
+
+    
 }

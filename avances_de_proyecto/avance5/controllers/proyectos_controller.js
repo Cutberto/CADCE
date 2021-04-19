@@ -2,28 +2,45 @@ const session = require('express-session');
 const Proyecto = require('../models/proyecto');
 const CasoDeUso = require('../models/casodeuso');
 const Tarea = require('../models/tarea');
+const airtable_controller = require('../controllers/airtable_controller');
+var Airtable = require('airtable');
+var AsyncAirtable = require('asyncairtable');
+var base = new Airtable({apiKey: 'keyIytlxEjOWlvP1H'}).base('appfHD8Ikbtk78MrM');
+var asyncbase = new AsyncAirtable("keyIytlxEjOWlvP1H" , "appfHD8Ikbtk78MrM");
 
 
 
 
-//idea para count count = rows[0].count;
-
+//funcion original:
 exports.inicio = (request, response, next) => {
 
-    Proyecto.fetchProyectosConHoras()
+    //parte para enviar tareas de un proyecto hacia airtable
+    //airtable_controller.sendToAirtableFunc(1);
+    
+    asyncbase.select('Proyecto').then( (tabla  )  =>      {
+        console.log(tabla);
+        temp = tabla[0].fields;
+
+        Proyecto.fetchProyectosConHoras()
         .then(([rows, fieldData]) => {
       
             response.render('todos_proyectos_test', { 
                 rol: request.session.rol,
                 proyectos: rows, 
                 titulo: 'Todos los proyectos',
+                text : temp,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
-        .catch(err => {
+
+
+        
+     })
+          .catch(err => {
             console.log(err);
         });
 };
+
 
 
 exports.crear_proyecto = (request, response, next) => {
