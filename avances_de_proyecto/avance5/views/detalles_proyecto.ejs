@@ -92,11 +92,20 @@
                     
 
                     <form action ="/airtable/<%=elemento.IdProyecto %>" method="POST" id ="airtable_post" class="box">  
-                      <h2>Conexión con Airtable</h2> 
+                      <h1>Conexión con Airtable</h1> 
 
                     <label for="apiKey">Valor del apiKey </label><br><input type="text" name="apiKey" required><br>
                     <label for="baseKey">Valor del baseKey </label><br><input type="text" name="baseKey" required><br>
                     <button type="submit" name="action"> Enviar a Airtable  </button>
+                    </form>
+
+
+                    <form action ="/airtable/updatesql/<%=elemento.IdProyecto %>" method="POST" id ="airtable_post" class="box">  
+                    
+                    <h1>Regresar los datos de Airtable al sistema</h1>
+                    <label for="apiKey">Valor del apiKey </label><br><input type="text" name="apiKey" required><br>
+                    <label for="baseKey">Valor del baseKey </label><br><input type="text" name="baseKey" required><br>
+                    <button type="submit" name="action"> Traer los datos de airtable al sistema  </button>
                     </form>
                    <% } %>
 

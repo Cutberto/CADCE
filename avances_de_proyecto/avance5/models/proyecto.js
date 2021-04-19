@@ -94,5 +94,6 @@ module.exports = class Proyecto {
         //return db.execute("SELECT tarea.nombre AS 'Tarea', casodeuso.nombre AS 'Caso de uso', casodeuso.iteracion AS 'Iteración', tarea.fase AS 'Fase de desarrollo', tarea.Status, tarea.TiempoReal AS 'Tiempo de completado' FROM tarea, casodeuso, casodeuso_tarea WHERE tarea.IdTarea = casodeuso_tarea.IdTarea AND  casodeuso.IdCasoDeUso = casodeuso_tarea.IdCasoDeUso AND tarea.IdProyecto = ?        ", [IdProyecto]    );
 }
 
+ 
     
 }

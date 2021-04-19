@@ -68,5 +68,9 @@ module.exports = class Tarea {
         return db.execute('SELECT * FROM wbs' );
     }
 
+    static updateTareasConAirtable(nombreTarea,Status,TiempoReal){
+        return db.execute( "UPDATE tarea SET   Status=?, TiempoReal=? WHERE nombre =?",[Status, TiempoReal, nombreTarea]    );
+    }
+
 
 }

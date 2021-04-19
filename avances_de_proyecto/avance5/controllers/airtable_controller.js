@@ -1,7 +1,7 @@
 var Airtable = require('airtable');
 var AsyncAirtable = require('asyncairtable');
 const Proyecto = require('../models/proyecto');
-
+const Tarea = require('../models/tarea');
 
 //    asyncbase.select('Proyecto').then( (tabla  )  =>      {
 
@@ -31,25 +31,12 @@ exports.sendToAirtableFunc = (request,response,next) => {
        var tempjson="";
        var objetoTabla="[";
        var taskList =[];
-      // console.log("rows[0] ", rows[0]);
-      // console.log("rows[0][6] ", rows[0][6]);
       for (var tarea =0; tarea < rows[0].length; tarea++) {
 
-      // for (tarea in rows[0]){
-      //   console.log("la idtarea es ", rows[0][tarea].IdTarea);  //NOTA: Esta es la forma de acceder a cada dato de rows
-        //console.log("la tarea es: ",rows[0][tarea]);
-        //aqui se construye el json en base al objeto record
-
-
-        //        tempjson = ' { "id": "' + rows[0][tarea].IdTarea +'", "fields": {  "Tarea": "' + rows[0][tarea].Tarea + '", "Caso de uso":"' + rows[0][tarea].Casodeuso + '", "Iteración":"' + rows[0][tarea].Iteración + '", "Fase de desarrollo":"' + rows[0][tarea].Fasededesarrollo + '", "Status":"' + rows[0][tarea].Status + '", "Tiempo de completado":"' + rows[0][tarea].Tiempodecompletado + '" }}  ' ;
-    //    tempjson = '  {"fields": {  "Tarea": "' + rows[0][tarea].Tarea + '", "Caso de uso":"' + rows[0][tarea].Casodeuso + '", "Iteración":"' + rows[0][tarea].Iteración + '", "Fase de desarrollo":"' + rows[0][tarea].Fasededesarrollo + '", "Status":"' + rows[0][tarea].Status + '", "Tiempo de completado":"' + rows[0][tarea].Tiempodecompletado + '" }}  ' ;
-    
+        //aqui se construye el json en base al objeto record    
     tempjson = '  { "Tarea": "' + rows[0][tarea].Tarea + '", "Caso de uso":"' + rows[0][tarea].Casodeuso + '", "Iteración":"' + rows[0][tarea].Iteración + '", "Fase de desarrollo":"' + rows[0][tarea].Fasededesarrollo + '", "Status":"' + rows[0][tarea].Status + '", "Tiempo de completado":"' + rows[0][tarea].Tiempodecompletado + '" }  ' ;
     
-        //tempjson = "[ { 'id': '" + rows[0][tarea].IdTarea +"', 'fields': {  'Tarea': '" + rows[0][tarea].Tarea + "', 'Caso de uso':'" + rows[0][tarea].Casodeuso + "', 'Iteración':'" + rows[0][tarea].Iteración + "', 'Fase de desarrollo':'" + rows[0][tarea].Fasededesarrollo + "', 'Status':'" + rows[0][tarea].Status + "', 'Tiempo de completado':'" + rows[0][tarea].Tiempodecompletado + "' }}  ]";
-
-        
-    //    console.log(tempjson);
+ 
         taskList.push(JSON.parse(tempjson));
         
         
@@ -59,15 +46,13 @@ exports.sendToAirtableFunc = (request,response,next) => {
         else {
           objetoTabla+= tempjson;
         }
-      // taskList.push(tempjson);
        }
        
 
-      // console.log(taskList[0]);
+
     
     objetoTabla += "]";
     console.log(objetoTabla);
-     //  asyncbase.createRecord('Proyecto', taskList[2]).then( (tabla  )  =>      {  });
      asyncbase.bulkCreate('Proyecto', JSON.parse(objetoTabla)).then( (tabla  )  =>      {
 
       response.redirect('/proyectos/detalles/'+request.params.proyecto_id);
@@ -75,19 +60,44 @@ exports.sendToAirtableFunc = (request,response,next) => {
 
 
        });
-          
-       // cambiar esto por un bulk insert
-        //    base('Proyecto').create( taskList[1] , function(err, records) {
-        //    if (err) {
-        //        console.error(err);
-        //        return;
-        //    }
-            
-        //    });    
-       
+
     }).catch(err => {
            console.log(err);
        });
 
     
+};
+
+
+exports.actualizarSQLconAirtable = (request,response, next) => {
+  var llaveApi = request.body.apiKey;
+  var llaveBase = request.body.baseKey;
+  var asyncbase = new AsyncAirtable(llaveApi , llaveBase);
+  asyncbase.select('Proyecto').then( (tabla  )  =>      {
+    console.log("La tabla recuperada de airtable para su UPDATE en SQL es: ",tabla);
+    
+    for (tarea in tabla){
+
+      //    ejemplo de como acceder a los datos de la tabla de airtable
+      //    tabla[tarea].fields.Status;
+    console.log("Realizando update en sql con parametros: '"+tabla[tarea].fields.Tarea+"'" ,tabla[tarea].fields.Status, tabla[tarea].fields['Tiempo de completado'])
+    const temptarea= String(tabla[tarea].fields.Tarea);
+    const tempstatus= String(tabla[tarea].fields.Status);
+    const temptiempo = String(tabla[tarea].fields['Tiempo de completado']);
+    Tarea.updateTareasConAirtable(temptarea, tempstatus, temptiempo )
+    .then(([rows,fieldData]) => {  console.log("se realizo update de tarea ",rows);    }    ).catch(err => {console.log(err);});
+    }
+    Proyecto.fetchProyectosConHoras()
+    .then(([rows, fieldData]) => {
+  
+      response.redirect('/proyectos/detalles/'+request.params.proyecto_id);
+
+    })
+
+    
+ })
+      .catch(err => {
+        console.log(err);
+    });
+
 };

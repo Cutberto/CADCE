@@ -9,11 +9,9 @@ var AsyncAirtable = require('asyncairtable');
 var asyncbase = new AsyncAirtable("keyIytlxEjOWlvP1H" , "appfHD8Ikbtk78MrM");
 
 
-
-
 //funcion original:
 exports.inicio = (request, response, next) => {
-
+    //EJEMPLO: Asi es como se hace una consulta de datos de airtable  
     //parte para enviar tareas de un proyecto hacia airtable
     //airtable_controller.sendToAirtableFunc(1);
     
@@ -22,7 +20,8 @@ exports.inicio = (request, response, next) => {
         var temp="";
         for (tarea in tabla){
         temp += tabla[tarea].fields.Status;
-        //SQL     update tarea fields (Status ) values (tabla[tarea].fields.Status WHERE tarea.nombre = tabla[bal balba l].Tarea  )
+        //idea para meter esto a SQL:
+        // update tarea fields (Status ) values (tabla[tarea].fields.Status WHERE tarea.nombre = tabla[tarea].fields.Tarea  )
         }
         Proyecto.fetchProyectosConHoras()
         .then(([rows, fieldData]) => {
@@ -35,7 +34,6 @@ exports.inicio = (request, response, next) => {
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
-
 
         
      })
