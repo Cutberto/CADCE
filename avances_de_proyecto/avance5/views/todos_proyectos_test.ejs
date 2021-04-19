@@ -47,7 +47,18 @@
                       <h6 style="color:#E1574A"><b>Estado: </b><%= proyecto.estado %></h6>
                   
                   <% } %>
+                  
                   </div >
+                  <div class="card-footer bg-transparent border-info">
+                        <% if (proyecto.Tiempo < 0) { %>
+                            <h6 style="color: #3fa3d9;"><b>Días hasta fecha límite: - </b></h6>
+                        <% } else { %>
+                            <h6 style="color: #3fa3d9;"><b>Días hasta fecha límite: <%= proyecto.Tiempo %></b></h6>
+                        <% } %>
+
+                  </div>
+
+                  
                   <div class="card-footer bg-transparent border-info" style="height:100px">
                       <% if (proyecto.terminadas != null && proyecto.totales != null)  { %>
                         <h5>Progreso:</h5>

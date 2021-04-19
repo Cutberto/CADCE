@@ -11,8 +11,6 @@ module.exports = class Proyecto {
        this.fechaLimite = fechaLimite;
        this.fechaInicial = fechaInicial;
        this.IdProyecto = IdProyecto;
-
-
     }
 
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
@@ -82,7 +80,7 @@ module.exports = class Proyecto {
 
     static fetchProyectosConHoras(){ //consulta que permite ver todos los datos incluyendo la suma de horas de cada tarea del proyecto
         //return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, vista_proyecto_tareas.fechaPlaneada, vista_proyecto_tareas.fechaLimite, vista_proyecto_tareas.fechaInicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal FROM vista_proyecto_tareas, vista_estimacion_tiempo_proyecto WHERE vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto ORDER BY estado, fechaInicial');
-        return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, vista_proyecto_tareas.fechaPlaneada, vista_proyecto_tareas.fechaLimite, vista_proyecto_tareas.fechaInicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto ORDER BY estado, fechaInicial');
+        return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, vista_proyecto_tareas.fechaPlaneada, vista_proyecto_tareas.fechaLimite, vista_proyecto_tareas.fechaInicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal, TIMESTAMPDIFF(DAY, NOW(), vista_proyecto_tareas.fechaLimite) AS Tiempo FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto ORDER BY estado, fechaInicial');
     }
     static fetchWBS() {
         return db.execute('SELECT * FROM wbs' );
