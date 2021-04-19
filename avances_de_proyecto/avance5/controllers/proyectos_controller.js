@@ -11,32 +11,17 @@ var asyncbase = new AsyncAirtable("keyIytlxEjOWlvP1H" , "appfHD8Ikbtk78MrM");
 
 //funcion original:
 exports.inicio = (request, response, next) => {
-    //EJEMPLO: Asi es como se hace una consulta de datos de airtable  
-    //parte para enviar tareas de un proyecto hacia airtable
-    //airtable_controller.sendToAirtableFunc(1);
-    
-    asyncbase.select('Proyecto').then( (tabla  )  =>      {
-        console.log(tabla);
-        var temp="";
-        for (tarea in tabla){
-        temp += tabla[tarea].fields.Status;
-        //idea para meter esto a SQL:
-        // update tarea fields (Status ) values (tabla[tarea].fields.Status WHERE tarea.nombre = tabla[tarea].fields.Tarea  )
-        }
-        Proyecto.fetchProyectosConHoras()
+
+    Proyecto.fetchProyectosConHoras()
         .then(([rows, fieldData]) => {
             response.render('todos_proyectos_test', { 
                 rol: request.session.rol,
                 proyectos: rows, 
                 titulo: 'Todos los proyectos',
-                text : temp,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
-
-        
-     })
-          .catch(err => {
+        .catch(err => {
             console.log(err);
         });
 };
