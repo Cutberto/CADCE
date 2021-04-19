@@ -1,7 +1,5 @@
 var Airtable = require('airtable');
 var AsyncAirtable = require('asyncairtable');
-var base = new Airtable({apiKey: 'keyIytlxEjOWlvP1H'}).base('appfHD8Ikbtk78MrM');
-var asyncbase = new AsyncAirtable("keyIytlxEjOWlvP1H" , "appfHD8Ikbtk78MrM");
 const Proyecto = require('../models/proyecto');
 
 
@@ -20,34 +18,14 @@ const Proyecto = require('../models/proyecto');
 }
 */
 
-exports.sendToAirtable = (request, response, next) => {
-   
-    Proyecto.fetchVistaAirtable(request.params.IdProyecto).then( (rows, fieldData  )  =>      {
-       //aqui se tiene que construir el objeto a enviar
-       tempjson="";
-       taskList =[];
-       for (tarea in rows){
-        //aqui se construye el json en base al objeto record
-        tempjson = ' { id: "' + rows[tarea].IdTarea +'", fields: {  Tarea: "' + rows[tarea].Tarea + '", "Caso de uso":' + rows[tarea].Casodeuso + '", "Iteración":' + rows[tarea].Iteración + '", "Fase de desarrollo":' + rows[tarea].Fasededesarrollo + '", "Status":' + rows[tarea].Status + '", "Tiempo de completado":' + rows[tarea].Tiempodecompletado + '" }}  ' ;
 
-        taskList.push(tempjson);
-       }
- 
-       asyncbase.bulkCreate('Proyecto', taskList).then( (tabla  )  =>      {
-           
-     
-           });
-           
-       
-    }).catch(err => {
-           console.log(err);
-       });
-
-    
-};
 
 exports.sendToAirtableFunc = (request,response,next) => {
-   
+  //Estas variables se encargan de recibir los datos para la conexión con airtable para realizar el envío de datos
+  var llaveApi = request.body.apiKey;
+  var llaveBase = request.body.baseKey;
+  var asyncbase = new AsyncAirtable(llaveApi , llaveBase);
+
     Proyecto.fetchVistaAirtable(request.params.proyecto_id).then( (rows, fieldData  )  =>      {
        //aqui se tiene que construir el objeto a enviar
        var tempjson="";

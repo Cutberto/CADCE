@@ -83,15 +83,23 @@
             <br>
 
                     <% for (let elemento of Proyecto){ %>
+                      <button name="opt"><a href="/proyectos/inicio" class="btn">Volver al inicio</a> </button>
+
+                      
                     
+
                     <button name="opt"><a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn">Casos de Uso</a></button>
-                    <button name="opt"><a href="/airtable/<%=elemento.IdProyecto%>" class="btn">Enviar a Airtable</a> </button>
                     
 
+                    <form action ="/airtable/<%=elemento.IdProyecto %>" method="POST" id ="airtable_post" class="box">  
+                      <h2>Conexión con Airtable</h2> 
 
+                    <label for="apiKey">Valor del apiKey </label><br><input type="text" name="apiKey" required><br>
+                    <label for="baseKey">Valor del baseKey </label><br><input type="text" name="baseKey" required><br>
+                    <button type="submit" name="action"> Enviar a Airtable  </button>
+                    </form>
                    <% } %>
 
-                    <button name="opt"><a href="/proyectos/inicio" class="btn">Volver al inicio</a> </button>
                     
                     
                                        
