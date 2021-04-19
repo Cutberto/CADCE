@@ -19,8 +19,11 @@ exports.inicio = (request, response, next) => {
     
     asyncbase.select('Proyecto').then( (tabla  )  =>      {
         console.log(tabla);
-        temp = tabla[0].fields;
-
+        var temp="";
+        for (tarea in tabla){
+        temp += tabla[tarea].fields.Status;
+        //SQL     update tarea fields (Status ) values (tabla[tarea].fields.Status WHERE tarea.nombre = tabla[bal balba l].Tarea  )
+        }
         Proyecto.fetchProyectosConHoras()
         .then(([rows, fieldData]) => {
       
