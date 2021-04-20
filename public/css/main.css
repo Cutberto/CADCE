@@ -1,0 +1,40 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
+        .row {
+           background: linear-gradient(to right, #262945, #1B1D31)
+            
+        }
+
+        .mycol{
+            background-color: rgb(250, 250, 250);
+
+
+        }
+
+        
+        .body-text {
+            background-color: #bbf1fa;
+        }
+h2 {
+    color:#663f3f;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+h1{
+    color : white;
+    
+}
+
+
+
+lettercolor0 {
+    color: #00E676;
+    font-size: 150%;
+}
+
+lettercolor {
+    color: #004222;
+    font-size: 150%;
+}
+
+
