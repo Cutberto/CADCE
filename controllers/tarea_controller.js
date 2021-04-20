@@ -67,6 +67,7 @@ exports.postActualizarTarea = (request, response, next) => {
 exports.postEliminarTarea = (request, response) => {
     const idTarea = request.body.IdTarea;
     console.log("Id", request.body.IdTarea)
+    Tarea.EliminarConexionTareasCasoDeUso(idTarea)
     Tarea.EliminarTarea(idTarea)
         .then(() => {
             request.session.alerta = "Tarea eliminada exitosamente";

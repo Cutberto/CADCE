@@ -57,9 +57,14 @@ module.exports = class Tarea {
         return db.execute('SELECT * FROM tarea WHERE IdTarea=?', [IdTarea]);
     }
 
+    static EliminarConexionTareasCasoDeUso(idTarea) {
+        return db.execute('DELETE FROM casodeuso_tarea WHERE IdTarea=?', [idTarea]);
+    }
+
     static EliminarTarea(idTarea) {
         return db.execute('DELETE FROM tarea WHERE IdTarea=?', [idTarea]);
     }
+
     //devuelve el total de tareas que hay en un proyecto
     static fetchTotalPorProyecto(IdProyecto) {
         return db.execute('SELECT COUNT(IdTarea) AS conteo FROM tarea WHERE IdProyecto = ? ', [IdProyecto]);
