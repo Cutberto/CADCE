@@ -34,7 +34,8 @@
                       <th scope="col">Fecha de inicio de desarrollo</th>
                       <th scope="col">Fecha Planeada de entrega</th>
                       <th scope="col">Fecha Limite de entrega</th>
-                      <th scope="col">Horas estimadas</th>
+                      <th scope="col">Horas Estimadas</th>
+                      <th scope="col">Horas Invertidas</th>
                       <th scope="col"></th>
                       <th scope="col"></th>
                       
@@ -52,6 +53,7 @@
                       <td><%= elemento.fecha_planeada %></td>
                       <td><%= elemento.fecha_limite %></td>
                       <td><%= Proyecto[0].TiempoTotal %></td>
+                      <td><%=Proyecto[0].TiempoInvertido%></td>
                       <td><button name="opt"><a href="/proyectos/<%= elemento.IdProyecto %>" >Editar</a> </button><br><br></td>
                       
                       <td>
