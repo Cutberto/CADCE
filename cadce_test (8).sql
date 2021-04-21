@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-04-2021 a las 23:44:54
+-- Tiempo de generación: 19-04-2021 a las 18:27:02
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `cadce_test`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `airtable_view`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `airtable_view` (
+`IdTarea` int(11)
+,`IdProyecto` int(11)
+,`Tarea` varchar(2000)
+,`Casodeuso` varchar(200)
+,`Iteración` float
+,`Fasededesarrollo` varchar(500)
+,`Status` varchar(500)
+,`Tiempodecompletado` float
+);
 
 -- --------------------------------------------------------
 
@@ -71,6 +88,8 @@ INSERT INTO `casodeuso_tarea` (`IdCasoDeUso`, `IdTarea`) VALUES
 (1, 9),
 (1, 11),
 (1, 12),
+(1, 24),
+(1, 25),
 (2, 22),
 (3, 1),
 (6, 19),
@@ -228,7 +247,7 @@ INSERT INTO `rol` (`IdRol`, `nombre`) VALUES
 CREATE TABLE `tarea` (
   `IdTarea` int(11) NOT NULL,
   `nombre` varchar(2000) NOT NULL,
-  `fase` varchar(4) NOT NULL,
+  `fase` varchar(500) NOT NULL,
   `dificultad` float NOT NULL,
   `IdProyecto` int(11) NOT NULL,
   `Status` varchar(500) DEFAULT NULL,
@@ -242,9 +261,9 @@ CREATE TABLE `tarea` (
 
 INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `Status`, `TiempoEstimado`, `TiempoReal`) VALUES
 (1, 'tarea para caso 13', '1', 13, 1, 'Done', 0, 0),
-(2, 'Segunda tarea (editada otra vez)', '1', 1, 1, NULL, 0, 0),
+(2, 'Segunda tarea (editada otra vez)', 'Análisis', 1, 1, NULL, 0, 0),
 (5, 'Crear diseño de boto', '1', 5, 1, NULL, 0, 0),
-(9, 'otra tarea (editada)', '1', 5, 1, NULL, 0, 0),
+(9, 'otra tarea (editada)', 'Análisis', 3, 1, NULL, 0, 0),
 (10, 'dibujar iconos de la', '1', 13, 1, NULL, 0, 0),
 (11, 'tarea de proyecto 1', '1', 13, 1, NULL, 0, 0),
 (12, 'testing task', '1', 3, 1, NULL, 0, 0),
@@ -253,7 +272,9 @@ INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `S
 (20, 'otra tarea caso de uso caro', '1', 1, 3, NULL, 1, 0),
 (21, 'crear icono de registro', '1', 1, 5, NULL, 0.5, 0),
 (22, 'programar openenglish', '1', 13, 2, 'Done', 50, 0),
-(23, 'tarea con wbs 2', '2', 2, 3, NULL, 0, 0);
+(23, 'tarea con wbs 2', '2', 2, 3, NULL, 0, 0),
+(24, 'tarea con fase y dificultad', 'Despliegue', 3, 1, NULL, 0, 0),
+(25, 'test 4', 'Pruebas', 8, 1, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -310,6 +331,15 @@ INSERT INTO `wbs` (`Dificultad`, `TiempoEstimado`) VALUES
 (5, 4),
 (8, 5),
 (13, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `airtable_view`
+--
+DROP TABLE IF EXISTS `airtable_view`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `airtable_view`  AS  select `tarea`.`IdTarea` AS `IdTarea`,`tarea`.`IdProyecto` AS `IdProyecto`,`tarea`.`nombre` AS `Tarea`,`casodeuso`.`nombre` AS `Casodeuso`,`casodeuso`.`iteracion` AS `Iteración`,`tarea`.`fase` AS `Fasededesarrollo`,`tarea`.`Status` AS `Status`,`tarea`.`TiempoReal` AS `Tiempodecompletado` from ((`tarea` join `casodeuso`) join `casodeuso_tarea`) where `tarea`.`IdTarea` = `casodeuso_tarea`.`IdTarea` and `casodeuso`.`IdCasoDeUso` = `casodeuso_tarea`.`IdCasoDeUso` ;
 
 -- --------------------------------------------------------
 
@@ -439,7 +469,7 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas

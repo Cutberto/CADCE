@@ -116,21 +116,22 @@ exports.getDetalles = (request, response, next) => {
 
 exports.getCaso = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
-    
-    console.log(request.params);
+
     CasoDeUso.fetchByProject(idProyecto)
         .then(([rows, fieldData]) => {
+            
             response.render('todos_casosdeuso', { 
                 rol: request.session.rol,
                 lista_casosdeuso: rows, 
-                titulo: 'Casos de uso'  ,
+                titulo: 'Casos de uso',
                 idProyecto: idProyecto,
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
+                isLoggedIn: request.session.isLoggedIn === true ? true : false,
             });
         })
         .catch(err => {
             console.log(err);
         });
+    
 };
 
 

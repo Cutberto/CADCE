@@ -19,5 +19,7 @@ router.get('/actualizarTarea/:tarea_id', isAuth, tareaController.getActualizarTa
 
 router.post('/actualizarTarea/', isAuth, tareaController.postActualizarTarea);
 
+router.post('/grafica', isAuth, tareaController.getDataTiempo)
+
 
 module.exports = router;

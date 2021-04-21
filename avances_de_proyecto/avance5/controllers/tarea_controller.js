@@ -66,17 +66,29 @@ exports.postActualizarTarea = (request, response, next) => {
 }
 
 
-exports.get = (request, response, next) => {
+exports.getTareas = (request, response, next) => {
 
-    CasoDeUso.fetchAll()
+    Tarea.fetchAll()
         .then(([rows, fieldData]) => {
-            response.render('todos_casosdeuso', { 
+            
+            response.render('todas_tareas', { 
                 rol: request.session.rol,
-                lista_casosdeuso: rows, 
+                lista_tarea: rows, 
                 titulo: 'Casos de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+exports.getDataTiempo = (request, response, next) => {
+
+    Tarea.fetchTiemposOfTareas()
+        .then(([rows, fieldData]) => {
+            response.status(200).json(rows);
+            })
         .catch(err => {
             console.log(err);
         });
