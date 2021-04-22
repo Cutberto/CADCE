@@ -70,7 +70,7 @@ exports.postActualizarCasoDeUso = (request, response, next) => {
     actualizar_caso.actualizar()
         .then(() => {
             request.session.aviso = "Caso de uso " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
-            response.redirect('/proyectos/casosdeuso/'+request.body.proyecto_id);
+            response.redirect('/proyectos/casosdeuso/'+request.body.IdProyecto_cu);
         }).catch(err => console.log(err));
 
 }
