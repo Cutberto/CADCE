@@ -87,6 +87,7 @@ exports.getDataTiempo = (request, response, next) => {
 
     Tarea.fetchTiemposOfTareas()
         .then(([rows, fieldData]) => {
+            console.log("La función asíncrona está funcionando")
             response.status(200).json(rows);
             })
         .catch(err => {

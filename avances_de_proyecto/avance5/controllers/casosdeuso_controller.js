@@ -14,23 +14,25 @@ exports.getTareas = (request, response, next) => {
         .then(([rows, fieldData]) => {
             Tarea.fetchTiemposOfTareas(idProyecto)
             .then(([rows, fieldData]) => {
-                console.log("Se han cargado los tiempos por tarea")
-                console.log(rows);
-                tiempoTareas = rows;
+                    console.log("Se han cargado los tiempos por tarea");
+                    
+                    tiempoTareas = rows;
+                    console.log(tiempoTareas);
+                    
+                    response.render('todas_tareas', { 
+                        rol: request.session.rol,
+                        lista_tareas: rows, 
+                        titulo: 'Tareas del caso de uso',
+                        IdCasoDeUso: idCasoDeUso,
+                        idProyecto: idProyecto,
+                        tiempoTareas : tiempoTareas,
+                        isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
             })
             .catch(err => {
                 console.log(err);
             });
-
-            response.render('todas_tareas', { 
-                rol: request.session.rol,
-                lista_tareas: rows, 
-                titulo: 'Tareas del caso de uso',
-                IdCasoDeUso: idCasoDeUso,
-                idProyecto: idProyecto,
-                tiempoTareas : tiempoTareas,
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
+            
         })
         .catch(err => {
             console.log(err);
