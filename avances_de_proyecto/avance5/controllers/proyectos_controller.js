@@ -119,6 +119,18 @@ exports.getDetalles = (request, response, next) => {
         });
 };
 
+exports.getgestionarairtable = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+
+
+            response.render('gestionar_airtable', { 
+                rol: request.session.rol,
+                IdProyecto: idProyecto, 
+                titulo: 'Gestionar airtable',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });
+
+};
 
 exports.getCaso = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
