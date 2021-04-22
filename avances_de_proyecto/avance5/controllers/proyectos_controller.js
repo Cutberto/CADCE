@@ -101,11 +101,17 @@ exports.getDetalles = (request, response, next) => {
     console.log("getDetalles",idProyecto);
     Proyecto.fetchOne(idProyecto)
         .then(([rows, fieldData]) => {
+            Proyecto.fetchProgresoIteraciones (idProyecto)
+            .then(([rows2, fieldData]) => {
+               console.log(rows2); 
             response.render('detalles_proyecto', { 
                 rol: request.session.rol,
+                progreso: rows2,
                 Proyecto: rows,  
                 titulo: 'Detalles del proyecto',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
+        
+            })
             });
         })
         .catch(err => {

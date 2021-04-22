@@ -73,8 +73,7 @@
                                     });
                                 </script>
                                 
-                            </form>
-                                                      
+                            </form>                        
                                                     
                       </td>
                     </tr>
@@ -111,10 +110,45 @@
                     </form>
                    <% } %>
 
+                   <div class="col s12 m4" style="width: 33%, height: 10%"> <!-- Tamaño de cada tarjeta -->
+                   <% for (i in progreso ){%>
+                   
                     
                     
-                                       
+                      <div class="card border-info text-white bg-dark mb-2" style="width: 100%, height: 100%">
 
+                <div class="card-footer bg-transparent border-info" style="height:100px">
+                  <% if (progreso[i].TareasTerminadas != null && progreso[i].TareasTotales != null)  { %>
+                    <h5>Progreso de la iteración <%= progreso[i].iteracion%>:</h5>
+                    <div class="container">
+                        <div class="progress blue-grey darken-4" style="height: 30px">
+                        <div class="determinate green accent-3" 
+                        style="width:<%=(progreso[i].TareasTerminadas/progreso[i].TareasTotales)*100 %> %" >
+                        <lettercolor><%= (progreso[i].TareasTerminadas/progreso[i].TareasTotales)*100 %>%</lettercolor></div>
+                    </div>
+                    </div>
+                  <% } else if (progreso[i].TareasTotales == null) { %>
+                    <div><br><h6>Aún no hay tareas para este proyecto</h6> <br>  </div>
+                    <% } else if (progreso[i].TareasTerminadas == null) { %>
+                       <h5>Progreso:</h5>
+                        <div class="container">
+                            <div class="progress blue-grey darken-4" style="height: 30px">
+                            <div class="determinate green accent-3" style="width:0%" ></div><lettercolor0>0%</lettercolor0>
+                        </div>
+                        </div>
+                  <% } else { %>
+                       <h5>Progreso:</h5>
+                        <div class="container">
+                            <div class="progress blue-grey darken-4" style="height: 30px">
+                            <div class="determinate green accent-3" style="width:0%" ></div><lettercolor0>0%</lettercolor0>
+                        </div>
+                        </div>
+                    
+                        <% } %>
+                       </div>
+                       
+                        <% } %>              
+                      </div>
 
            
 

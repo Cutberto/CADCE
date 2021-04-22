@@ -71,8 +71,14 @@ module.exports = class Proyecto {
         return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, DATE_FORMAT(vista_proyecto_tareas.fechaPlaneada, "%d-%m-%Y")AS fecha_planeada, DATE_FORMAT(vista_proyecto_tareas.fechaLimite, "%d-%m-%Y")AS fecha_limite, DATE_FORMAT(vista_proyecto_tareas.fechaInicial, "%d-%m-%Y")AS fecha_inicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal, vista_proyecto_tareas.TiempoInvertido FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto WHERE vista_proyecto_tareas.IdProyecto = ? ORDER BY estado, fechaInicial '
         ,  [idProyecto]  )    
     }
+     //esta funcion regresa la cantidad de tareas terminadas por cada iteracion
+    static fetchProgresoIteraciones (IdProyecto){ 
+        return db.execute ("SELECT tarea.IdProyecto, casodeuso.iteracion, COUNT(CASE WHEN tarea.Status = 'Done' THEN 1 END) AS 'TareasTerminadas', COUNT(CASE WHEN tarea.Status != 'Done' THEN 1 END) AS 'TareasPendientes', COUNT(tarea.Status) as 'TareasTotales' FROM tarea, casodeuso_tarea, casodeuso WHERE casodeuso_tarea.IdTarea = tarea.IdTarea AND casodeuso.IdCasoDeUso = casodeuso_tarea.IdCasoDeUso AND tarea.IdProyecto = ? GROUP BY casodeuso.iteracion, tarea.IdProyecto",[IdProyecto]);
 
-    
+
+
+
+    }
     
     static eliminarProyecto(idProyecto){
         return db.execute('UPDATE proyecto SET estado = ? WHERE IdProyecto = ?', ['Finalizado', idProyecto]);
