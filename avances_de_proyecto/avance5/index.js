@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 const proyectos = require('./routes/proyectos');
 const casosdeuso = require('./routes/casosdeuso');
 const login = require('./routes/login');
