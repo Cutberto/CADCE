@@ -72,8 +72,5 @@ module.exports = class Tarea {
         return db.execute( "UPDATE tarea SET   Status=?, TiempoReal=? WHERE nombre =?",[Status, TiempoReal, nombreTarea]    );
     }
 
-    static fetchTiemposOfTareas(IdProyecto) {
-        return db.execute('SELECT nombre, wbs.TiempoEstimado, TiempoReal FROM tarea, wbs WHERE tarea.dificultad = wbs.Dificultad AND IdProyecto =?', [IdProyecto] );
-    }
 
 }

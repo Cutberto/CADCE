@@ -66,30 +66,17 @@ exports.postActualizarTarea = (request, response, next) => {
 }
 
 
-exports.getTareas = (request, response, next) => {
+exports.get = (request, response, next) => {
 
-    Tarea.fetchAll()
+    CasoDeUso.fetchAll()
         .then(([rows, fieldData]) => {
-            
-            response.render('todas_tareas', { 
+            response.render('todos_casosdeuso', { 
                 rol: request.session.rol,
-                lista_tarea: rows, 
+                lista_casosdeuso: rows, 
                 titulo: 'Casos de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
         })
-        .catch(err => {
-            console.log(err);
-        });
-};
-
-exports.getDataTiempo = (request, response, next) => {
-
-    Tarea.fetchTiemposOfTareas()
-        .then(([rows, fieldData]) => {
-            console.log("La función asíncrona está funcionando")
-            response.status(200).json(rows);
-            })
         .catch(err => {
             console.log(err);
         });

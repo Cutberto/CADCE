@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
-<<<<<<< HEAD:cadce_test.sql
 -- Tiempo de generación: 21-04-2021 a las 22:51:15
-=======
--- Tiempo de generación: 19-04-2021 a las 18:27:02
->>>>>>> Ángel/GraficaTiempoRealTiempoEstimado:cadce_test (8).sql
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -280,17 +276,10 @@ CREATE TABLE `tarea` (
 --
 
 INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `Status`, `TiempoEstimado`, `TiempoReal`) VALUES
-<<<<<<< HEAD:cadce_test.sql
 (1, 'tarea para caso 13', '1', 13, 1, 'Done', 0, 1.5),
 (2, 'Segunda tarea (editada otra vez)', 'Análisis', 5, 1, 'Done', 0, 1),
 (5, 'Crear diseño de boto', '1', 5, 1, NULL, 0, 0),
 (9, 'otra tarea (editada)', 'Análisis', 3, 1, 'In progress', 0, 0),
-=======
-(1, 'tarea para caso 13', '1', 13, 1, 'Done', 0, 0),
-(2, 'Segunda tarea (editada otra vez)', 'Análisis', 1, 1, NULL, 0, 0),
-(5, 'Crear diseño de boto', '1', 5, 1, NULL, 0, 0),
-(9, 'otra tarea (editada)', 'Análisis', 3, 1, NULL, 0, 0),
->>>>>>> Ángel/GraficaTiempoRealTiempoEstimado:cadce_test (8).sql
 (10, 'dibujar iconos de la', '1', 13, 1, NULL, 0, 0),
 (11, 'tarea de proyecto 1', 'Diseño', 1, 1, 'In progress', 0, 0),
 (12, 'testing task', 'Pruebas', 1, 1, 'Done', 0, 0),
@@ -300,15 +289,10 @@ INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `S
 (21, 'crear icono de registro', '1', 1, 5, NULL, 0.5, 0),
 (22, 'programar openenglish', '1', 13, 2, 'Done', 50, 0),
 (23, 'tarea con wbs 2', '2', 2, 3, NULL, 0, 0),
-<<<<<<< HEAD:cadce_test.sql
 (24, 'tarea con fase y dificultad', 'Despliegue', 3, 1, 'Done', 0, 0),
 (25, 'test 4', 'Pruebas', 8, 1, 'Done', 0, 2),
 (26, 'Planear el login', 'Análisis', 1, 1, 'Done', 0, 2),
 (27, 'tareaa', 'Análisis', 2, 1, 'Done', 0, 0.5);
-=======
-(24, 'tarea con fase y dificultad', 'Despliegue', 3, 1, NULL, 0, 0),
-(25, 'test 4', 'Pruebas', 8, 1, NULL, 0, 0);
->>>>>>> Ángel/GraficaTiempoRealTiempoEstimado:cadce_test (8).sql
 
 -- --------------------------------------------------------
 
@@ -513,11 +497,7 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-<<<<<<< HEAD:cadce_test.sql
   MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-=======
-  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
->>>>>>> Ángel/GraficaTiempoRealTiempoEstimado:cadce_test (8).sql
 
 --
 -- Restricciones para tablas volcadas
