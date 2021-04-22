@@ -50,10 +50,21 @@
                                <td scope="row" ><%= tarea.fase %></td>
                                <td scope="row" ><%= tarea.dificultad %></td>
                                <td scope="row" > <button name="opt"><a href="/tareas/actualizarTarea/<%= tarea.IdTarea %>">Editar tarea </a></button> </td> 
+                               <td>
+                                 <form action="/tareas/eliminarTarea" method="POST" id="eliminar_<%= tarea.IdTarea %>">
+                                  <input type="hidden" name="IdTarea" value="<%= tarea.IdTarea %>">
+                                  <button type="submit" name="add">Eliminar</button>
 
-
-
-
+                                  <script> 
+                                    document.getElementById("eliminar_<%= tarea.IdTarea %>").addEventListener('submit', (e) => {
+                                      let confirmacion = confirm('¿Estás seguro de eliminar la tarea?');
+                                      if(!confirmacion){
+                                        e.preventDefault();
+                                      }  
+                                    });
+                                  </script>
+                                  </form> 
+                                  </td>
 
                         </tr>
 

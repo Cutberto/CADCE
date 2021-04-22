@@ -19,5 +19,7 @@ router.get('/actualizarTarea/:tarea_id', isAuth, tareaController.getActualizarTa
 
 router.post('/actualizarTarea/', isAuth, tareaController.postActualizarTarea);
 
+router.post('/EliminarTarea', isAuth, tareaController.postEliminarTarea);
+
 
 module.exports = router;
