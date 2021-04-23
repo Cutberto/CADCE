@@ -86,6 +86,6 @@ module.exports = class Tarea {
     }
 
     static fetchTiemposOfTareas(IdProyecto) {
-        return db.execute('SELECT nombre, wbs.TiempoEstimado, TiempoReal FROM tarea, wbs WHERE tarea.dificultad = wbs.Dificultad AND IdProyecto =?', [IdProyecto] );
+        return db.execute('SELECT nombre, wbs.TiempoEstimado, TiempoReal FROM tarea, wbs, casodeuso_tarea WHERE tarea.dificultad = wbs.Dificultad AND tarea.IdTarea = casodeuso_tarea.IdTarea AND casodeuso_tarea.IdCasoDeUso =?', [IdProyecto] );
     }
 }

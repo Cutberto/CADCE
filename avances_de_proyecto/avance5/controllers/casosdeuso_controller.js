@@ -11,36 +11,11 @@ exports.getTareas = (request, response, next) => {
 
     Tarea.fetchTareasOfCaso(idCasoDeUso)
         .then(([rows, fieldData]) => {
-            Tarea.fetchTiemposOfTareas(idProyecto)
-<<<<<<< HEAD
-                .then(([rows, fieldData]) => {
-                    console.log("Se han cargado los tiempos por tarea")
-                    console.log(rows);
-                    tiempoTareas = rows;
-                        console.log("Se han cargado los tiempos por tarea");
-
+            Tarea.fetchTiemposOfTareas(idCasoDeUso)
+            .then(([rows, fieldData]) => {
                         tiempoTareas = rows;
                         console.log(tiempoTareas);
-
-                        response.render('todas_tareas', { 
-                            rol: request.session.rol,
-                            lista_tareas: rows, 
-                            titulo: 'Tareas del caso de uso',
-                            IdCasoDeUso: idCasoDeUso,
-                            idProyecto: idProyecto,
-                            tiempoTareas : tiempoTareas,
-                            isLoggedIn: request.session.isLoggedIn === true ? true : false
-                });
-            })
-            .catch(err => {
-                console.log(err);
-        });
-    })
-        .catch(err => {
-            console.log(err);
-    });
-=======
-            .then(([rows, fieldData]) => {
+            
                     console.log("Se han cargado los tiempos por tarea");
                     
                     tiempoTareas = rows;
@@ -65,7 +40,6 @@ exports.getTareas = (request, response, next) => {
         console.log(err);
     });
 
->>>>>>> mergeDeTodos
 };
 
 exports.getNuevoCasoDeUso = (request, response, next) => {
