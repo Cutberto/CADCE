@@ -11,7 +11,7 @@ exports.getTareas = (request, response, next) => {
 
     Tarea.fetchTareasOfCaso(idCasoDeUso)
         .then(([rows, fieldData]) => {
-            Tarea.fetchTiemposOfTareas(idProyecto)
+            Tarea.fetchTiemposOfTareas(idCasoDeUso)
             .then(([rows, fieldData]) => {
                     console.log("Se han cargado los tiempos por tarea");
                     
