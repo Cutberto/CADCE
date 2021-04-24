@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-04-2021 a las 22:51:15
+-- Tiempo de generación: 24-04-2021 a las 06:15:12
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -61,14 +61,18 @@ CREATE TABLE `casodeuso` (
 --
 
 INSERT INTO `casodeuso` (`IdCasoDeUso`, `nombre`, `descripcion`, `IdProyecto`, `dificultad`, `tiempoMax`, `tiempoMin`, `iteracion`, `Status`) VALUES
-(1, 'iniciar sesion', 'Crear el login de la herramienta digital', 1, 1, 0, 0, 1, ''),
+(1, 'iniciar sesion', 'Crear el login de la herramienta digital', 1, 1, 0, 0, 3, ''),
 (2, 'Agregar producto', 'Agregar producto que vende la tienda', 2, 5, 0, 0, 1, ''),
-(3, 'Cerrar sesion', 'Logout de la sesion', 1, 13, 0, 0, 1, ''),
+(3, 'Cerrar sesion', 'Logout de la sesion', 1, 13, 0, 0, 3, ''),
 (5, 'Login del sistema', 'Este caso de uso es el login del sistema', 1, 13, 0, 0, 1, ''),
 (6, 'caso test editado', 'caso test descripcion ', 3, 1, 0, 0, 1, ''),
 (7, 'Registrarse en la plataforma', 'El usuario debe poder crear una cuenta con su correo institucional', 5, 13, 0, 0, 1, NULL),
 (8, 'Software para finanzas', 'Este software será destinado al departamento de finanzas...', 1, 0, 0, 0, 1, NULL),
-(9, 'Prueba para demostración', 'descripción de prueba ', 1, 0, 0, 0, 1, NULL);
+(9, 'Prueba para demostración', 'descripción de prueba 2', 1, 0, 0, 0, 2, NULL),
+(12, '23', '23', 3, 0, 0, 0, 2, NULL),
+(13, '24', '24', 3, 0, 0, 0, 2, NULL),
+(14, 'caso de uso para temp', 'descripcion para temp', 8, 0, 0, 0, 1, NULL),
+(15, 'temp', 'descripcion para temp', 9, 0, 0, 0, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -93,13 +97,11 @@ INSERT INTO `casodeuso_tarea` (`IdCasoDeUso`, `IdTarea`) VALUES
 (1, 24),
 (1, 25),
 (2, 22),
-(3, 1),
 (3, 27),
-(6, 19),
 (6, 20),
-(6, 23),
 (7, 21),
-(9, 26);
+(9, 26),
+(14, 29);
 
 -- --------------------------------------------------------
 
@@ -142,6 +144,33 @@ CREATE TABLE `empleado_proyecto` (
   `IdProyecto` int(11) NOT NULL,
   `IdEmpleado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `iteracion`
+--
+
+CREATE TABLE `iteracion` (
+  `iteracion` int(11) NOT NULL,
+  `IdProyecto` int(11) NOT NULL,
+  `FechaFinalizacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `iteracion`
+--
+
+INSERT INTO `iteracion` (`iteracion`, `IdProyecto`, `FechaFinalizacion`) VALUES
+(1, 1, '2021-04-30'),
+(1, 2, '2021-04-29'),
+(1, 3, '2021-04-27'),
+(1, 5, '2021-04-24'),
+(1, 8, '2021-05-08'),
+(1, 9, '2021-04-30'),
+(2, 1, '2021-04-24'),
+(2, 3, '2021-04-23'),
+(3, 1, '2021-05-05');
 
 -- --------------------------------------------------------
 
@@ -268,31 +297,31 @@ CREATE TABLE `tarea` (
   `IdProyecto` int(11) NOT NULL,
   `Status` varchar(500) DEFAULT NULL,
   `TiempoEstimado` float NOT NULL DEFAULT 0,
-  `TiempoReal` float NOT NULL DEFAULT 0
+  `TiempoReal` float NOT NULL DEFAULT 0,
+  `FechaFinalizacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tarea`
 --
 
-INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `Status`, `TiempoEstimado`, `TiempoReal`) VALUES
-(1, 'tarea para caso 13', '1', 13, 1, 'Done', 0, 1.5),
-(2, 'Segunda tarea (editada otra vez)', 'Análisis', 5, 1, 'Done', 0, 1),
-(5, 'Crear diseño de boto', '1', 5, 1, NULL, 0, 0),
-(9, 'otra tarea (editada)', 'Análisis', 3, 1, 'In progress', 0, 0),
-(10, 'dibujar iconos de la', '1', 13, 1, NULL, 0, 0),
-(11, 'tarea de proyecto 1', 'Diseño', 1, 1, 'In progress', 0, 0),
-(12, 'testing task', 'Pruebas', 1, 1, 'Done', 0, 0),
-(13, 'Tarea para caso 5', '1', 13, 1, NULL, 0, 0),
-(19, 'tarea nueva caso 3 editada otra vez 2', '1', 5, 3, NULL, 0.5, 0),
-(20, 'otra tarea caso de uso caro', '1', 1, 3, NULL, 1, 0),
-(21, 'crear icono de registro', '1', 1, 5, NULL, 0.5, 0),
-(22, 'programar openenglish', '1', 13, 2, 'Done', 50, 0),
-(23, 'tarea con wbs 2', '2', 2, 3, NULL, 0, 0),
-(24, 'tarea con fase y dificultad', 'Despliegue', 3, 1, 'Done', 0, 0),
-(25, 'test 4', 'Pruebas', 8, 1, 'Done', 0, 2),
-(26, 'Planear el login', 'Análisis', 1, 1, 'Done', 0, 2),
-(27, 'tareaa', 'Análisis', 2, 1, 'Done', 0, 0.5);
+INSERT INTO `tarea` (`IdTarea`, `nombre`, `fase`, `dificultad`, `IdProyecto`, `Status`, `TiempoEstimado`, `TiempoReal`, `FechaFinalizacion`) VALUES
+(2, 'Segunda tarea (editada otra vez)', 'Análisis', 5, 1, 'Done', 0, 1, '2021-04-24'),
+(5, 'Crear diseño de boto', '1', 5, 1, NULL, 0, 0, NULL),
+(9, 'otra tarea (editada)', 'Análisis', 3, 1, 'In progress', 0, 0, NULL),
+(10, 'dibujar iconos de la', '1', 13, 1, NULL, 0, 0, NULL),
+(11, 'tarea de proyecto 1', 'Diseño', 1, 1, 'In progress', 0, 0, NULL),
+(12, 'testing task', 'Pruebas', 1, 1, 'In progress', 0, 0, NULL),
+(13, 'Tarea para caso 5', '1', 13, 1, NULL, 0, 0, NULL),
+(20, 'otra tarea caso de uso caro', '1', 1, 3, 'Done', 1, 0, NULL),
+(21, 'crear icono de registro', '1', 1, 5, NULL, 0.5, 0, NULL),
+(22, 'programar openenglish', '1', 13, 2, 'Done', 50, 0, NULL),
+(24, 'tarea con fase y dificultad', 'Despliegue', 3, 1, 'In progress', 0, 0, NULL),
+(25, 'test 4', 'Pruebas', 8, 1, 'Done', 0, 2, '2021-04-24'),
+(26, 'Planear el login', 'Análisis', 1, 1, 'Done', 0, 2, '2021-04-24'),
+(27, 'tareaa', 'Análisis', 2, 1, 'Done', 0, 0.5, '2021-04-24'),
+(28, 'si', 'Análisis', 1, 3, NULL, 0, 0, NULL),
+(29, 'tarea si', 'Implementación', 5, 8, NULL, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -447,6 +476,12 @@ ALTER TABLE `empleado_proyecto`
   ADD KEY `IdEmpleado` (`IdEmpleado`);
 
 --
+-- Indices de la tabla `iteracion`
+--
+ALTER TABLE `iteracion`
+  ADD PRIMARY KEY (`iteracion`,`IdProyecto`);
+
+--
 -- Indices de la tabla `proyecto`
 --
 ALTER TABLE `proyecto`
@@ -479,7 +514,7 @@ ALTER TABLE `wbs`
 -- AUTO_INCREMENT de la tabla `casodeuso`
 --
 ALTER TABLE `casodeuso`
-  MODIFY `IdCasoDeUso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `IdCasoDeUso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `empleado`
@@ -497,7 +532,7 @@ ALTER TABLE `proyecto`
 -- AUTO_INCREMENT de la tabla `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `IdTarea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas
