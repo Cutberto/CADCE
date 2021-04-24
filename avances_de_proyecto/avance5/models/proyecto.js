@@ -97,7 +97,17 @@ module.exports = class Proyecto {
          return db.execute('SELECT * FROM airtable_view WHERE IdProyecto = ?' ,[IdProyecto]   );
         //return db.execute("SELECT tarea.nombre AS 'Tarea', casodeuso.nombre AS 'Caso de uso', casodeuso.iteracion AS 'Iteración', tarea.fase AS 'Fase de desarrollo', tarea.Status, tarea.TiempoReal AS 'Tiempo de completado' FROM tarea, casodeuso, casodeuso_tarea WHERE tarea.IdTarea = casodeuso_tarea.IdTarea AND  casodeuso.IdCasoDeUso = casodeuso_tarea.IdCasoDeUso AND tarea.IdProyecto = ?        ", [IdProyecto]    );
 }
-
+    static fetchConteoIteraciones(IdProyecto) {
+        return db.execute( "SELECT COUNT(iteracion) as 'conteo' FROM iteracion WHERE IdProyecto = ?"  ,[IdProyecto]);
+    }
  
+    static fetchIteraciones(IdProyecto){
+        return db.execute("SELECT iteracion, DATE_FORMAT(FechaFinalizacion, '%d-%m-%Y') as 'FechaFinalizacion' FROM `iteracion` WHERE IdProyecto = ?", [IdProyecto]);
+    }
+
+    static crearIteracion(iteracion, IdProyecto, fechaFinalizacion){
+        return db.execute("INSERT INTO iteracion (iteracion,IdProyecto,FechaFinalizacion) VALUES (?,?,?)", [iteracion, IdProyecto, fechaFinalizacion]);
+    }
+
     
 }

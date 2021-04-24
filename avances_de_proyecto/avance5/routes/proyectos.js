@@ -22,6 +22,13 @@ router.get('/todos', isAuth, proyectosController.get);
 
 router.get('/casosdeuso/:proyecto_id' , isAuth,  proyectosController.getCaso  );
 
+router.get('/iteraciones/:proyecto_id' , isAuth,  proyectosController.getIteraciones  );
+
+router.post('/nuevaiteracion' , isAuth,  proyectosController.postIteracion  );
+
+router.get('/nuevaiteracion/:proyecto_id' , isAuth,  proyectosController.crear_iteracion  );
+
+
 router.get('/nuevocaso/:proyecto_id' , isAuth,  proyectosController.getNuevoCaso  );
 //<button name="opt"><a href="/proyectos/airtable/<%=Proyecto.IdProyecto%>" class="btn">Enviar a Airtable</a> </button>
 

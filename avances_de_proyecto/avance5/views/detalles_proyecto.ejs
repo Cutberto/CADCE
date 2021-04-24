@@ -26,7 +26,7 @@
     </div>
     <br><br>
     <div class="container">
-          
+
                 <table class="table table-responsive-md table-striped table-dark ">
                  
                   <thead>
@@ -89,8 +89,9 @@
                     <% for (let elemento of Proyecto){ %>
                      <div class="col s12 m12 l12"> 
                       <button name="opt"><a href="/proyectos/inicio" class="btn">Volver al inicio</a> </button>
-                   
-                    <button name="opt"><a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn">Casos de Uso</a></button>
+  
+                    <button name="opt"><a href="/proyectos/iteraciones/<%= elemento.IdProyecto %>" class="btn">Ver iteraciones</a></button>  
+                    <button name="opt"><a href="/proyectos/casosdeuso/<%= elemento.IdProyecto %>" class="btn">Ver Casos de Uso</a></button>  
                     <button name="opt"><a href="/proyectos/gestionarAirtable/<%=elemento.IdProyecto%>" class="btn">Gestionar en Airtable</a>   </button>
                   </div>
 

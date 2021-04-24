@@ -34,8 +34,14 @@
                     <label for="nombre">Nombre </label><br><br><input type="text" name="nombre_cu" value="<%= casodeuso.nombre %>" required>
                     <label for="descripcion"><br>Descripción </label><br><br><br><input type="text" name="descripcion_cu" value="<%= casodeuso.descripcion %>" required>
                     
-                    <label for="iteracion"><br>Iteracion </label><br><br><br><input type="number" name="iteracion_cu" value="<%= casodeuso.iteracion %>" required>
-                    
+                    <label for="iteracion"><br>Iteracion </label><br><br><br>
+                    <select class="form-select" aria-label="iteracion_cu" name="iteracion_cu" type="number">
+                        <% for (let iteracion of lista_iteraciones){ %>
+
+                            <option value="<%=iteracion.iteracion%>"> <%=iteracion.iteracion%> </option>
+                        <% } %>
+                        </select>
+                        
                     <br><br><br><input type="hidden" name="dificultad_cu" value="<%= casodeuso.dificultad %>" required>
                     
                                    

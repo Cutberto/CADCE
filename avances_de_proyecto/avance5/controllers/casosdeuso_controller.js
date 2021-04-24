@@ -1,7 +1,7 @@
 const session = require('express-session');
 const CasoDeUso = require('../models/casodeuso');
 const Tarea = require('../models/tarea');
-
+const Proyecto = require('../models/proyecto');
 
 exports.getTareas = (request, response, next) => {
     let tiempoTareas = [];
@@ -49,6 +49,8 @@ exports.getNuevoCasoDeUso = (request, response, next) => {
         isLoggedIn: request.session.isLoggedIn === true ? true : false
     });
 };
+
+
 
 exports.postNuevoCasoDeUso = (request, response, next) => {
     const nuevo_casodeuso = new CasoDeUso(request.body.IdCasoDeUso_cu, request.body.nombre_cu, request.body.descripcion_cu, request.body.IdProyecto_cu, request.body.dificultad_cu, request.body.iteracion_cu);
@@ -100,12 +102,16 @@ exports.getActualizarCasoDeUso = (request, response, next) => {
     console.log(request.params);
     CasoDeUso.fetchOne(idCasoDeUso)
         .then(([rows, fieldData]) => {
-            response.render('modif_casodeuso', { 
+            Proyecto.fetchIteraciones(rows[0].IdProyecto)
+            .then(([rows2, fieldData]) => { 
+                response.render('modif_casodeuso', { 
                 rol: request.session.rol,
-                lista_casosdeuso: rows, 
+                lista_casosdeuso: rows,
+                lista_iteraciones: rows2, 
                 titulo: 'Modificar caso de uso',
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
+        })
         })
         .catch(err => {
             console.log(err);

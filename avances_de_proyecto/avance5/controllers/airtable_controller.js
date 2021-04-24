@@ -80,11 +80,18 @@ exports.actualizarSQLconAirtable = (request,response, next) => {
 
       //    ejemplo de como acceder a los datos de la tabla de airtable
       //    tabla[tarea].fields.Status;
-    console.log("Realizando update en sql con parametros: '"+tabla[tarea].fields.Tarea+"'" ,tabla[tarea].fields.Status, tabla[tarea].fields['Tiempo de completado'])
+    console.log("Realizando update en sql con parametros: '"+tabla[tarea].fields.Tarea+"'" ,tabla[tarea].fields.Status, tabla[tarea].fields['Tiempo de completado'], tabla[tarea].createdTime)
     const temptarea= String(tabla[tarea].fields.Tarea);
     const tempstatus= String(tabla[tarea].fields.Status);
     const temptiempo = String(tabla[tarea].fields['Tiempo de completado']);
-    Tarea.updateTareasConAirtable(temptarea, tempstatus, temptiempo )
+    var tempfechaFinalizacion ="";
+    if (tempstatus == 'Done'){
+       tempfechaFinalizacion = String(tabla[tarea].createdTime);
+    }
+    else {
+       tempfechaFinalizacion = null;
+    }
+    Tarea.updateTareasConAirtable(temptarea, tempstatus, temptiempo, tempfechaFinalizacion )
     .then(([rows,fieldData]) => {  console.log("se realizo update de tarea ",rows);    }    ).catch(err => {console.log(err);});
     }
     Proyecto.fetchProyectosConHoras()

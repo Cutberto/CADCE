@@ -26,6 +26,58 @@ exports.inicio = (request, response, next) => {
         });
 };
 
+//Nuevo caso de uso
+exports.getIteraciones = (request, response, next) => {
+    const idProyecto = request.params.proyecto_id;
+    console.log("getIteraciones",idProyecto);
+    Proyecto.fetchConteoIteraciones(idProyecto)
+        .then(([rows, fieldData]) => {
+            Proyecto.fetchIteraciones (idProyecto)
+            .then(([rows2, fieldData]) => {
+               console.log(rows2,"  ", rows); 
+                response.render('todas_iteraciones', { 
+                    rol: request.session.rol,
+                    iteraciones: rows2,
+                    conteo: rows,  
+                    IdProyecto: idProyecto,
+                    titulo: 'Iteraciones del proyecto',
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
+        
+                })
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+exports.crear_iteracion = (request, response, next) => {
+    response.render('crear_iteracion',
+        {rol: request.session.rol,
+            titulo: 'Crear iteración',
+            IdProyecto: request.params.proyecto_id
+        }
+    );
+
+};
+
+exports.postIteracion = (request, response, next) => {
+    console.log("recibi un post de iteracion");
+    Proyecto.crearIteracion(request.body.iteracion,request.body.IdProyecto,request.body.FechaFinalizacion)
+        .then(() => {
+
+            request.session.aviso = "La iteracion " + request.body.iteracion + " ha sido creada!"; //para mostrar un aviso en la siguiente vista renderizada
+            response.redirect('/proyectos/detalles/'+request.body.IdProyecto);
+        }).catch(
+            err => {
+                console.log(err);
+                request.session.error = "La iteracion ya existe en el sistema";
+                response.redirect('/proyectos/detalles/'+request.body.IdProyecto);
+            }
+            
+            );
+
+}
 
 
 exports.crear_proyecto = (request, response, next) => {
@@ -86,13 +138,19 @@ exports.getProyecto = (request, response, next) => {
 exports.getNuevoCaso = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;
     console.log("getnuevoCaso",idProyecto);
-    
-    response.render('crear_casodeuso', { 
-            rol: request.session.rol,
-            idProyecto: idProyecto, 
-            titulo: 'Nuevo caso de uso ',
-            isLoggedIn: request.session.isLoggedIn === true ? true : false 
+    Proyecto.fetchIteraciones(idProyecto)
+    .then(([rows, fieldData]) => {  
+        response.render('crear_casodeuso', { 
+                rol: request.session.rol,
+                idProyecto: idProyecto,
+                lista_iteraciones: rows, 
+                titulo: 'Nuevo caso de uso ',
+                isLoggedIn: request.session.isLoggedIn === true ? true : false 
        });
+    })
+    .catch(err => {
+        console.log(err);
+    })
     }
         
 
@@ -118,6 +176,7 @@ exports.getDetalles = (request, response, next) => {
             console.log(err);
         });
 };
+
 
 exports.getgestionarairtable = (request, response, next) => {
     const idProyecto = request.params.proyecto_id;

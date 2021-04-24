@@ -77,8 +77,8 @@ module.exports = class Tarea {
         return db.execute('SELECT * FROM wbs');
     }
 
-    static updateTareasConAirtable(nombreTarea, Status, TiempoReal) {
-        return db.execute("UPDATE tarea SET   Status=?, TiempoReal=? WHERE nombre =?", [Status, TiempoReal, nombreTarea]);
+    static updateTareasConAirtable(nombreTarea, Status, TiempoReal, FechaFinalizacion)  {
+        return db.execute("UPDATE tarea SET   Status=?, TiempoReal=?, FechaFinalizacion=? WHERE nombre =?", [Status, TiempoReal, FechaFinalizacion, nombreTarea]);
     }
 
     static fetchTiemposOfTareas(IdProyecto) {

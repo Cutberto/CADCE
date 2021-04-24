@@ -37,7 +37,12 @@
                         <input type="text" name="descripcion_cu" required><br>
                         
                         <label for="iteracion"><br>Iteracion </label><br>
-                        <input type="number" name="iteracion_cu" required><br>
+                        <select class="form-select" aria-label="iteracion_cu" name="iteracion_cu" type="number">
+                            <% for (let iteracion of lista_iteraciones){ %>
+    
+                                <option value="<%=iteracion.iteracion%>"> <%=iteracion.iteracion%> </option>
+                            <% } %>
+                            </select>
                         
                         <input type="hidden" name="IdProyecto_cu" value = "<%=idProyecto%>" required>
                         
