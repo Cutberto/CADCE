@@ -112,7 +112,7 @@
                         <div class="progress blue-grey darken-4" style="height: 30px">
                         <div class="determinate green accent-3" 
                         style="width:<%=(progreso[i].TareasTerminadas/progreso[i].TareasTotales*100)%>%" >
-                        <lettercolor><%= (progreso[i].TareasTerminadas/progreso[i].TareasTotales)*100 %>%</lettercolor></div>
+                        <lettercolor><%= Math.round(progreso[i].TareasTerminadas/progreso[i].TareasTotales*100) %>%</lettercolor></div>
                     </div>
                     </div>
                     </div>

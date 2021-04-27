@@ -64,7 +64,7 @@
                         <h5>Progreso:</h5>
                         <div class="container">
                             <div class="progress blue-grey darken-4" style="height: 30px">
-                            <div class="determinate green accent-3" style="width: <%= (proyecto.terminadas/proyecto.totales)*100 %>%" ><lettercolor><%= (proyecto.terminadas/proyecto.totales)*100 %>%</lettercolor></div>
+                            <div class="determinate green accent-3" style="width: <%= (proyecto.terminadas/proyecto.totales)*100 %>%" ><lettercolor><%= Math.round(proyecto.terminadas/proyecto.totales*100) %>%</lettercolor></div>
                         </div>
                         </div>
                       <% } else if (proyecto.totales == null) { %>
