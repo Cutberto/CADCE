@@ -23,33 +23,39 @@
     </div>
     <br><br>
     <div class="container">
-          
-                                  
-                    <h1>En este menú podrás gestionar todo lo relacionado a enviar los datos de este proyecto a Airtable
-                       y traerlos de vuelta al sistema</h1>
+      <button name="opt"><a href="/proyectos/detalles/<%=IdProyecto%>" class="btn">Volver al proyecto</a> </button>
 
-                    <button name="opt"><a href="/proyectos/detalles/<%=IdProyecto%>" class="btn">Volver al proyecto</a> </button>
+                                  <br> <br>
+                    <h3>En este menú podrás gestionar todo lo relacionado a enviar los datos de este proyecto a Airtable
+                       y traerlos de vuelta al sistema</h3>
 
-                                         
+
+                                         <br>
+              <div class= "card border-info text-white bg-dark mb-2">
+
+                  <div class="card-header card-title bg-transparent border-info"> Enviar datos de este proyecto hacia Airtable  </div>
 
                     <form action ="/airtable/<%=IdProyecto %>" method="POST" id ="airtable_post" class="box">  
-                      <h1>Enviar datos de este proyecto hacia Airtable</h1> 
-
+ 
                     <label for="apiKey">Valor del apiKey </label><br><input type="text" name="apiKey" required><br>
                     <label for="baseKey">Valor del baseKey </label><br><input type="text" name="baseKey" required><br>
                     <button type="submit" name="action"> Enviar a Airtable  </button>
                     </form>
 
+              </div>
+              <br>
+            
+            <div class="card border-info text-white bg-dark mb-2">
+              <div class="card-header card-title bg-transparent border-info"> Traer de regreso los datos de airtable  </div>
 
-                    <form action ="/airtable/updatesql/<%=IdProyecto %>" method="POST" id ="airtable_post" class="box">  
+                  <form action ="/airtable/updatesql/<%=IdProyecto %>" method="POST" id ="airtable_post" class="box">  
                     
-                    <h1>Regresar los datos de Airtable al sistema</h1>
                     <label for="apiKey">Valor del apiKey </label><br><input type="text" name="apiKey" required><br>
                     <label for="baseKey">Valor del baseKey </label><br><input type="text" name="baseKey" required><br>
                     <button type="submit" name="action"> Traer los datos de airtable al sistema  </button>
                     </form>
 
-                  
+             </div>
 
            
 
