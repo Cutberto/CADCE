@@ -103,8 +103,12 @@
                 
                    <h3>Dashboard</h3>
 
-                   <div class="col l4 m12 s12"> <div class ="card bg-dark"> 
-                    <canvas id="horasChart" width="50%" height="27%"></canvas>      
+                   <div class="col l4 m12 s12"> <div class ="card bg-dark">
+                    <div class= "card-header card-title bg-transparent border-info">
+                      <h6>Horas estimadas vs horas dedicadas</h6> 
+                       </div>
+ 
+                    <canvas id="horasChart" width="50%" height="22%"></canvas>      
                     </div> </div>  
                     
                    <% for (i in progreso ){%>
@@ -121,7 +125,7 @@
                         <div class="progress blue-grey darken-4" style="height: 30px">
                         <div class="determinate green accent-3" 
                         style="width:<%=(progreso[i].TareasTerminadas/progreso[i].TareasTotales*100)%>%" >
-                        <lettercolor><%= Math.round(progreso[i].TareasTerminadas/progreso[i].TareasTotales*100) %>%</lettercolor></div>
+                        <lettercolor><%= (progreso[i].TareasTerminadas/progreso[i].TareasTotales)*100 %>%</lettercolor></div>
                     </div>
                     </div>
                     </div>
@@ -142,66 +146,190 @@
                      
                         <% } %>              
   
-                        
+           
 
-                    <br><br>         
-                     
-                    
-                </div>
-                  
-                <script>
-  
-                  var ctxHoras = document.getElementById('horasChart').getContext('2d');
-                    var myChart = new Chart(ctxHoras, {
-                    type: 'bar',
-                    
-                    
-                    data: {
-                       
-                        labels: ["Horas estimadas vs dedicadas"]  ,
-                        datasets: [{
-                            label: ['Horas estimadas'],
-                            data: [<%- Proyecto[0].TiempoTotal; %>],
-                            backgroundColor: 'rgba(255, 205, 86, 1)',
-                            borderColor:  'rgb(255, 205, 86)',
-                            borderWidth: 1,
-                            
-                        },
-                            {
-                            label: ['Horas dedicadas'],
-                            data:[<%- Proyecto[0].TiempoInvertido; %>],
-                            backgroundColor: 'rgba(99, 132, 0, 1)',
-                            borderColor:  'rgb(101, 140, 0)',
-                            borderWidth: 1, 
-                           
-                        
-                        }
-                      ]
-                    },
-                    options: {
-                      color: 'rgb(255,255,255)' ,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                        
-                    }
-                });
-                
-                </script>
+                    <br><br>      
+                    <div class="col l12 m12 s12"> <div class ="card bg-dark">
+                      <div class= "card-header card-title bg-transparent border-info">
+                        <h3>Gráfica de Valor Ganado, Valor Planeado y Costo Real</h3>
+                      </div>
 
+                      <canvas id="myChart" width="50%" height="20%"></canvas>      
+                      </div> </div>            
+            </div>
+ 
           
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+  <!-- Fecha Planeada-->
+    <% let fechaPlaneada = []; %>
+    <% let valorPlaneadoData = []; %>
+    <% let valorPlaneadoList = []; %>
+    <% let valorPlaneadoAcc = 0; %>
 
+    <% for (let data in valorPlaneado) { %>
+        <% fechaPlaneada.push(valorPlaneado[data].FechaFinalizacion); %>
+        <% valorPlaneadoData.push(valorPlaneado[data].ValorPlaneado); %>
+    <% } %>
+
+    <% for (let i = 0; i < valorPlaneadoData.length; i++) { %>
+      <% valorPlaneadoAcc += valorPlaneadoData[i];%>
+      <% valorPlaneadoList.push(valorPlaneadoAcc); %>  
+    <% } %>
+
+    <% console.log(valorPlaneadoList); %>
+
+    <!-- Costo Real -->
+
+    <% let costoRealData = []; %>
+    <% let costoRealList = []; %>
+    <% let costoRealAcc = 0; %>
+
+    <% for (let data in costoReal) { %>
+      <% costoRealData.push(costoReal[data].CostoReal); %>
+    <% } %>
+
+    <% for (let i = 0; i < costoRealData.length; i++) { %>
+      <% costoRealAcc += costoRealData[i];%>
+      <% costoRealList.push(costoRealAcc); %>  
+    <% } %>
+    
+    <% console.log(costoRealList); %>
+
+    <!-- Valor Ganado -->
+
+    <% let valorGanadoData = []; %>
+    <% let valorGanadoList = []; %>
+    <% let valorGanadoAcc = 0; %>
+
+    <% for (let data in valorGanado) { %>
+      <% valorGanadoData.push(valorGanado[data].ValorGanado); %>
+    <% } %>
+
+    <% for (let i = 0; i < valorGanado.length; i++) { %>
+      <% valorGanadoAcc += valorGanadoData[i];%>
+      <% valorGanadoList.push(valorGanadoAcc); %>  
+    <% } %>
+    
+    <!-- Valor Ganado Faltante-->
+    <% if (valorGanado.length != valorPlaneadoData.length) { %>
+      <% for(i = valorGanado.length; i < valorPlaneado.length; i++) {%>
+        <% valorGanadoList.push(valorGanadoList[valorGanado.length-1]); %>
+      <% } %>
+    <% } %>
+
+    
+    <% console.log("Faltan valor Ganado: " + valorGanadoList[valorGanado.length-1]) %>
+    
+    <% console.log(valorGanadoList); %>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+    
     <script type="text/javascript" src="/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
 
-
-
+    <!-- Chart.js -->
+    <script>
+  
+      var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: <%- JSON.stringify(fechaPlaneada); %>,
+            datasets: [{
+                label: 'Valor Planeado',
+                data: <%- JSON.stringify(valorPlaneadoList); %>,
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Costo Real',
+                data: <%- JSON.stringify(costoRealList); %>,
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+            {
+                label: 'Valor Ganado',
+                data: <%- JSON.stringify(valorGanadoList); %>,
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          color: 'rgb(255,255,255)',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    
+    </script>
+        <script>
+  
+          var ctxHoras = document.getElementById('horasChart').getContext('2d');
+            var myChart = new Chart(ctxHoras, {
+            type: 'bar',
+            
+            
+            data: {
+               
+                labels: ["Horas estimadas vs dedicadas"]  ,
+                datasets: [{
+                    label: ['Horas estimadas'],
+                    data: [<%- Proyecto[0].TiempoTotal; %>],
+                    backgroundColor: 'rgba(255, 205, 86, 1)',
+                    borderColor:  'rgb(255, 205, 86)',
+                    borderWidth: 1,
+                    
+                },
+                    {
+                    label: ['Horas dedicadas'],
+                    data:[<%- Proyecto[0].TiempoInvertido; %>],
+                    backgroundColor: 'rgba(99, 132, 0, 1)',
+                    borderColor:  'rgb(101, 140, 0)',
+                    borderWidth: 1, 
+                   
+                
+                }
+              ]
+            },
+            options: {
+              color: 'rgb(255,255,255)' ,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+                
+            }
+        });
+        
+        </script>
 
   </body>
 

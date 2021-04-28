@@ -80,12 +80,18 @@
                 
 
             </div>
-        </div>
+        </div> <br>
+        <div class="col l12 m12 s12"> 
+          
+          
+          <div class ="card bg-dark"> 
+            <div class= "card-header card-title bg-transparent border-info"><h3>Tiempo estimado vs tiempo real de completado (horas)</h3>  </div>
+            <canvas id="myChart" width="50%" height="20%"></canvas>      
+          </div> </div>     
     </div>    
 
         
-    <canvas id="myChart" width="50%" height="20%"></canvas>
-
+     
     <% let nombre = []; %>
     <% let tiempoEstimado = []; %>
     <% let tiempoReal = []; %>
@@ -140,6 +146,7 @@
           ]
         },
         options: {
+          color: 'rgb(255,255,255)',
             scales: {
                 y: {
                     beginAtZero: true

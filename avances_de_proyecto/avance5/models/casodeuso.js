@@ -54,5 +54,15 @@ module.exports = class CasoDeUso {
         return db.execute('DELETE FROM casodeuso_tarea WHERE IdCasoDeUso=?', [idCasoDeUso]);
     }    
 
+    static SelectValorPlaneado(idProyecto){
+        return db.execute('SELECT tarea.IdProyecto, casodeuso.iteracion, DATE_FORMAT(iteracion.FechaFinalizacion, "%d-%m-%Y") AS FechaFinalizacion, SUM(wbs.TiempoEstimado) as ValorPlaneado FROM tarea, wbs, casodeuso_tarea, casodeuso, iteracion WHERE tarea.dificultad = wbs.Dificultad AND casodeuso_tarea.IdTarea = tarea.IdTarea AND casodeuso_tarea.IdCasoDeUso = casodeuso.IdCasoDeUso AND tarea.IdProyecto = ? AND iteracion.iteracion = casodeuso.iteracion GROUP BY casodeuso.iteracion;', [idProyecto]);
+    }
 
+    static SelectCostoReal(idProyecto){
+        return db.execute('SELECT tarea.IdProyecto, casodeuso.iteracion, iteracion.FechaFinalizacion, SUM(tarea.TiempoReal) as CostoReal FROM tarea, wbs, casodeuso_tarea, casodeuso, iteracion WHERE tarea.dificultad = wbs.Dificultad AND casodeuso_tarea.IdTarea = tarea.IdTarea AND casodeuso_tarea.IdCasoDeUso = casodeuso.IdCasoDeUso AND tarea.IdProyecto = 1 AND iteracion.iteracion = casodeuso.iteracion GROUP BY casodeuso.iteracion', [idProyecto]);
+    }
+
+    static SelectValorGanado(idProyecto){
+        return db.execute('SELECT tarea.IdProyecto, casodeuso.iteracion, iteracion.FechaFinalizacion, SUM(wbs.TiempoEstimado) as ValorGanado FROM tarea, wbs, casodeuso_tarea, casodeuso, iteracion WHERE tarea.dificultad = wbs.Dificultad AND casodeuso_tarea.IdTarea = tarea.IdTarea AND casodeuso_tarea.IdCasoDeUso = casodeuso.IdCasoDeUso AND tarea.IdProyecto = ? AND iteracion.iteracion = casodeuso.iteracion AND tarea.status LIKE "Done" GROUP BY casodeuso.iteracion', [idProyecto]);
+    }
 }

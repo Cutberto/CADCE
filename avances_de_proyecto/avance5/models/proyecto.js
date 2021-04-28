@@ -109,5 +109,8 @@ module.exports = class Proyecto {
         return db.execute("INSERT INTO iteracion (iteracion,IdProyecto,FechaFinalizacion) VALUES (?,?,?)", [iteracion, IdProyecto, fechaFinalizacion]);
     }
 
+    static fetchValorCosto(iteracion){
+        return db.execute("SELECT iteracion, DATE_FORMAT(iteracion.FechaFinalizacion, '%d-%m-%Y') as 'FechaFinalizacion', (select sum(tarea.TiempoReal) from casodeuso, iteracion, tarea WHERE iteracion.iteracion = casodeuso.iteracion GROUP BY iteracion.iteracion) as accTiempoReal, wbs.TiempoEstimado FROM iteracion, tarea, wbs, casodeuso_tarea, proyecto WHERE iteracion.IdProyecto = proyecto.IdProyecto GROUP BY iteracion.iteracion; ", [IdProyecto]);
+    }
     
 }
