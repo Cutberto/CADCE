@@ -81,11 +81,7 @@ module.exports = class Tarea {
         return db.execute("UPDATE tarea SET   Status=?, TiempoReal=?, FechaFinalizacion=? WHERE nombre =?", [Status, TiempoReal, FechaFinalizacion, nombreTarea]);
     }
 
-    static fetchTiemposOfTareas(IdProyecto) {
-        return db.execute('SELECT nombre, wbs.TiempoEstimado, TiempoReal FROM tarea, wbs WHERE tarea.dificultad = wbs.Dificultad AND IdProyecto =?', [IdProyecto] );
-    }
-
-    static fetchTiemposOfTareas(IdProyecto) {
-        return db.execute('SELECT nombre, wbs.TiempoEstimado, TiempoReal FROM tarea, wbs, casodeuso_tarea WHERE tarea.dificultad = wbs.Dificultad AND tarea.IdTarea = casodeuso_tarea.IdTarea AND casodeuso_tarea.IdCasoDeUso =?', [IdProyecto] );
+    static fetchTiemposOfTareas(IdCasoDeUso) {
+        return db.execute('SELECT nombre, wbs.TiempoEstimado, TiempoReal FROM tarea, wbs, casodeuso_tarea WHERE tarea.dificultad = wbs.Dificultad AND tarea.IdTarea = casodeuso_tarea.IdTarea AND casodeuso_tarea.IdCasoDeUso =?', [IdCasoDeUso] );
     }
 }

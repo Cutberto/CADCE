@@ -161,20 +161,53 @@ exports.getDetalles = (request, response, next) => {
         .then(([rows, fieldData]) => {
             Proyecto.fetchProgresoIteraciones (idProyecto)
             .then(([rows2, fieldData]) => {
-               console.log(rows2); 
-            response.render('detalles_proyecto', { 
-                rol: request.session.rol,
-                progreso: rows2,
-                Proyecto: rows,  
-                titulo: 'Detalles del proyecto',
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
+                //Valor Planeado
+                CasoDeUso.SelectValorPlaneado(idProyecto)
+                .then(([rows3, fieldData]) => {
+                    //Costo Real
+                    CasoDeUso.SelectCostoReal(idProyecto)
+                    .then(([rows4, fieldData]) => {
+                        //Valor Ganado
+                        CasoDeUso.SelectValorGanado(idProyecto)
+                        .then(([rows5, fieldData]) => {
+
+                        valorPlaneadoEJS = rows3;
+                        costoRealEJS = rows4;
+                        valorGanadoEJS = rows5;
+                        console.log("Esto llegó al controlador: " + costoRealEJS);
+
+                response.render('detalles_proyecto', { 
+                    rol: request.session.rol,
+                    valorGanado: valorGanadoEJS,
+                    valorPlaneado: valorPlaneadoEJS,
+                    costoReal : costoRealEJS,
+                    progreso: rows2,
+                    Proyecto: rows,  
+                    titulo: 'Detalles del proyecto',
+                    isLoggedIn: request.session.isLoggedIn === true ? true : false
         
-            })
+            });
+        })
+            .catch(err => {
+            console.log(err);
+        });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        
+        })
+            .catch(err => {
+                console.log(err);
             });
         })
         .catch(err => {
             console.log(err);
         });
+    })
+    .catch(err => {
+        console.log(err);
+    });
 };
 
 
@@ -197,13 +230,14 @@ exports.getCaso = (request, response, next) => {
     console.log(request.params);
     CasoDeUso.fetchByProject(idProyecto)
         .then(([rows, fieldData]) => {
-            response.render('todos_casosdeuso', { 
-                rol: request.session.rol,
-                lista_casosdeuso: rows, 
-                titulo: 'Casos de uso'  ,
-                idProyecto: idProyecto,
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
+
+                        response.render('todos_casosdeuso', { 
+                            rol: request.session.rol,
+                            lista_casosdeuso: rows, 
+                            titulo: 'Casos de uso'  ,
+                            idProyecto: idProyecto,
+                            isLoggedIn: request.session.isLoggedIn === true ? true : false
+            });   
         })
         .catch(err => {
             console.log(err);

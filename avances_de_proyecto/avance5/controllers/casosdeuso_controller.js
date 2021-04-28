@@ -64,6 +64,7 @@ exports.postNuevoCasoDeUso = (request, response, next) => {
 
 
 exports.getCasoDeUso = (request, response, next) => {
+    console.log("fetchOne")
     const idCasoDeUso = request.params.casodeuso_id;
     console.log(idCasoDeUso);
     console.log(request.params);
@@ -136,7 +137,6 @@ exports.postEliminarCasoDeUso = (request, response) => {
 }
 
 exports.get = (request, response, next) => {
-
     CasoDeUso.fetchAll()
         .then(([rows, fieldData]) => {
             response.render('todos_casosdeuso', { 

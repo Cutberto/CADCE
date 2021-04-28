@@ -79,9 +79,10 @@ exports.postEliminarTarea = (request, response) => {
 }
 
 exports.get = (request, response, next) => {
-
+    
     Tarea.fetchAll()
         .then(([rows, fieldData]) => {
+            console.log("fetchAll")
             response.render('todas_tareas', {
                 rol: request.session.rol,
                 lista_tarea: rows,
