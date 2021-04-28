@@ -23,7 +23,7 @@ exports.postNuevaTarea = (request, response, next) => {
             console.log("save de tarea ejecutado... ejecutando asignacion Con caso de uso");
             nueva_tarea.asignarConCasoDeUso(request.body.IdCasoDeUso)
                 .then(() => {
-                    response.redirect('/casosdeuso/' + request.body.IdCasoDeUso+'/'+request.body.IdProyecto); //Poner aqui una ruta hacia proyectos/casosdeuso/ProyectoID
+                    response.redirect('/casosdeuso/' + request.body.IdCasoDeUso+'/'+request.body.IdProyecto); 
                 })
 
 
@@ -35,6 +35,8 @@ exports.postNuevaTarea = (request, response, next) => {
 //idea para count count = rows[0].count;
 exports.getActualizarTarea = (request, response, next) => {
     const idTarea = request.params.tarea_id;
+    const IdProyecto = request.params.proyecto_id;
+    const IdCasoDeUso = request.params.casodeuso_id;
     Tarea.fetchOne(idTarea)
         .then(([rows, fieldData]) => {
             const title = 'Tarea ' + rows[0].nombre;
@@ -43,6 +45,7 @@ exports.getActualizarTarea = (request, response, next) => {
                 rol: request.session.rol,
                 lista_tarea: rows,
                 idProyecto: rows[0].IdProyecto,
+                IdCasoDeUso: IdCasoDeUso,
                 titulo: title,
                 isLoggedIn: request.session.isLoggedIn === true ? true : false
             });
@@ -60,7 +63,7 @@ exports.postActualizarTarea = (request, response, next) => {
     actualizar_tarea.actualizar()
         .then(() => {
             request.session.aviso = "Tarea " + request.body.nombre + " ha sido actualizada"; //para mostrar un aviso en la siguiente vista renderizada
-            response.redirect('/proyectos/casosdeuso/' + request.body.IdProyecto); //redirigir hacia la el caso de uso correspondiente
+            response.redirect('/casosdeuso/'+ request.body.IdCasoDeUso+'/' + request.body.IdProyecto); //redirigir hacia la el caso de uso correspondiente
         }).catch(err => console.log(err));
 
 }

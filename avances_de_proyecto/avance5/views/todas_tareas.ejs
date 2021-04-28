@@ -37,7 +37,8 @@
                           <th scope="col" style="width:50%">Nombre</th>
                           <th scope="col" style="width:13%">Fase</th>
                           <th scope="col" style="width:10%">Dificultad</th>
-                          <th scope="col" style="width:20%"></th>
+                          <th scope="col" style="width:20%">Editar</th>
+                          <th scope="col" style="width:20%">Eliminar</th>
                         </tr>
                       </thead>
 
@@ -49,7 +50,7 @@
                                <td scope="row" ><%= tarea.nombre %></td>
                                <td scope="row" ><%= tarea.fase %></td>
                                <td scope="row" ><%= tarea.dificultad %></td>
-                               <td scope="row" > <button name="opt"><a href="/tareas/actualizarTarea/<%= tarea.IdTarea %>">Editar tarea </a></button> </td> 
+                               <td scope="row" > <button name="opt"><a href="/tareas/actualizarTarea/<%= tarea.IdTarea %>/<%=IdCasoDeUso%>/<%=idProyecto%>">Editar tarea </a></button> </td> 
                                <td>
                                  <form action="/tareas/eliminarTarea" method="POST" id="eliminar_<%= tarea.IdTarea %>">
                                   <input type="hidden" name="IdTarea" value="<%= tarea.IdTarea %>">
@@ -116,34 +117,28 @@
   
       var ctx = document.getElementById('myChart').getContext('2d');
         var myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: <%- JSON.stringify(nombre); %>,
             datasets: [{
                 label: 'Tiempo Real',
                 data: <%- JSON.stringify(tiempoReal); %>,
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                   
+                
                 ],
-                borderWidth: 1
+                borderColor:'rgb(0,0,0)'  ,
+                borderWidth: 3
             },
             {
                 label: 'Tiempo Estimado',
                 data: <%- JSON.stringify(tiempoEstimado); %>,
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
+                backgroundColor: [
+                'rgba(54, 162, 235, 0.5)'
                 ],
-                borderWidth: 1
+                borderColor:'rgb(0,0,0)'  ,
+                borderWidth: 3
             }
           ]
         },
