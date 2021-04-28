@@ -18,7 +18,7 @@ router.post('/nueva', isAuth, tareaController.postNuevaTarea);
 
 router.get('/actualizarTarea/:tarea_id', isAuth, tareaController.getActualizarTarea);
 
-router.post('/actualizarTarea/', isAuth, tareaController.postActualizarTarea);
+router.post('/actualizarTarea', isAuth, tareaController.postActualizarTarea);
 
 router.post('/EliminarTarea', isAuth, tareaController.postEliminarTarea);
 

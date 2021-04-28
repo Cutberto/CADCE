@@ -23,7 +23,7 @@ exports.postNuevaTarea = (request, response, next) => {
             console.log("save de tarea ejecutado... ejecutando asignacion Con caso de uso");
             nueva_tarea.asignarConCasoDeUso(request.body.IdCasoDeUso)
                 .then(() => {
-                    response.redirect('/proyectos/casosdeuso/' + request.body.IdProyecto); //Poner aqui una ruta hacia proyectos/casosdeuso/ProyectoID
+                    response.redirect('/casosdeuso/' + request.body.IdCasoDeUso+'/'+request.body.IdProyecto); //Poner aqui una ruta hacia proyectos/casosdeuso/ProyectoID
                 })
 
 
