@@ -1,5 +1,6 @@
 const db = require('../utils/database');
 const bcrypt = require('bcryptjs');
+const { apiKey } = require('airtable');
 
 module.exports = class Proyecto {
 
@@ -111,6 +112,14 @@ module.exports = class Proyecto {
 
     static fetchValorCosto(iteracion){
         return db.execute("SELECT iteracion, DATE_FORMAT(iteracion.FechaFinalizacion, '%d-%m-%Y') as 'FechaFinalizacion', (select sum(tarea.TiempoReal) from casodeuso, iteracion, tarea WHERE iteracion.iteracion = casodeuso.iteracion GROUP BY iteracion.iteracion) as accTiempoReal, wbs.TiempoEstimado FROM iteracion, tarea, wbs, casodeuso_tarea, proyecto WHERE iteracion.IdProyecto = proyecto.IdProyecto GROUP BY iteracion.iteracion; ", [IdProyecto]);
+    }
+
+    static guardarLlaves(idProyecto, apiKey, tableKey){
+        return db.execute("UPDATE  proyecto SET apiKey=?, tableKey=?  WHERE IdProyecto = ?",[ apiKey, tableKey, idProyecto]);
+    }
+
+    static obtenerLlaves(idProyecto){
+        return db.execute("SELECT apiKey, tableKey FROM proyecto WHERE IdProyecto = ?", [idProyecto]);
     }
     
 }

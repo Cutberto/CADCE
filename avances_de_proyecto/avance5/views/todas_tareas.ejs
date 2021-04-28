@@ -53,6 +53,8 @@
                                <td>
                                  <form action="/tareas/eliminarTarea" method="POST" id="eliminar_<%= tarea.IdTarea %>">
                                   <input type="hidden" name="IdTarea" value="<%= tarea.IdTarea %>">
+                                  <input type="hidden" name="IdCasoDeUso" value = "<%= IdCasoDeUso %>">
+                                  <input type="hidden" name ="IdProyecto" value = "<%= idProyecto %>">
                                   <button type="submit" name="add">Eliminar</button>
 
                                   <script> 

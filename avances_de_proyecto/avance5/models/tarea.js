@@ -6,28 +6,28 @@ module.exports = class Tarea {
     //Constructor de la clase. Sirve para crear un nuevo objeto, y en él se definen las propiedades del modelo
     // Tarea(request.body.IdTarea, request.body.Nombre, request.body.Fase, request.body.IdDificultad, request.body.TiempoMax, request.body.TiempoMin);
 
-    constructor(IdTarea, nombre, IdFase, dificultad, IdProyecto, TiempoEstimado) {
+    constructor(IdTarea, nombre, IdFase, dificultad, IdProyecto) {
         this.IdTarea = IdTarea;
         this.nombre = nombre;
         this.IdFase = IdFase;
         this.dificultad = dificultad;
         this.IdProyecto = IdProyecto;
-        this.TiempoEstimado = TiempoEstimado;
+       
     }
 
     save() {
         console.log("guardando tarea en db con parametros: ")
-        console.log(this.nombre, this.IdFase, this.dificultad, this.IdProyecto, this.TiempoEstimado);
-        return db.execute('INSERT INTO tarea (nombre, fase, dificultad, IdProyecto, TiempoEstimado) VALUES ( ?, ?, ?, ?, ?)',
-            [this.nombre, this.IdFase, this.dificultad, this.IdProyecto, this.TiempoEstimado]
+        console.log(this.nombre, this.IdFase, this.dificultad, this.IdProyecto, );
+        return db.execute('INSERT INTO tarea (nombre, fase, dificultad, IdProyecto) VALUES ( ?, ?, ?, ?)',
+            [this.nombre, this.IdFase, this.dificultad, this.IdProyecto]
         );
     }
 
     //cu 18
     actualizar() {
         return db.execute(
-            "UPDATE tarea SET  nombre=?, fase =?, dificultad=?, TiempoEstimado=? WHERE IdTarea =? ",
-            [this.nombre, this.IdFase, this.dificultad, this.TiempoEstimado, this.IdTarea]
+            "UPDATE tarea SET  nombre=?, fase =?, dificultad=? WHERE IdTarea =? ",
+            [this.nombre, this.IdFase, this.dificultad,  this.IdTarea]
         );
     }
     // IdCasoDeUso lo recibe como parametro del request (se maneja en tarea_controller/postNuevaTarea)

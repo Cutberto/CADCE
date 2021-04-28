@@ -17,7 +17,7 @@ exports.getNuevaTarea = (request, response, next) => {
 exports.postNuevaTarea = (request, response, next) => {
     console.log("recibi post de nueva tarea con parametros:");
     console.log(request.body);
-    const nueva_tarea = new Tarea(request.body.IdTarea, request.body.nombre, request.body.IdFase, request.body.dificultad, request.body.IdProyecto, request.body.TiempoEstimado);
+    const nueva_tarea = new Tarea(request.body.IdTarea, request.body.nombre, request.body.IdFase, request.body.dificultad, request.body.IdProyecto);
     nueva_tarea.save()
         .then(() => {
             console.log("save de tarea ejecutado... ejecutando asignacion Con caso de uso");
@@ -56,7 +56,7 @@ exports.getActualizarTarea = (request, response, next) => {
 exports.postActualizarTarea = (request, response, next) => {
     console.log("recibi un post actualizar de tarea con parametros:");
     console.log(request.body);
-    const actualizar_tarea = new Tarea(request.body.IdTarea, request.body.nombre, request.body.IdFase, request.body.dificultad, request.body.IdProyecto, request.body.TiempoEstimado);
+    const actualizar_tarea = new Tarea(request.body.IdTarea, request.body.nombre, request.body.IdFase, request.body.dificultad, request.body.IdProyecto);
     actualizar_tarea.actualizar()
         .then(() => {
             request.session.aviso = "Tarea " + request.body.nombre + " ha sido actualizada"; //para mostrar un aviso en la siguiente vista renderizada
@@ -66,12 +66,14 @@ exports.postActualizarTarea = (request, response, next) => {
 }
 exports.postEliminarTarea = (request, response) => {
     const idTarea = request.body.IdTarea;
+    const idProyecto = request.body.IdProyecto;
+    const idcaso = request.body.IdCasoDeUso;
     console.log("Id", request.body.IdTarea)
     Tarea.EliminarConexionTareasCasoDeUso(idTarea)
     Tarea.EliminarTarea(idTarea)
         .then(() => {
             request.session.alerta = "Tarea eliminada exitosamente";
-            response.redirect('/proyectos/inicio');
+            response.redirect('/casosdeuso/'+idcaso+'/'+idProyecto);
         })
         .catch(err => {
             console.log(err);

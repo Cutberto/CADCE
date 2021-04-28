@@ -112,7 +112,7 @@ exports.postActualizarProyecto = (request, response, next) => {
     actualizar_proyecto.actualizar(request.body.IdProyecto)
         .then(() => {
             request.session.aviso = "El proyecto " + request.body.nombre + " ha sido actualizado"; //para mostrar un aviso en la siguiente vista renderizada
-            response.redirect('/proyectos/inicio');
+            response.redirect('/proyectos/detalles/'+request.body.IdProyecto);
         }).catch(err => console.log(err));
 
 }
@@ -212,16 +212,52 @@ exports.getDetalles = (request, response, next) => {
 
 
 exports.getgestionarairtable = (request, response, next) => {
-    const idProyecto = request.params.proyecto_id;
+    const IdProyecto = request.params.proyecto_id;
+
+    Proyecto.obtenerLlaves(IdProyecto)
+    .then(([rows,fieldData]) => {
+
+        response.render('gestionar_airtable', { 
+            rol: request.session.rol,
+            IdProyecto: IdProyecto,
+            llaves: rows, 
+            titulo: 'Gestionar airtable',
+            isLoggedIn: request.session.isLoggedIn === true ? true : false
+        });
 
 
-            response.render('gestionar_airtable', { 
-                rol: request.session.rol,
-                IdProyecto: idProyecto, 
-                titulo: 'Gestionar airtable',
-                isLoggedIn: request.session.isLoggedIn === true ? true : false
-            });
+    }                     ) 
+    .catch(err => { 
+        console.log(err);
+        response.render('gestionar_airtable', { 
+            rol: request.session.rol,
+            IdProyecto: IdProyecto, 
+            titulo: 'Gestionar airtable',
+            isLoggedIn: request.session.isLoggedIn === true ? true : false
+        });
 
+     })            
+
+
+
+};
+
+exports.postGuardarLlaves = (request, response, next) => {
+    const IdProyecto = request.body.IdProyecto;
+    const apiKey = request.body.apiKey;
+    const tableKey = request.body.tableKey;
+        Proyecto.guardarLlaves(IdProyecto,apiKey,tableKey)
+        .then(([rows,fieldData]) => {
+
+           response.redirect('/proyectos/gestionarAirtable/'+IdProyecto);
+
+
+        }                     ) 
+        .catch(err => { 
+            console.log(err);
+            response.redirect('/proyectos/gestionarAirtable/'+IdProyecto);
+         })            
+           
 };
 
 exports.getCaso = (request, response, next) => {

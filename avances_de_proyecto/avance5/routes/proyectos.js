@@ -18,6 +18,9 @@ router.post('/crear_proyecto' , isAuth, proyectosController.postProyecto);
 
 router.get('/gestionarAirtable/:proyecto_id' , isAuth,  proyectosController.getgestionarairtable  );
 
+
+router.post('/guardarLlaves/' , isAuth,  proyectosController.postGuardarLlaves  );
+
 router.get('/todos', isAuth, proyectosController.get);  
 
 router.get('/casosdeuso/:proyecto_id' , isAuth,  proyectosController.getCaso  );
