@@ -20,8 +20,8 @@ module.exports = class Proyecto {
        // return bcrypt.hash(this.contraseña, 12)
          //   .then((password_encriptado) => {
                 return db.execute(
-                    ' INSERT INTO proyecto (nombre, descripcion, fechaPlaneada, fechaLimite, fechaInicial, tiempoMax, tiempoMin, estado) VALUES (?,?,?,?,?,?,?,?)',
-                    [this.nombre,this.descripcion ,this.fechaplaneada, this.fechaLimite,this.fechaInicial , '0', '0', 'Activo'    ]
+                    ' INSERT INTO proyecto (nombre, descripcion, fechaPlaneada, fechaLimite, fechaInicial, estado) VALUES (?,?,?,?,?,?)',
+                    [this.nombre,this.descripcion ,this.fechaplaneada, this.fechaLimite,this.fechaInicial ,  'Activo'  ]
                 );
           //  }).catch(err => console.log(err));  
     }
@@ -68,7 +68,7 @@ module.exports = class Proyecto {
 
     static fetchOne(idProyecto) {
        // return db.execute('SELECT *, DATE_FORMAT(fechaInicial, "%d-%m-%Y")AS fecha_inicial, DATE_FORMAT(fechaPlaneada, "%d-%m-%Y")AS fecha_planeada, DATE_FORMAT(fechaLimite, "%d-%m-%Y")AS fecha_limite FROM proyecto WHERE IdProyecto=?', [idProyecto]);
-        return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, DATE_FORMAT(vista_proyecto_tareas.fechaPlaneada, "%d-%m-%Y")AS fecha_planeada, DATE_FORMAT(vista_proyecto_tareas.fechaLimite, "%d-%m-%Y")AS fecha_limite, DATE_FORMAT(vista_proyecto_tareas.fechaInicial, "%d-%m-%Y")AS fecha_inicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal, vista_proyecto_tareas.TiempoInvertido FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto WHERE vista_proyecto_tareas.IdProyecto = ? ORDER BY estado, fechaInicial '
+        return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, DATE_FORMAT(vista_proyecto_tareas.fechaPlaneada, "%d-%m-%Y")AS fecha_planeada, DATE_FORMAT(vista_proyecto_tareas.fechaLimite, "%d-%m-%Y")AS fecha_limite, DATE_FORMAT(vista_proyecto_tareas.fechaInicial, "%d-%m-%Y")AS fecha_inicial,  vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal, vista_proyecto_tareas.TiempoInvertido FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto WHERE vista_proyecto_tareas.IdProyecto = ? ORDER BY estado, fechaInicial '
         ,  [idProyecto]  )    
     }
      //esta funcion regresa la cantidad de tareas terminadas por cada iteracion
@@ -86,7 +86,7 @@ module.exports = class Proyecto {
 
     static fetchProyectosConHoras(){ //consulta que permite ver todos los datos incluyendo la suma de horas de cada tarea del proyecto
         //return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, vista_proyecto_tareas.fechaPlaneada, vista_proyecto_tareas.fechaLimite, vista_proyecto_tareas.fechaInicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal FROM vista_proyecto_tareas, vista_estimacion_tiempo_proyecto WHERE vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto ORDER BY estado, fechaInicial');
-        return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, vista_proyecto_tareas.fechaPlaneada, vista_proyecto_tareas.fechaLimite, vista_proyecto_tareas.fechaInicial, vista_proyecto_tareas.tiempoMax, vista_proyecto_tareas.tiempoMin, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal, TIMESTAMPDIFF(DAY, NOW(), vista_proyecto_tareas.fechaLimite) AS Tiempo FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto ORDER BY estado, fechaInicial');
+        return db.execute('SELECT vista_proyecto_tareas.IdProyecto, vista_proyecto_tareas.nombre, vista_proyecto_tareas.descripcion, vista_proyecto_tareas.fechaPlaneada, vista_proyecto_tareas.fechaLimite, vista_proyecto_tareas.fechaInicial, vista_proyecto_tareas.estado, vista_proyecto_tareas.totales, vista_proyecto_tareas.terminadas, vista_estimacion_tiempo_proyecto.TiempoTotal, TIMESTAMPDIFF(DAY, NOW(), vista_proyecto_tareas.fechaLimite) AS Tiempo FROM vista_proyecto_tareas LEFT JOIN vista_estimacion_tiempo_proyecto ON vista_proyecto_tareas.IdProyecto = vista_estimacion_tiempo_proyecto.IdProyecto ORDER BY estado, fechaInicial');
     }
     static fetchWBS() {
         return db.execute('SELECT * FROM wbs' );
