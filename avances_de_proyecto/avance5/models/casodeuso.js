@@ -16,8 +16,8 @@ module.exports = class CasoDeUso {
     //Este método servirá para guardar de manera persistente el nuevo objeto. 
     save() {
         console.log( this.nombre, this.descripcion, this.IdProyecto, this.dificultad, 'NULL', 'NULL', this.iteracion);
-        return db.execute('INSERT INTO casodeuso ( nombre, descripcion, IdProyecto, dificultad, tiempoMax, tiempoMin, iteracion) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                          [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad, 'NULL', 'NULL', this.iteracion]
+        return db.execute('INSERT INTO casodeuso ( nombre, descripcion, IdProyecto, dificultad, iteracion) VALUES (?, ?, ?, ?, ?)',
+                          [ this.nombre, this.descripcion, this.IdProyecto, this.dificultad,  this.iteracion]
         );
     }
 
