@@ -1,9 +1,9 @@
-# Versión 0.45 pre-beta
+# Versión 1.0 Release 
 
-## Guía de instalación
+## Guía de instalación local 
 
 1) Clonar el repositorio. 
-2) Ejecutar el script de la base de datos en MyPhpAdmin (XAMPP) dentro de una base llamada "cadce_test_new" (credencial root, sin password)
+2) Ejecutar el script de la base de datos en MyPhpAdmin (XAMPP) dentro de una base llamada "cadce_test" (credencial root, sin password)
 
 ## Installs de npm (no deberia ser necesario reinstalarlos, pero puede suceder):
 npm --save install express
@@ -28,9 +28,6 @@ paara acceder a la app: localhost:3000/login
 ## Credenciales de login
 
 ### Cuenta administradora
-Username: 1
+Username: cut@cut.com
 Password: cut
 
-### Cuenta no-administradora
-Username: 11
-Password: cut
