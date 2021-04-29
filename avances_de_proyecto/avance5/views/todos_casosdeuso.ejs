@@ -52,7 +52,7 @@
                       
                       <td> <button name="opt"><a href="/casosdeuso/<%= CasoDeUso.IdCasoDeUso %>">Editar</a></button></td>
                       
-                      <td> <button name="opt"><a href="/casosdeuso/<%= CasoDeUso.IdCasoDeUso %>/<%= CasoDeUso.IdProyecto %>">Ver tareas asociadas</a></button></td>                      
+                      <td> <button name="opt"><a href="/tareas/<%= CasoDeUso.IdCasoDeUso %>/<%= CasoDeUso.IdProyecto %>">Ver tareas asociadas</a></button></td>                      
                       <td>
                             <form action="/casosdeuso/eliminar-casoDeUso" method="POST" id="eliminar_<%= CasoDeUso.IdCasoDeUso %>">
                                 <input type="hidden" name="IdCasoDeUso" value="<%= CasoDeUso.IdCasoDeUso %>">

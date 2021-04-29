@@ -9,6 +9,7 @@ const isAuth = require('../utils/is-auth.js');
 const tareaController = require('../controllers/tarea_controller');
 const { isatty } = require('tty');
 
+router.get('/:casodeuso_id/:proyecto_id' , isAuth,  tareaController.getTareas);
 
 router.get('/nueva/:casodeuso_id/:proyecto_id', isAuth, tareaController.getNuevaTarea);
 
