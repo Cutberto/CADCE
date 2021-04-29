@@ -167,7 +167,9 @@
     <% let valorPlaneadoAcc = 0; %>
 
     <% for (let data in valorPlaneado) { %>
+        <% console.log("Data: " + data) %>
         <% fechaPlaneada.push(valorPlaneado[data].FechaFinalizacion); %>
+        <% console.log("VP: " + valorPlaneado[data]) %>
         <% valorPlaneadoData.push(valorPlaneado[data].ValorPlaneado); %>
     <% } %>
 
