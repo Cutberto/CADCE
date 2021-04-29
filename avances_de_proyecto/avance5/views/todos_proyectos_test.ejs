@@ -9,8 +9,8 @@
       <title> <%= titulo %>  </title>
       <meta name="description" content="Prototipo ">
       <link href = "../css/main.css" rel = "stylesheet">
+      <link href = "../css/login.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 
@@ -18,40 +18,82 @@
     
        
    
-<body> 
+<body class="row s12 m12"> 
         
 
     <%- include('includes/navbar.ejs'); %>
 
- <div class="row center">
+ <div class="center">
      
     <div class="col s12 m12 ">
        
          <% for (let proyecto of proyectos) { %>
-        <div class="col s12 m4"> <!-- Tamaño de cada tarjeta -->
-            <div class="card small ">
-                <div class="card-image">
-                    <!--img src="../img/square_logo2.jpg" alt="Project Logo" width="320" height="300" -->
+           
+            <div class="col s12 m4" style="width: 33%, height: 10%"> <!-- Tamaño de cada tarjeta -->
+                    
+                <div class="card border-info text-white bg-dark mb-2" style="width: 100%, height: 100%">
 
-                </div>
-                <div class="card-header">
-                    <h5>  <%= proyecto.nombre %> </h5>  <br>  
+                  <div class="card-header card-title bg-transparent border-info"><%= proyecto.nombre %></div>
+
+                  <div class="card-footer bg-transparent border-info" style="height:150px"><br><h6><b>Descripción: </b><%= proyecto.descripcion %></h6> <br></div>
+
+                  <div class="card-footer bg-transparent border-info">
+                  <% if (proyecto.estado == 'Activo') {%>
+                  
+                      <h6 style="color:#2ecc71"><b>Estado: </b><%= proyecto.estado %></h6>
+                  
+                  <% } else { %>
+                  
+                      <h6 style="color:#E1574A"><b>Estado: </b><%= proyecto.estado %></h6>
+                  
+                  <% } %>
+                  
+                  </div >
+                  <div class="card-footer bg-transparent border-info">
+                        <% if (proyecto.Tiempo < 0) { %>
+                            <h6 style="color: #3fa3d9;"><b>Días hasta fecha límite: - </b></h6>
+                        <% } else { %>
+                            <h6 style="color: #3fa3d9;"><b>Días hasta fecha límite: <%= proyecto.Tiempo %></b></h6>
+                        <% } %>
+
                   </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item"> <b>Descripción: </b> <%= proyecto.descripcion %></li>
-                    <li class="list-group-item"> <b>Estado: </b> <%= proyecto.estado %></li>
-                   
-                  </ul>
 
-                <div class="card-content">
-                    
-                    <a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="btn btn-primary">Detalles</a>
+                  
+                  <div class="card-footer bg-transparent border-info" style="height:100px">
+                      <% if (proyecto.terminadas != null && proyecto.totales != null)  { %>
+                        <h5>Progreso:</h5>
+                        <div class="container">
+                            <div class="progress blue-grey darken-4" style="height: 30px">
+                            <div class="determinate green accent-3" style="width: <%= (proyecto.terminadas/proyecto.totales)*100 %>%" ><lettercolor><%= Math.round(proyecto.terminadas/proyecto.totales*100) %>%</lettercolor></div>
+                        </div>
+                        </div>
+                      <% } else if (proyecto.totales == null) { %>
+                        <div><br><h6>Aún no hay tareas para este proyecto</h6> <br>  </div>
+                        <% } else if (proyecto.terminadas == null) { %>
+                           <h5>Progreso:</h5>
+                            <div class="container">
+                                <div class="progress blue-grey darken-4" style="height: 30px">
+                                <div class="determinate green accent-3" style="width:0%" ></div><lettercolor0>0%</lettercolor0>
+                            </div>
+                            </div>
+                      <% } else { %>
+                           <h5>Progreso:</h5>
+                            <div class="container">
+                                <div class="progress blue-grey darken-4" style="height: 30px">
+                                <div class="determinate green accent-3" style="width:0%" ></div><lettercolor0>0%</lettercolor0>
+                            </div>
+                            </div>
+                        <% } %>
+                  </div>  
 
                     
+                      
+                  <div class="card-footer bg-transparent border-info"><a href="/proyectos/detalles/<%= proyecto.IdProyecto %>" class="card-link waves-effect waves-light btn  light-blue accent-4" style="color:#b3e5fc ">Detalles</a></div>
+
                 </div>
-                
+                                                      
             </div>
-        </div>
+                     
         <% } %>
     </div>    
 </div>

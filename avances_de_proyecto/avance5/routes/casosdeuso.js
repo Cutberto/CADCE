@@ -15,12 +15,17 @@ router.post('/NuevoCasoDeUso', isAuth, casosdeusoController.postNuevoCasoDeUso);
 
 router.get('/todos', isAuth, casosdeusoController.get);
 
+router.post('/eliminar-casoDeUso', isAuth, casosdeusoController.postEliminarCasoDeUso);
+
 router.post('/actualizarCaso', isAuth, casosdeusoController.postActualizarCasoDeUso);
 
 router.get('/actualizarCaso', isAuth, casosdeusoController.getActualizarCasoDeUso);
 
+router.get('/:casodeuso_id/:proyecto_id' , isAuth,  casosdeusoController.getTareas);
+
 router.get('/:casodeuso_id',  isAuth, casosdeusoController.getActualizarCasoDeUso);  
 
 router.post('/:casodeuso_id', isAuth, casosdeusoController.postActualizarCasoDeUso);
+
 
 module.exports = router;

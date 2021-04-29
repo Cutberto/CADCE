@@ -16,13 +16,13 @@ exports.get = (request, response, next) => {
 
 exports.post = (request, response, next) => {
     request.session.error = "";
-    const username = request.body.IdEmpleado;
+    const username = request.body.correo;
     console.log(username);
     //IdRol = Usuario.getRole(username);
-    Usuario.fetchOne(username)
+    Usuario.getCorreo(username)
         .then(([rows, fieldData]) => {
             if (rows.length < 1) {
-                request.session.error = "El usuario y/o contraseña no coinciden";
+                request.session.error = "El correo y/o contraseña no coinciden";
                 console.log ("usuario y contra no coinciden");
                 response.redirect('/login/');
             } else {
@@ -37,17 +37,17 @@ exports.post = (request, response, next) => {
                             request.session.rol =rows[0].IdRol;
                             //console.log(IdRol);
 
-                            request.session.usuario = request.body.IdEmpleado;
+                            request.session.usuario = request.body.correo;
                             return request.session.save(err => {
                                 response.redirect('/proyectos/inicio');
                                 console.log("exito en login");
                             });
                         }
-                        request.session.error = "El usuario y/o contraseña no coinciden";
+                        request.session.error = "El correo y/o contraseña no coinciden";
                         response.redirect('/login/');
                         console.log("error no hay match");
                     }).catch(err => {
-                        request.session.error = "El usuario y/o contraseña no coinciden";
+                        request.session.error = "El correo y/o contraseña no coinciden";
                         response.redirect('/login/');
                         console.log ("error en .catch");
                     });

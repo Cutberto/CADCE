@@ -7,11 +7,14 @@ const bodyParser = require('body-parser');
 
 
 
+
 app.use(bodyParser.urlencoded({extended: false}));
 const proyectos = require('./routes/proyectos');
 const casosdeuso = require('./routes/casosdeuso');
 const login = require('./routes/login');
 const tareas = require('./routes/tareas');
+const rutaairtable = require('./routes/airtable');
+
 
 
 //const mensaje = require ('./routes/mensaje');
@@ -29,6 +32,7 @@ app.use('/proyectos', proyectos);
 app.use('/casosdeuso', casosdeuso);
 app.use('/tareas', tareas);
 app.use('/login',login);
+app.use('/airtable',rutaairtable);
 
 //Para acceder a los recursos de la carpeta public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response, next) => {
     console.log(request.session);
-    response.redirect('/proyectos');
+    response.redirect('/login');
 });
 
 
@@ -46,5 +50,8 @@ app.use( (request, response, next) => {
     response.status(404);
     response.send('404: Recurso no encontrado'); //Manda la respuesta
 } );
+
+
+
 
 app.listen(3000);

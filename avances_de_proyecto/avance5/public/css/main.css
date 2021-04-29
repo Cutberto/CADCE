@@ -1,6 +1,6 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500';
         .row {
-            background-color: rgb(182, 216, 248);
+           background: linear-gradient(to right, #262945, #1B1D31)
             
         }
 
@@ -21,10 +21,26 @@ h2 {
 }
 
 h1{
-    color : black   ;
+    color : white;
     
+}
+h3{
+    color : white;
+    
+}
+h6{
+    color:white;
 }
 
 
+lettercolor0 {
+    color: #00E676;
+    font-size: 150%;
+}
+
+lettercolor {
+    color: #004222;
+    font-size: 150%;
+}
 
 

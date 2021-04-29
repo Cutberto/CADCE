@@ -8,27 +8,61 @@ const isAuth = require('../utils/is-auth.js');
 
 const proyectosController = require('../controllers/proyectos_controller');
 
+const airtable_controller = require('../controllers/airtable_controller');
+
 router.get('/inicio', isAuth, proyectosController.inicio);
 
 router.get('/crear_proyecto', isAuth, proyectosController.crear_proyecto);
 
-router.post('/crear_proyecto' , isAuth, proyectosController.postProyecto);               
+router.post('/crear_proyecto' , isAuth, proyectosController.postProyecto); 
+
+router.get('/gestionarAirtable/:proyecto_id' , isAuth,  proyectosController.getgestionarairtable  );
+
+
+router.post('/guardarLlaves/' , isAuth,  proyectosController.postGuardarLlaves  );
 
 router.get('/todos', isAuth, proyectosController.get);  
 
 router.get('/casosdeuso/:proyecto_id' , isAuth,  proyectosController.getCaso  );
 
+router.get('/iteraciones/:proyecto_id' , isAuth,  proyectosController.getIteraciones  );
+
+router.post('/nuevaiteracion' , isAuth,  proyectosController.postIteracion  );
+
+router.get('/nuevaiteracion/:proyecto_id' , isAuth,  proyectosController.crear_iteracion  );
+
+
 router.get('/nuevocaso/:proyecto_id' , isAuth,  proyectosController.getNuevoCaso  );
+//<button name="opt"><a href="/proyectos/airtable/<%=Proyecto.IdProyecto%>" class="btn">Enviar a Airtable</a> </button>
+
 
 router.get('/detalles/:proyecto_id' , isAuth,  proyectosController.getDetalles  );
+
+router.post('/eliminar-proyecto', isAuth, proyectosController.postEliminarProyecto);
+
+router.get('/Wbs' , isAuth,  proyectosController.getWbs );
+
+router.post('/Wbs' , isAuth,  proyectosController.postWbs );
 
 router.get('/detalleset', isAuth, proyectosController.detalleset);
 
 router.get('/actividades', isAuth, proyectosController.actividades);
 
-router.get('/:proyecto_id',  isAuth, proyectosController.getProyecto); //colocar isauth
+router.get('/:proyecto_id',  isAuth, proyectosController.getProyecto);
 
 router.post('/:proyecto_id', isAuth, proyectosController.postActualizarProyecto);
+
+
+
+
+
+
+
+//router.get('/nuevatarea/:proyecto_id' , isAuth,  proyectosController.getNuevaTarea  );
+
+//router.post('/nuevatarea/:proyecto_id' , isAuth,  proyectosController.postNuevaTarea  );
+
+
 
 
 /*Obtener la lista de proyectos*/

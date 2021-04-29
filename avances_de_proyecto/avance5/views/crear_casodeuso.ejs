@@ -9,16 +9,15 @@
       <title> <%= titulo %> </title>
       <meta name="description" content="Prototipo ">
       <link href = "/css/main.css" rel = "stylesheet">
+      <link href = "/css/inputs.css" rel = "stylesheet">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+
 
 </head>
     
        
    
-<body>  
+<body class="row">  
     <div class="row">
         <%- include('includes/navbar.ejs'); %>
 
@@ -28,25 +27,38 @@
     <div class="container">
        
             <div class="mycol md-12 sm-12 lg-9">
-                    <form action="/casosdeuso/NuevoCasoDeUso" method="POST">
-                        <label for="IdCasoDeUso"> Id Caso de Uso  </label><input type="text" name="IdCasoDeUso_cu" required>
-                        <label for="nombre">Nombre </label><input type="text" name="nombre_cu" required>
-                        <label for="descripcion">Descripción </label><input type="text" name="descripcion_cu" required>
-                        <label for="IdProyecto"> IdProyecto </label><input type="text" name="IdProyecto_cu" value = "<%=idProyecto%>"required>
-                        <label for="IdDificultad">IdDificultad</label><input type="text" name="dificultad_cu" required>                
+                    <form action="/casosdeuso/NuevoCasoDeUso" method="POST" class="box">
+                        <input type="hidden" name="IdCasoDeUso_cu" >
+                                               
+                        <label for="nombre">Nombre </label><br>
+                        <input type="text" name="nombre_cu" required><br>
+                        
+                        <label for="descripcion"><br>Descripción </label><br>
+                        <input type="text" name="descripcion_cu" required><br>
+                        
+                        <label for="iteracion"><br>Iteracion </label><br>
+                        <select class="form-select" aria-label="iteracion_cu" name="iteracion_cu" type="number">
+                            <% for (let iteracion of lista_iteraciones){ %>
+    
+                                <option value="<%=iteracion.iteracion%>"> <%=iteracion.iteracion%> </option>
+                            <% } %>
+                            </select>
+                        
+                        <input type="hidden" name="IdProyecto_cu" value = "<%=idProyecto%>" required>
+                        
+                        <input type="hidden" name="dificultad_cu" value = "0">                
 
                         <br><br>
                         <button class="btn waves-effect waves-light" type="submit" name="action">Crear
-                            <i class="material-icons right">send</i>
-                        </button>      
-                        <a href="/proyectos/casosdeuso/<%=idProyecto%>" class="waves-effect waves-light btn" > Cancelar </a> <br> 
+                        </button>   
+   
                         
                         <br><br><br>
 
                     </form>
             </div>
         </div>
-    </div>    
+       
 
 
 

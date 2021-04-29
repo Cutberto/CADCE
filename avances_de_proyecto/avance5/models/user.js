@@ -28,6 +28,10 @@ module.exports = class User {
         return db.execute('SELECT * FROM empleado WHERE IdEmpleado=?', [IdEmpleado]);
     }
 
+    static getCorreo(correo) {
+        return db.execute('SELECT * FROM empleado WHERE correo=?', [correo]);
+    }    
+
     static getRole(IdEmpleado){
         return db.execute('SELECT IdRol FROM empleado WHERE IdEmpleado=?', [IdEmpleado]);
     }
