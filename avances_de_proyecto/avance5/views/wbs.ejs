@@ -31,7 +31,7 @@
                 <form action="/proyectos/Wbs" method="POST" class="box">
                 
                 
-                <label>Escribe el tiempo estimado para cada dificultad</label><br>
+                <label><b>Escribe el tiempo estimado para cada dificultad (En horas)</b></label><br>
                 <% for (let dificultad of lstwbs) { %>
 
                     <input type="hidden" name="Dificultad" value="<%= dificultad.Dificultad %>" required>
