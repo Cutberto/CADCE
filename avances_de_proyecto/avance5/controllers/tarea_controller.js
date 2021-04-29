@@ -1,6 +1,45 @@
 const session = require('express-session');
 const Tarea = require('../models/tarea');
 
+exports.getTareas = (request, response, next) => {
+    let tiempoTareas = [];
+
+    const idCasoDeUso = request.params.casodeuso_id;
+    const idProyecto = request.params.proyecto_id;
+
+    Tarea.fetchTareasOfCaso(idCasoDeUso)
+        .then(([rows, fieldData]) => {
+            Tarea.fetchTiemposOfTareas(idCasoDeUso)
+            .then(([rows2, fieldData]) => {
+                        tiempoTareas = rows2;
+                        console.log(tiempoTareas);
+            
+                    console.log("Se han cargado los tiempos por tarea");
+                    
+                    tiempoTareas = rows2;
+                    console.log(tiempoTareas);
+
+                    response.render('todas_tareas', { 
+                        rol: request.session.rol,
+                        lista_tareas: rows, 
+                        titulo: 'Tareas del caso de uso',
+                        IdCasoDeUso: idCasoDeUso,
+                        idProyecto: idProyecto,
+                        tiempoTareas : tiempoTareas,
+                        isLoggedIn: request.session.isLoggedIn === true ? true : false
+                    });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+};
+
 exports.getNuevaTarea = (request, response, next) => {
     const casodeusoid = request.params.casodeuso_id;
     const proyectoid = request.params.proyecto_id;

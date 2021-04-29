@@ -21,8 +21,6 @@ router.post('/actualizarCaso', isAuth, casosdeusoController.postActualizarCasoDe
 
 router.get('/actualizarCaso', isAuth, casosdeusoController.getActualizarCasoDeUso);
 
-router.get('/:casodeuso_id/:proyecto_id' , isAuth,  casosdeusoController.getTareas);
-
 router.get('/:casodeuso_id',  isAuth, casosdeusoController.getActualizarCasoDeUso);  
 
 router.post('/:casodeuso_id', isAuth, casosdeusoController.postActualizarCasoDeUso);
