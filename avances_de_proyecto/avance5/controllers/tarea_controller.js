@@ -9,7 +9,7 @@ exports.getTareas = (request, response, next) => {
 
     Tarea.fetchTareasOfCaso(idCasoDeUso)
         .then(([rows, fieldData]) => {
-            Tarea.fetchTiemposOfTareas(idCasoDeUso)
+            Tarea.SelectTiemposOfTareas(idCasoDeUso)
             .then(([rows2, fieldData]) => {
                         tiempoTareas = rows2;
                         console.log(tiempoTareas);
@@ -62,7 +62,7 @@ exports.postNuevaTarea = (request, response, next) => {
             console.log("save de tarea ejecutado... ejecutando asignacion Con caso de uso");
             nueva_tarea.asignarConCasoDeUso(request.body.IdCasoDeUso)
                 .then(() => {
-                    response.redirect('/casosdeuso/' + request.body.IdCasoDeUso+'/'+request.body.IdProyecto); 
+                    response.redirect('/tareas/' + request.body.IdCasoDeUso+'/'+request.body.IdProyecto); 
                 })
 
 
@@ -102,7 +102,7 @@ exports.postActualizarTarea = (request, response, next) => {
     actualizar_tarea.actualizar()
         .then(() => {
             request.session.aviso = "Tarea " + request.body.nombre + " ha sido actualizada"; //para mostrar un aviso en la siguiente vista renderizada
-            response.redirect('/casosdeuso/'+ request.body.IdCasoDeUso+'/' + request.body.IdProyecto); //redirigir hacia la el caso de uso correspondiente
+            response.redirect('/tareas/'+ request.body.IdCasoDeUso+'/' + request.body.IdProyecto); //redirigir hacia la el caso de uso correspondiente
         }).catch(err => console.log(err));
 
 }
@@ -115,7 +115,7 @@ exports.postEliminarTarea = (request, response) => {
     Tarea.EliminarTarea(idTarea)
         .then(() => {
             request.session.alerta = "Tarea eliminada exitosamente";
-            response.redirect('/casosdeuso/'+idcaso+'/'+idProyecto);
+            response.redirect('/tareas/'+idcaso+'/'+idProyecto);
         })
         .catch(err => {
             console.log(err);
