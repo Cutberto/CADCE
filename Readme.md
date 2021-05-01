@@ -24,9 +24,17 @@ En la ruta correspondiente, ejecutar el comando siguiente
 npm start
 
 Para acceder a la app localmente: localhost:8080/login
-Para desplegar la app en Google Cloud, favor de revisar el manual de instalación anexo en la carpeta Proyecto 
+
+
+Para desplegar la app en Google Cloud, favor de revisar el manual de instalación anexo en la carpeta Proyecto
+
+
 Será necesario configurar las credenciales de conexion con la base de datos en /utils/database.js
+
+
 Además deberá colocar las credenciales de acceso a un servidor redis personal en el archivo index.js
+
+
 
 ## Credenciales de login
 
