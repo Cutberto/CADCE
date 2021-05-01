@@ -17,7 +17,7 @@ exports.get = (request, response, next) => {
 exports.post = (request, response, next) => {
     request.session.error = "";
     const username = request.body.correo;
-    console.log(username);
+    //console.log(username);
     //IdRol = Usuario.getRole(username);
     Usuario.getCorreo(username)
         .then(([rows, fieldData]) => {
@@ -31,7 +31,7 @@ exports.post = (request, response, next) => {
                 bcrypt.compare(request.body.contraseña, rows[0].contraseña)
                     .then(doMatch => {
                         if (doMatch) {
-                            console.log(request.body);
+                           // console.log(request.body);
                             request.session.isLoggedIn = true;
 
                             request.session.rol =rows[0].IdRol;
