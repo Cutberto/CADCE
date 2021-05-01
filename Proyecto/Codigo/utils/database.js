@@ -9,7 +9,7 @@ const mysql = require('mysql2');
 
 
 
-
+//COLOCAR AQUI CREDENCIALES DE ACCESO DEL SERVIDOR SQL DE DESPLIEGUE =)
 
 const pool = mysql.createPool({
     host: 'localhost',

@@ -10,11 +10,12 @@ const redis = require('redis');
 const connectRedis = require('connect-redis');
 //let redis_store = require('connect-redis')(session);
 const RedisStore = connectRedis(session);
+
+//SUTSTITUIR AQUI LAS CREDENCIALES DE ACCESO DE SU ALMACENAMIENTO REDIS
 const redisClient = redis.createClient({
     host:'redis-15552.c259.us-central1-2.gce.cloud.redislabs.com',
     port: 15552,
     password: 'K1L4yIHkTOQOZ79khSpU3aF7Y6B9WOoM'
-    
 })
 redisClient.on('error', function (err) {
     console.log('Could not establish a connection with redis. ' + err);
