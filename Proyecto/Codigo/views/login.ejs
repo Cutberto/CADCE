@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang = "es">
+
+<head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Iniciar sesión</title>
+      <meta name="description" content="Sistema para administrar proyectos para NatDev. Elaborado por CADCE">
+      <link href = "../css/login.css" rel = "stylesheet">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">   
+    
+</head>
+
+<main>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="card">
+                        <form action="/login" method="POST" class="box" >
+                            <h1>Login</h1>
+                            <p class="text-muted"> Por favor ingresa tu correo y contraseña</p> <input type="text" name="correo" placeholder="Correo"> 
+                            <input type="password" name="contraseña" placeholder="Contraseña">
+                            <p><%= error  %></p>  
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
+                            
+                        </form>
+                    
+                    </div>
+                </div>
+           </div>
+        </div>
+    </body>
+</main>
+
+
+
